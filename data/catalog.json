@@ -1,0 +1,2815 @@
+{
+  "cities": [
+    {
+      "code": "01 - AMBERIEU",
+      "departement": "01",
+      "nom": "AMBERIEU",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "02 - EPARCY",
+      "departement": "02",
+      "nom": "EPARCY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "02 - ST QUENTIN",
+      "departement": "02",
+      "nom": "ST QUENTIN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "03 - VICHY",
+      "departement": "03",
+      "nom": "VICHY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "04 - ALLOS",
+      "departement": "04",
+      "nom": "ALLOS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "05 - EMBRUN",
+      "departement": "05",
+      "nom": "EMBRUN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "05 - GAP",
+      "departement": "05",
+      "nom": "GAP",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "05 - LARAGNE",
+      "departement": "05",
+      "nom": "LARAGNE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "06 - ANDON-bas Thorenc",
+      "departement": "06",
+      "nom": "ANDON-bas Thorenc",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "06 - BREIL SUR ROYA",
+      "departement": "06",
+      "nom": "BREIL SUR ROYA",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "06 - GRASSE",
+      "departement": "06",
+      "nom": "GRASSE",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "06 - ISOLA",
+      "departement": "06",
+      "nom": "ISOLA",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "06 - NICE",
+      "departement": "06",
+      "nom": "NICE",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "06 - PUGET THENIERS",
+      "departement": "06",
+      "nom": "PUGET THENIERS",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "06 - ST DALMAS LE SELVAGE",
+      "departement": "06",
+      "nom": "ST DALMAS LE SELVAGE",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "06 - ST ETIENNE DE THINEE-Auron",
+      "departement": "06",
+      "nom": "ST ETIENNE DE THINEE-Auron",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "06 - VENCE",
+      "departement": "06",
+      "nom": "VENCE",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "07 - TOURNON",
+      "departement": "07",
+      "nom": "TOURNON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "08 - ROCROI",
+      "departement": "08",
+      "nom": "ROCROI",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "08 - SEDAN",
+      "departement": "08",
+      "nom": "SEDAN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - ASTRON",
+      "departement": "09",
+      "nom": "ASTRON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - AUZAT-PRADIERES",
+      "departement": "09",
+      "nom": "AUZAT-PRADIERES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - CONFLANS-SALAU",
+      "departement": "09",
+      "nom": "CONFLANS-SALAU",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - L'HOSPITALET (Andorre)",
+      "departement": "09",
+      "nom": "L'HOSPITALET (Andorre)",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - MERENS LES VALS",
+      "departement": "09",
+      "nom": "MERENS LES VALS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - SAINT GIRONS",
+      "departement": "09",
+      "nom": "SAINT GIRONS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "09 - SANTEIN-EYLIE",
+      "departement": "09",
+      "nom": "SANTEIN-EYLIE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "10 - ROMILLY",
+      "departement": "10",
+      "nom": "ROMILLY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "11 - CARCASSONNE",
+      "departement": "11",
+      "nom": "CARCASSONNE",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "12 - MILLAU",
+      "departement": "12",
+      "nom": "MILLAU",
+      "zone": "Montagne",
+      "bord_de_mer": false
+    },
+    {
+      "code": "13 - ISTRES",
+      "departement": "13",
+      "nom": "ISTRES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "13 - PORT DE BOUC",
+      "departement": "13",
+      "nom": "PORT DE BOUC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "14 - CAEN",
+      "departement": "14",
+      "nom": "CAEN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - AURILLAC",
+      "departement": "15",
+      "nom": "AURILLAC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - CHALVIGNAC L AIGLE",
+      "departement": "15",
+      "nom": "CHALVIGNAC L AIGLE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - FERRIERES ST MARY",
+      "departement": "15",
+      "nom": "FERRIERES ST MARY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - LAFEUILLADE EN VEZIE",
+      "departement": "15",
+      "nom": "LAFEUILLADE EN VEZIE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - LAVASTRIE GRANDVAL",
+      "departement": "15",
+      "nom": "LAVASTRIE GRANDVAL",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - LE CLAUX",
+      "departement": "15",
+      "nom": "LE CLAUX",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - MARCOLES",
+      "departement": "15",
+      "nom": "MARCOLES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - MARMANHAC",
+      "departement": "15",
+      "nom": "MARMANHAC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "15 - MASSIAC",
+      "departement": "15",
+      "nom": "MASSIAC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "16 - ANGOULEME",
+      "departement": "16",
+      "nom": "ANGOULEME",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "16 - COGNAC",
+      "departement": "16",
+      "nom": "COGNAC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "17 - LA ROCHELLE",
+      "departement": "17",
+      "nom": "LA ROCHELLE",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "18 - BOURGES",
+      "departement": "18",
+      "nom": "BOURGES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "19 - BRIVES",
+      "departement": "19",
+      "nom": "BRIVES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - AJACCIO-CAMPO DEL ORO",
+      "departement": "20",
+      "nom": "AJACCIO-CAMPO DEL ORO",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - ALBERTACCE-POPAJA",
+      "departement": "20",
+      "nom": "ALBERTACCE-POPAJA",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - CALVI STE CATHERINE",
+      "departement": "20",
+      "nom": "CALVI STE CATHERINE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - CARBINI-MARGHESE",
+      "departement": "20",
+      "nom": "CARBINI-MARGHESE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - PILA-CANALE",
+      "departement": "20",
+      "nom": "PILA-CANALE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - SARTENE-MADONINA",
+      "departement": "20",
+      "nom": "SARTENE-MADONINA",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "20 - SOLENZARA",
+      "departement": "20",
+      "nom": "SOLENZARA",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "21 - BAIGNEUX LES JUIFS",
+      "departement": "21",
+      "nom": "BAIGNEUX LES JUIFS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "21 - DIJON",
+      "departement": "21",
+      "nom": "DIJON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "22 - ILE DE BREHAT",
+      "departement": "22",
+      "nom": "ILE DE BREHAT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "22 - ROSTRENEN",
+      "departement": "22",
+      "nom": "ROSTRENEN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "23 - GUERET-GRANCHER",
+      "departement": "23",
+      "nom": "GUERET-GRANCHER",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "24 - BERGERAC",
+      "departement": "24",
+      "nom": "BERGERAC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "25 - BESANCON",
+      "departement": "25",
+      "nom": "BESANCON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "26 - MONSEGUR-LAUZON",
+      "departement": "26",
+      "nom": "MONSEGUR-LAUZON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "26 - MONTELIMAR",
+      "departement": "26",
+      "nom": "MONTELIMAR",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "26 - NYON",
+      "departement": "26",
+      "nom": "NYON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "27 - EVREUX-HUEST",
+      "departement": "27",
+      "nom": "EVREUX-HUEST",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "28 - CHARTRES",
+      "departement": "28",
+      "nom": "CHARTRES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "29 - BREST",
+      "departement": "29",
+      "nom": "BREST",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "29 - FOUESNANT",
+      "departement": "29",
+      "nom": "FOUESNANT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "30 - NIMES",
+      "departement": "30",
+      "nom": "NIMES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "31 - BAGNERES DE LUCHON",
+      "departement": "31",
+      "nom": "BAGNERES DE LUCHON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "31 - TOULOUSE",
+      "departement": "31",
+      "nom": "TOULOUSE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "31 - TOULOUSE-BLAGNAC",
+      "departement": "31",
+      "nom": "TOULOUSE-BLAGNAC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "32 - AUCH",
+      "departement": "32",
+      "nom": "AUCH",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "33 - BORDEAUX",
+      "departement": "33",
+      "nom": "BORDEAUX",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "33 - CAZAUX",
+      "departement": "33",
+      "nom": "CAZAUX",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "34 - MONTPELLIER",
+      "departement": "34",
+      "nom": "MONTPELLIER",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "35 - RENNES-ST JACQUES",
+      "departement": "35",
+      "nom": "RENNES-ST JACQUES",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "36 - CHATEAUROUX",
+      "departement": "36",
+      "nom": "CHATEAUROUX",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "37 - TOURS",
+      "departement": "37",
+      "nom": "TOURS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "38 - ALPES DE VENOSC",
+      "departement": "38",
+      "nom": "ALPES DE VENOSC",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "38 - GRENOBLE-EYBENS",
+      "departement": "38",
+      "nom": "GRENOBLE-EYBENS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "38 - LA COTE ST ANDRE",
+      "departement": "38",
+      "nom": "LA COTE ST ANDRE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "38 - VIENNE",
+      "departement": "38",
+      "nom": "VIENNE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "39 - ST CLAUDE - ETABLE",
+      "departement": "39",
+      "nom": "ST CLAUDE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "40 - MONT DE MARSAN",
+      "departement": "40",
+      "nom": "MONT DE MARSAN",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "41 - BLOIS",
+      "departement": "41",
+      "nom": "BLOIS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "42 - ST ETIENNE-BOUTHEON",
+      "departement": "42",
+      "nom": "ST ETIENNE-BOUTHEON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "43 - LE PUY-LOUDES",
+      "departement": "43",
+      "nom": "LE PUY-LOUDES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "44 - ESCOUBLAC-LA BAULE",
+      "departement": "44",
+      "nom": "ESCOUBLAC-LA BAULE",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "44 - NANTES-Chateau Bougon",
+      "departement": "44",
+      "nom": "NANTES-Chateau Bougon",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "45 - ORLEANS",
+      "departement": "45",
+      "nom": "ORLEANS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "46 - GOURDON",
+      "departement": "46",
+      "nom": "GOURDON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "47 - AGEN",
+      "departement": "47",
+      "nom": "AGEN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "48 - MENDE-BRENOUX",
+      "departement": "48",
+      "nom": "MENDE-BRENOUX",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "49 - ANGERS",
+      "departement": "49",
+      "nom": "ANGERS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "50 - CHERBOURG",
+      "departement": "50",
+      "nom": "CHERBOURG",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "51 - REIMS",
+      "departement": "51",
+      "nom": "REIMS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "52 - CHAUMONT",
+      "departement": "52",
+      "nom": "CHAUMONT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "53 - LAVAL-ENTRAMMES",
+      "departement": "53",
+      "nom": "LAVAL-ENTRAMMES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "54 - NANCY-ESSEY",
+      "departement": "54",
+      "nom": "NANCY-ESSEY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "55 - HAUDIOMONT",
+      "departement": "55",
+      "nom": "HAUDIOMONT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "56 - LORIENT-LANN BIHOUE",
+      "departement": "56",
+      "nom": "LORIENT-LANN BIHOUE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "57 - METZ-FRESCATY",
+      "departement": "57",
+      "nom": "METZ-FRESCATY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "58 - NEVERS",
+      "departement": "58",
+      "nom": "NEVERS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "59 - DUNKERQUE",
+      "departement": "59",
+      "nom": "DUNKERQUE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "59 - LILLE",
+      "departement": "59",
+      "nom": "LILLE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "60 - BEAUVAIS-TILLE",
+      "departement": "60",
+      "nom": "BEAUVAIS-TILLE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "61 - ALENCON",
+      "departement": "61",
+      "nom": "ALENCON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "62 - BOULOGNE",
+      "departement": "62",
+      "nom": "BOULOGNE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - AUZAT sur Allier-La Combelle",
+      "departement": "63",
+      "nom": "AUZAT sur Allier-La Combelle",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - CHATEAUNEUF LES BAINS",
+      "departement": "63",
+      "nom": "CHATEAUNEUF LES BAINS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - CLERMONT-FERRAND-Aulnat",
+      "departement": "63",
+      "nom": "CLERMONT-FERRAND-Aulnat",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - EGLISENEUVE D ENGRAYGUES",
+      "departement": "63",
+      "nom": "EGLISENEUVE D ENGRAYGUES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - LE MONT DORE",
+      "departement": "63",
+      "nom": "LE MONT DORE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - PICHERANDE",
+      "departement": "63",
+      "nom": "PICHERANDE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - SAINT ANTHEME",
+      "departement": "63",
+      "nom": "SAINT ANTHEME",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - SAINT NECTAIRE",
+      "departement": "63",
+      "nom": "SAINT NECTAIRE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "63 - VIVEROLS",
+      "departement": "63",
+      "nom": "VIVEROLS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "64 - BIARRITZ",
+      "departement": "64",
+      "nom": "BIARRITZ",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "64 - LARUNS",
+      "departement": "64",
+      "nom": "LARUNS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "64 - PAU",
+      "departement": "64",
+      "nom": "PAU",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "65 - GEDRE",
+      "departement": "65",
+      "nom": "GEDRE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "65 - LASSOULA",
+      "departement": "65",
+      "nom": "LASSOULA",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "65 - TARBES OSSUN",
+      "departement": "65",
+      "nom": "TARBES OSSUN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "66 - FONT ROMEU",
+      "departement": "66",
+      "nom": "FONT ROMEU",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "66 - PERPIGNAN",
+      "departement": "66",
+      "nom": "PERPIGNAN",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "66 - PRATS DE MOLLO",
+      "departement": "66",
+      "nom": "PRATS DE MOLLO",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "67 - STRASBOURG Enteheim",
+      "departement": "67",
+      "nom": "STRASBOURG Enteheim",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "68 - COLMAR-MEYENHEIM",
+      "departement": "68",
+      "nom": "COLMAR-MEYENHEIM",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "69 - LYON",
+      "departement": "69",
+      "nom": "LYON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "70 - LUXEUIL",
+      "departement": "70",
+      "nom": "LUXEUIL",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "71 - CHALON SUR SAONE",
+      "departement": "71",
+      "nom": "CHALON SUR SAONE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "71 - LA GUICHE",
+      "departement": "71",
+      "nom": "LA GUICHE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "71 - MACON",
+      "departement": "71",
+      "nom": "MACON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "71 - MONT ST VINCENT",
+      "departement": "71",
+      "nom": "MONT ST VINCENT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "72 - LE MANS",
+      "departement": "72",
+      "nom": "LE MANS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "73 - CHALLES-LES-EAUX",
+      "departement": "73",
+      "nom": "CHALLES-LES-EAUX",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "74 - ANNECY",
+      "departement": "74",
+      "nom": "ANNECY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "74 - ANNEMASSE",
+      "departement": "74",
+      "nom": "ANNEMASSE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "74 - THONON-LES-BAINS",
+      "departement": "74",
+      "nom": "THONON-LES-BAINS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "74 - USINENS",
+      "departement": "74",
+      "nom": "USINENS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "75 - PARIS-MONTSOURIS",
+      "departement": "75",
+      "nom": "PARIS-MONTSOURIS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "75 - PARIS-TOUR ST JACQUES",
+      "departement": "75",
+      "nom": "PARIS-TOUR ST JACQUES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "76 - CAP DE LA HEVE",
+      "departement": "76",
+      "nom": "CAP DE LA HEVE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "76 - ROUEN",
+      "departement": "76",
+      "nom": "ROUEN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "77 - MELUN",
+      "departement": "77",
+      "nom": "MELUN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "78 - TRAPPES",
+      "departement": "78",
+      "nom": "TRAPPES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "79 - NIORT",
+      "departement": "79",
+      "nom": "NIORT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "80 - ABBEVILLE",
+      "departement": "80",
+      "nom": "ABBEVILLE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "81 - ALBI",
+      "departement": "81",
+      "nom": "ALBI",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "82 - MONTAUBAN",
+      "departement": "82",
+      "nom": "MONTAUBAN",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "83 - BRIGNOLES",
+      "departement": "83",
+      "nom": "BRIGNOLES",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "83 - COLLOBRIERES",
+      "departement": "83",
+      "nom": "COLLOBRIERES",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "83 - DRAGUIGNAN",
+      "departement": "83",
+      "nom": "DRAGUIGNAN",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "83 - PLAN D AUPS",
+      "departement": "83",
+      "nom": "PLAN D AUPS",
+      "zone": "Bord de mer",
+      "bord_de_mer": false
+    },
+    {
+      "code": "84 - APT",
+      "departement": "84",
+      "nom": "APT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "84 - AVIGNON-MONTFAVET",
+      "departement": "84",
+      "nom": "AVIGNON-MONTFAVET",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "84 - CAVAILLON",
+      "departement": "84",
+      "nom": "CAVAILLON",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "84 - GORDES",
+      "departement": "84",
+      "nom": "GORDES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "85 - LES SABLES D OLONNES",
+      "departement": "85",
+      "nom": "LES SABLES D OLONNES",
+      "zone": "Bord de mer",
+      "bord_de_mer": true
+    },
+    {
+      "code": "86 - POITIERS",
+      "departement": "86",
+      "nom": "POITIERS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "87 - LIMOGES",
+      "departement": "87",
+      "nom": "LIMOGES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "88 - EPINAL",
+      "departement": "88",
+      "nom": "EPINAL",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "89 - AUXERRE",
+      "departement": "89",
+      "nom": "AUXERRE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "90 - BELFORT",
+      "departement": "90",
+      "nom": "BELFORT",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "91 - BRETIGNY SUR ORGE",
+      "departement": "91",
+      "nom": "BRETIGNY SUR ORGE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "91 - ORLY",
+      "departement": "91",
+      "nom": "ORLY",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "92 - NANTERRE",
+      "departement": "92",
+      "nom": "NANTERRE",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "93 - ST-DENIS",
+      "departement": "93",
+      "nom": "ST-DENIS",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "94 - CRETEIL",
+      "departement": "94",
+      "nom": "CRETEIL",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "95 - LE BOURGET",
+      "departement": "95",
+      "nom": "LE BOURGET",
+      "zone": "Standard",
+      "bord_de_mer": false
+    },
+    {
+      "code": "95 - PONTOISE CORMELLES",
+      "departement": "95",
+      "nom": "PONTOISE CORMELLES",
+      "zone": "Standard",
+      "bord_de_mer": false
+    }
+  ],
+  "pacs": [
+    {
+      "code": "AHP60_14",
+      "label": "Effipac 14 - Chassis S",
+      "gamme": "Effipac",
+      "refrigerant": "R32",
+      "chassis": "S",
+      "puissance_nominale": 14,
+      "t_max_eau": 60
+    },
+    {
+      "code": "AHP60_18",
+      "label": "Effipac 18 - Chassis S",
+      "gamme": "Effipac",
+      "refrigerant": "R32",
+      "chassis": "S",
+      "puissance_nominale": 18,
+      "t_max_eau": 60
+    },
+    {
+      "code": "AHP60_26",
+      "label": "Effipac 26 - Chassis M",
+      "gamme": "Effipac",
+      "refrigerant": "R32",
+      "chassis": "M",
+      "puissance_nominale": 26,
+      "t_max_eau": 60
+    },
+    {
+      "code": "AHP60_32",
+      "label": "Effipac 32 - Chassis M",
+      "gamme": "Effipac",
+      "refrigerant": "R32",
+      "chassis": "M",
+      "puissance_nominale": 32,
+      "t_max_eau": 60
+    },
+    {
+      "code": "AHP60_50",
+      "label": "Effipac 50 - Chassis L",
+      "gamme": "Effipac",
+      "refrigerant": "R32",
+      "chassis": "L",
+      "puissance_nominale": 50,
+      "t_max_eau": 60
+    },
+    {
+      "code": "AHP60_70",
+      "label": "Effipac 70 - Chassis L",
+      "gamme": "Effipac",
+      "refrigerant": "R32",
+      "chassis": "XL",
+      "puissance_nominale": 70,
+      "t_max_eau": 60
+    },
+    {
+      "code": "AHP70_15",
+      "label": "Aptae 15 - Chassis S",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "S",
+      "puissance_nominale": 15,
+      "t_max_eau": 75
+    },
+    {
+      "code": "AHP70_18",
+      "label": "Aptae 18 - Chassis S",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "S",
+      "puissance_nominale": 18,
+      "t_max_eau": 75
+    },
+    {
+      "code": "AHP70_23",
+      "label": "Aptae 23 - Chassis M",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "M",
+      "puissance_nominale": 23,
+      "t_max_eau": 75
+    },
+    {
+      "code": "AHP70_27",
+      "label": "Aptae 27 - Chassis M",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "M",
+      "puissance_nominale": 27,
+      "t_max_eau": 75
+    },
+    {
+      "code": "AHP70_40",
+      "label": "Aptae 40 - Chassis L",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "L",
+      "puissance_nominale": 40,
+      "t_max_eau": 75
+    },
+    {
+      "code": "AHP70_50",
+      "label": "Aptae 50 - Chassis L",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "L",
+      "puissance_nominale": 50,
+      "t_max_eau": 75
+    },
+    {
+      "code": "AHP70_65",
+      "label": "Aptae 65 - Chassis XL",
+      "gamme": "Aptae",
+      "refrigerant": "R290",
+      "chassis": "XL",
+      "puissance_nominale": 65,
+      "t_max_eau": 75
+    }
+  ],
+  "equipment": [
+    {
+      "code": "",
+      "nom_commercial": "Effipac 14",
+      "nom_interface": "Effipac 14",
+      "nom_devis": "Effipac 14",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 18",
+      "nom_interface": "Effipac 18",
+      "nom_devis": "Effipac 18",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 26",
+      "nom_interface": "Effipac 26",
+      "nom_devis": "Effipac 26",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 32",
+      "nom_interface": "Effipac 32",
+      "nom_devis": "Effipac 32",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 50",
+      "nom_interface": "Effipac 50",
+      "nom_devis": "Effipac 50",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 70",
+      "nom_interface": "Effipac 70",
+      "nom_devis": "Effipac 70",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 14 AC",
+      "nom_interface": "Effipac 14 AC",
+      "nom_devis": "Effipac 14 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 18 AC",
+      "nom_interface": "Effipac 18 AC",
+      "nom_devis": "Effipac 18 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 26 AC",
+      "nom_interface": "Effipac 26 AC",
+      "nom_devis": "Effipac 26 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 32 AC",
+      "nom_interface": "Effipac 32 AC",
+      "nom_devis": "Effipac 32 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 50 AC",
+      "nom_interface": "Effipac 50 AC",
+      "nom_devis": "Effipac 50 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 70 AC",
+      "nom_interface": "Effipac 70 AC",
+      "nom_devis": "Effipac 70 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 14",
+      "nom_interface": "Effipac 14",
+      "nom_devis": "Effipac 14 Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 18",
+      "nom_interface": "Effipac 18",
+      "nom_devis": "Effipac 18 Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 26",
+      "nom_interface": "Effipac 26",
+      "nom_devis": "Effipac 26 Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 32",
+      "nom_interface": "Effipac 32",
+      "nom_devis": "Effipac 32 Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 50",
+      "nom_interface": "Effipac 50",
+      "nom_devis": "Effipac 50 Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 70",
+      "nom_interface": "Effipac 70",
+      "nom_devis": "Effipac 70 Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 14 AC",
+      "nom_interface": "Effipac 14 AC",
+      "nom_devis": "Effipac 14 AC Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 18 AC",
+      "nom_interface": "Effipac 18 AC",
+      "nom_devis": "Effipac 18 AC Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 26 AC",
+      "nom_interface": "Effipac 26 AC",
+      "nom_devis": "Effipac 26 AC Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 32 AC",
+      "nom_interface": "Effipac 32 AC",
+      "nom_devis": "Effipac 32 AC Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 50 AC",
+      "nom_interface": "Effipac 50 AC",
+      "nom_devis": "Effipac 50 AC Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Effipac 70 AC",
+      "nom_interface": "Effipac 70 AC",
+      "nom_devis": "Effipac 70 AC Hybride",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Bouteille Effi 100L",
+      "nom_interface": "Bouteille Effi 100L",
+      "nom_devis": "Bouteille Effi 100L",
+      "nb_brides": 0
+    },
+    {
+      "code": "",
+      "nom_commercial": "Bouteille Effi 200L",
+      "nom_interface": "Bouteille Effi 200L",
+      "nom_devis": "Bouteille Effi 200L",
+      "nb_brides": 0
+    },
+    {
+      "code": "",
+      "nom_commercial": "Corflex Effi 0B 500L SM1",
+      "nom_interface": "Corflex Effi 0B 500L SM1",
+      "nom_devis": "Corflex Effi 0B 500L SM1",
+      "nb_brides": 0
+    },
+    {
+      "code": "",
+      "nom_commercial": "Corflex Effi 3B 500L SM1",
+      "nom_interface": "Corflex Effi 3B 500L SM1",
+      "nom_devis": "Corflex Effi 3B 500L SM1",
+      "nb_brides": 3
+    },
+    {
+      "code": "",
+      "nom_commercial": "Corflex Effi 0B 900L SM1",
+      "nom_interface": "Corflex Effi 0B 900L SM1",
+      "nom_devis": "Corflex Effi 0B 900L SM1",
+      "nb_brides": 0
+    },
+    {
+      "code": "",
+      "nom_commercial": "Corflex Effi 2B 900L SM1",
+      "nom_interface": "Corflex Effi 2B 900L SM1",
+      "nom_devis": "Corflex Effi 2B 900L SM1",
+      "nb_brides": 2
+    },
+    {
+      "code": "",
+      "nom_commercial": "Corflex Effi 2B 1500L SM1",
+      "nom_interface": "Corflex Effi 2B 1500L SM1",
+      "nom_devis": "Corflex Effi 2B 1500L SM1",
+      "nb_brides": 2
+    },
+    {
+      "code": "",
+      "nom_commercial": "Résistance blindée 6kw pac chauffage",
+      "nom_interface": "6 kW",
+      "nom_devis": "Résistance blindée 6kw",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Résistance blindée 15kw pac chauffage",
+      "nom_interface": "15 kW",
+      "nom_devis": "Résistance blindée 15kw",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Résistance blindée 30kw pac chauffage",
+      "nom_interface": "30 kW",
+      "nom_devis": "Résistance blindée 30kw",
+      "nb_brides": null
+    },
+    {
+      "code": "059261",
+      "nom_commercial": "QAZ36 - Sonde départ système",
+      "nom_interface": "QAZ36 - Sonde départ système",
+      "nom_devis": "QAZ 36 - Sonde départ système",
+      "nb_brides": null
+    },
+    {
+      "code": "059260",
+      "nom_commercial": "QAC34 - Sonde extérieure",
+      "nom_interface": "QAC34 - Sonde extérieure",
+      "nom_devis": "QAC 34 - Sonde extérieure",
+      "nb_brides": null
+    },
+    {
+      "code": "059592",
+      "nom_commercial": "QAD 36 - Sonde circuit régulé",
+      "nom_interface": "QAD 36 - Sonde circuit régulé",
+      "nom_devis": "QAD 36 - Sonde circuit régulé",
+      "nb_brides": null
+    },
+    {
+      "code": "059752",
+      "nom_commercial": "Interface de communication OCI 345",
+      "nom_interface": "Interface de communication OCI 345",
+      "nom_devis": "Interface de communication LPB OCI 345",
+      "nb_brides": null
+    },
+    {
+      "code": "040941",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Kit RVS 63",
+      "nb_brides": null
+    },
+    {
+      "code": "040943",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Kit RVS 46",
+      "nb_brides": null
+    },
+    {
+      "code": "059775",
+      "nom_commercial": "Module d'extension de pilotage circuit chauffage AVS75",
+      "nom_interface": "Module d'extension de pilotage circuit chauffage AVS75",
+      "nom_devis": "Module d'extension de pilotage circuit chauffage (AVS75)",
+      "nb_brides": null
+    },
+    {
+      "code": "091471",
+      "nom_commercial": "Bouton marche forcée",
+      "nom_interface": "Bouton marche forcée",
+      "nom_devis": "Bouton de marche forcéedes resistances",
+      "nb_brides": null
+    },
+    {
+      "code": "030497",
+      "nom_commercial": "KIT DOIGT DE GANT RETOUR PAC 1\"1/4",
+      "nom_interface": "KIT DOIGT DE GANT RETOUR PAC 1\"1/4",
+      "nom_devis": "Kit doigt de gants retour Pac 1\"1/4",
+      "nb_brides": null
+    },
+    {
+      "code": "030498",
+      "nom_commercial": "KIT DOIGT DE GANT RETOUR PAC 2\"1/2",
+      "nom_interface": "KIT DOIGT DE GANT RETOUR PAC 2\"1/2",
+      "nom_devis": "Kit doigt de gants retour Pac 2\"1/2",
+      "nb_brides": null
+    },
+    {
+      "code": "030499",
+      "nom_commercial": "KIT DOIGT DE GANT RETOUR PAC 3\"",
+      "nom_interface": "KIT DOIGT DE GANT RETOUR PAC 3\"",
+      "nom_devis": "Kit doigt de gants retour Pac 3\"",
+      "nb_brides": null
+    },
+    {
+      "code": "092038",
+      "nom_commercial": "Kit antivibratile 14-18 kw",
+      "nom_interface": "Kit antivibratile 14-18 kw",
+      "nom_devis": "Supports anti-vibratiles châssis S",
+      "nb_brides": null
+    },
+    {
+      "code": "092039",
+      "nom_commercial": "Kit antivibratile 26-32 kw",
+      "nom_interface": "Kit antivibratile 26-32 kw",
+      "nom_devis": "Supports anti-vibratiles châssis M",
+      "nb_brides": null
+    },
+    {
+      "code": "092040",
+      "nom_commercial": "Kit antivibratile 50-70 kw",
+      "nom_interface": "Kit antivibratile 50-70 kw",
+      "nom_devis": "Supports anti-vibratiles châssis L",
+      "nb_brides": null
+    },
+    {
+      "code": "030527",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Support sur-étanchéité châssis S",
+      "nb_brides": null
+    },
+    {
+      "code": "030528",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Support sur-étanchéité châssis M",
+      "nb_brides": null
+    },
+    {
+      "code": "030529",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Support sur-étanchéité châssis L",
+      "nb_brides": null
+    },
+    {
+      "code": "030530",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Support sous-étanchéité châssis S",
+      "nb_brides": null
+    },
+    {
+      "code": "030531",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Support sous-étanchéité châssis M",
+      "nb_brides": null
+    },
+    {
+      "code": "030532",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Support sous-étanchéité châssis L",
+      "nb_brides": null
+    },
+    {
+      "code": "074977",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Vanne de réglage châssis S",
+      "nb_brides": null
+    },
+    {
+      "code": "074978",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Vanne de réglage châssis M",
+      "nb_brides": null
+    },
+    {
+      "code": "074979",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Vanne de réglage châssis L",
+      "nb_brides": null
+    },
+    {
+      "code": "059833",
+      "nom_commercial": "Navipass MODBUS",
+      "nom_interface": "Navipass MODBUS",
+      "nom_devis": "Navipass MODBUS",
+      "nb_brides": null
+    },
+    {
+      "code": "092000",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Kit raccord hydraulique châssis L",
+      "nb_brides": null
+    },
+    {
+      "code": "074976",
+      "nom_commercial": "",
+      "nom_interface": "",
+      "nom_devis": "Relais temporisé",
+      "nb_brides": null
+    },
+    {
+      "code": "880320",
+      "nom_commercial": "Mise en service Effipac ou Hydramax Effipac",
+      "nom_interface": "Mise en service Effipac ou Hydramax Effipac",
+      "nom_devis": "Mise en service d'une Effipac",
+      "nb_brides": null
+    },
+    {
+      "code": "880321",
+      "nom_commercial": "Mise en service Effipac ou Hydramax Effipac supplémentaire",
+      "nom_interface": "Mise en service Effipac ou Hydramax Effipac supplémentaire",
+      "nom_devis": "Mise en service d'une Effipac supplémentaire",
+      "nb_brides": null
+    },
+    {
+      "code": "880322",
+      "nom_commercial": "Pré-visite Effipac ou Hydramax Effipac",
+      "nom_interface": "Pré-visite Effipac ou Hydramax Effipac",
+      "nom_devis": "Pré-visite d'installation",
+      "nb_brides": null
+    },
+    {
+      "code": "880323",
+      "nom_commercial": "Assistance installation Effipac ou Hydramax Effipac",
+      "nom_interface": "Assistance installation Effipac ou Hydramax Effipac",
+      "nom_devis": "Assistance à l'installation",
+      "nb_brides": null
+    },
+    {
+      "code": "080013",
+      "nom_commercial": "Mise a terre avec hayon",
+      "nom_interface": "Mise a terre avec hayon",
+      "nom_devis": "Mise à terre avec hayon",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 15",
+      "nom_interface": "Aptae 15",
+      "nom_devis": "Aptae 15",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 18",
+      "nom_interface": "Aptae 18",
+      "nom_devis": "Aptae 18",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 23",
+      "nom_interface": "Aptae 23",
+      "nom_devis": "Aptae 23",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 27",
+      "nom_interface": "Aptae 27",
+      "nom_devis": "Aptae 27",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 40",
+      "nom_interface": "Aptae 40",
+      "nom_devis": "Aptae 40",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 50",
+      "nom_interface": "Aptae 50",
+      "nom_devis": "Aptae 50",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 65",
+      "nom_interface": "Aptae 65",
+      "nom_devis": "Aptae 65",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 15 AC",
+      "nom_interface": "Aptae 15 AC",
+      "nom_devis": "Aptae 15 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 18 AC",
+      "nom_interface": "Aptae 18 AC",
+      "nom_devis": "Aptae 18 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 23 AC",
+      "nom_interface": "Aptae 23 AC",
+      "nom_devis": "Aptae 23 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 27 AC",
+      "nom_interface": "Aptae 27 AC",
+      "nom_devis": "Aptae 27 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 40 AC",
+      "nom_interface": "Aptae 40 AC",
+      "nom_devis": "Aptae 40 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "Aptae 50 AC",
+      "nom_interface": "Aptae 50 AC",
+      "nom_devis": "Aptae 50 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "930102",
+      "nom_commercial": "Neofirst 500 BR SM1",
+      "nom_interface": "Neofirst 500 BR SM1",
+      "nom_devis": "Neofirst 500 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930103",
+      "nom_commercial": "Neofirst 750 BR SM1",
+      "nom_interface": "Neofirst 750 BR SM1",
+      "nom_devis": "Neofirst 750 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930104",
+      "nom_commercial": "Neofirst 900 BR SM1",
+      "nom_interface": "Neofirst 900 BR SM1",
+      "nom_devis": "Neofirst 900 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930105",
+      "nom_commercial": "Neofirst 1000 BR SM1",
+      "nom_interface": "Neofirst 1000 BR SM1",
+      "nom_devis": "Neofirst 1000 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930106",
+      "nom_commercial": "Neofirst 1500 BR SM1",
+      "nom_interface": "Neofirst 1500 BR SM1",
+      "nom_devis": "Neofirst 1500 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930107",
+      "nom_commercial": "Neofirst 2000 BR SM1",
+      "nom_interface": "Neofirst 2000 BR SM1",
+      "nom_devis": "Neofirst 2000 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930120",
+      "nom_commercial": "Neoflow 500 BR SM1",
+      "nom_interface": "Neoflow 500 BR SM1",
+      "nom_devis": "Neoflow 500 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930121",
+      "nom_commercial": "Neoflow 750 BR SM1",
+      "nom_interface": "Neoflow 750 BR SM1",
+      "nom_devis": "Neoflow 750 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930122",
+      "nom_commercial": "Neoflow 900 BR SM1",
+      "nom_interface": "Neoflow 900 BR SM1",
+      "nom_devis": "Neoflow 900 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930123",
+      "nom_commercial": "Neoflow 1000 BR SM1",
+      "nom_interface": "Neoflow 1000 BR SM1",
+      "nom_devis": "Neoflow 1000 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930124",
+      "nom_commercial": "Neoflow 1500 BR SM1",
+      "nom_interface": "Neoflow 1500 BR SM1",
+      "nom_devis": "Neoflow 1500 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930125",
+      "nom_commercial": "Neoflow 2000 BR SM1",
+      "nom_interface": "Neoflow 2000 BR SM1",
+      "nom_devis": "Neoflow 2000 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930126",
+      "nom_commercial": "Neoflow 2500 BR SM1",
+      "nom_interface": "Neoflow 2500 BR SM1",
+      "nom_devis": "Neoflow 2500 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "930127",
+      "nom_commercial": "Neoflow 3000 BR SM1",
+      "nom_interface": "Neoflow 3000 BR SM1",
+      "nom_devis": "Neoflow 3000 BR SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520434",
+      "nom_commercial": "Corhydro 500L SM1",
+      "nom_interface": "Corhydro 500L SM1",
+      "nom_devis": "Corhydro 500L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520435",
+      "nom_commercial": "Corhydro 750L SM1",
+      "nom_interface": "Corhydro 750L SM1",
+      "nom_devis": "Corhydro 750L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520650",
+      "nom_commercial": "Corhydro 900L SM1",
+      "nom_interface": "Corhydro 900L SM1",
+      "nom_devis": "Corhydro 900L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520436",
+      "nom_commercial": "Corhydro 1000L SM1",
+      "nom_interface": "Corhydro 1000L SM1",
+      "nom_devis": "Corhydro 1000L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520437",
+      "nom_commercial": "Corhydro 1000L TB SM1",
+      "nom_interface": "Corhydro 1000L TB SM1",
+      "nom_devis": "Corhydro 1000L TB SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520480",
+      "nom_commercial": "Corhydro 1500L SM1",
+      "nom_interface": "Corhydro 1500L SM1",
+      "nom_devis": "Corhydro 1500L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520439",
+      "nom_commercial": "Corhydro 1500L TB SM1",
+      "nom_interface": "Corhydro 1500L TB SM1",
+      "nom_devis": "Corhydro 1500L TB SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520440",
+      "nom_commercial": "Corhydro 2000L SM1",
+      "nom_interface": "Corhydro 2000L SM1",
+      "nom_devis": "Corhydro 2000L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520441",
+      "nom_commercial": "Corhydro 2500L SM1",
+      "nom_interface": "Corhydro 2500L SM1",
+      "nom_devis": "Corhydro 2500L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520442",
+      "nom_commercial": "Corhydro 2500L TB SM1",
+      "nom_interface": "Corhydro 2500L TB SM1",
+      "nom_devis": "Corhydro 2500L TB SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520443",
+      "nom_commercial": "Corhydro 3000L SM1",
+      "nom_interface": "Corhydro 3000L SM1",
+      "nom_devis": "Corhydro 3000L SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520444",
+      "nom_commercial": "Corhydro 3000L TB SM1",
+      "nom_interface": "Corhydro 3000L TB SM1",
+      "nom_devis": "Corhydro 3000L TB SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 15",
+      "nom_interface": "IZEA 15",
+      "nom_devis": "IZEA 15",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 15 AC",
+      "nom_interface": "IZEA 15 AC",
+      "nom_devis": "IZEA 15 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 18",
+      "nom_interface": "IZEA 18",
+      "nom_devis": "IZEA 18",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 18 AC",
+      "nom_interface": "IZEA 18 AC",
+      "nom_devis": "IZEA 18 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 23",
+      "nom_interface": "IZEA 23",
+      "nom_devis": "IZEA 23",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 23 AC",
+      "nom_interface": "IZEA 23 AC",
+      "nom_devis": "IZEA 23 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 27",
+      "nom_interface": "IZEA 27",
+      "nom_devis": "IZEA 27",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 27 AC",
+      "nom_interface": "IZEA 27 AC",
+      "nom_devis": "IZEA 27 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 40",
+      "nom_interface": "IZEA 40",
+      "nom_devis": "IZEA 40",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 40 AC",
+      "nom_interface": "IZEA 40 AC",
+      "nom_devis": "IZEA 40 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 50",
+      "nom_interface": "IZEA 50",
+      "nom_devis": "IZEA 50",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 50 AC",
+      "nom_interface": "IZEA 50 AC",
+      "nom_devis": "IZEA 50 AC",
+      "nb_brides": null
+    },
+    {
+      "code": "",
+      "nom_commercial": "IZEA 65",
+      "nom_interface": "IZEA 65",
+      "nom_devis": "IZEA 65",
+      "nb_brides": null
+    },
+    {
+      "code": "950109",
+      "nom_commercial": "Elara 1 CO 500 TP SM1",
+      "nom_interface": "Elara 1 CO 500 TP SM1",
+      "nom_devis": "Elara 1 CO 500 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950110",
+      "nom_commercial": "Elara 1 CO 750 TP SM1",
+      "nom_interface": "Elara 1 CO 750 TP SM1",
+      "nom_devis": "Elara 1 CO 750 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950111",
+      "nom_commercial": "Elara 1 CO 900 TP SM1",
+      "nom_interface": "Elara 1 CO 900 TP SM1",
+      "nom_devis": "Elara 1 CO 900 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950112",
+      "nom_commercial": "Elara 1 CO 1000 TP SM1",
+      "nom_interface": "Elara 1 CO 1000 TP SM1",
+      "nom_devis": "Elara 1 CO 1000 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950113",
+      "nom_commercial": "Elara 1 CO 1500 TP SM1",
+      "nom_interface": "Elara 1 CO 1500 TP SM1",
+      "nom_devis": "Elara 1 CO 1500 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950114",
+      "nom_commercial": "Elara 1 CO 2000 TP SM1",
+      "nom_interface": "Elara 1 CO 2000 TP SM1",
+      "nom_devis": "Elara 1 CO 2000 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950116",
+      "nom_commercial": "Elara 1+ 500 TP SM1",
+      "nom_interface": "Elara 1+ 500 TP SM1",
+      "nom_devis": "Elara 1+ 500 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950117",
+      "nom_commercial": "Elara 1+ 750 TP SM1",
+      "nom_interface": "Elara 1+ 750 TP SM1",
+      "nom_devis": "Elara 1+ 750 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950118",
+      "nom_commercial": "Elara 1+ 900 TP SM1",
+      "nom_interface": "Elara 1+ 900 TP SM1",
+      "nom_devis": "Elara 1+ 900 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950119",
+      "nom_commercial": "Elara 1+ 1000 TP SM1",
+      "nom_interface": "Elara 1+ 1000 TP SM1",
+      "nom_devis": "Elara 1+ 1000 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950120",
+      "nom_commercial": "Elara 1+ 1500 TP SM1",
+      "nom_interface": "Elara 1+ 1500 TP SM1",
+      "nom_devis": "Elara 1+ 1500 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950121",
+      "nom_commercial": "Elara 1+ 2000 TP SM1",
+      "nom_interface": "Elara 1+ 2000 TP SM1",
+      "nom_devis": "Elara 1+ 2000 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950122",
+      "nom_commercial": "Elara 1+ 2500 TP SM1",
+      "nom_interface": "Elara 1+ 2500 TP SM1",
+      "nom_devis": "Elara 1+ 2500 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "950123",
+      "nom_commercial": "Elara 1+ 3000 TP SM1",
+      "nom_interface": "Elara 1+ 3000 TP SM1",
+      "nom_devis": "Elara 1+ 3000 TP SM1",
+      "nb_brides": null
+    },
+    {
+      "code": "520274",
+      "nom_commercial": "BOUTEILLE P MAX 100L",
+      "nom_interface": "BOUTEILLE P MAX 100L",
+      "nom_devis": "BOUTEILLE P MAX 100L",
+      "nb_brides": 0
+    },
+    {
+      "code": "520275",
+      "nom_commercial": "BOUTEILLE P MAX 200L",
+      "nom_interface": "BOUTEILLE P MAX 200L",
+      "nom_devis": "BOUTEILLE P MAX 200L",
+      "nb_brides": 0
+    },
+    {
+      "code": "520351",
+      "nom_commercial": "LCT P MAX 500 L 0TP SM1",
+      "nom_interface": "LCT P MAX 500 L 0TP SM1",
+      "nom_devis": "LCT P MAX 500 L 0TP SM1",
+      "nb_brides": 0
+    },
+    {
+      "code": "520403",
+      "nom_commercial": "LCT P MAX 500L 3TP SM1",
+      "nom_interface": "LCT P MAX 500L 3TP SM1",
+      "nom_devis": "LCT P MAX 500L 3TP SM1",
+      "nb_brides": 3
+    },
+    {
+      "code": "520372",
+      "nom_commercial": "LCT P MAX 900 L 0TP SM1",
+      "nom_interface": "LCT P MAX 900 L 0TP SM1",
+      "nom_devis": "LCT P MAX 900 L 0TP SM1",
+      "nb_brides": 0
+    },
+    {
+      "code": "520404",
+      "nom_commercial": "LCT P MAX 900L 2TP SM1",
+      "nom_interface": "LCT P MAX 900L 2TP SM1",
+      "nom_devis": "LCT P MAX 900L 2TP SM1",
+      "nb_brides": 2
+    },
+    {
+      "code": "520405",
+      "nom_commercial": "LCT P MAX 1500L 2TP SM1",
+      "nom_interface": "LCT P MAX 1500L 2TP SM1",
+      "nom_devis": "LCT P MAX 1500L 2TP SM1",
+      "nb_brides": 2
+    },
+    {
+      "code": "065227",
+      "nom_commercial": "LCT 500 TP M1",
+      "nom_interface": "LCT 500 TP M2",
+      "nom_devis": "LCT 500 TP M3",
+      "nb_brides": null
+    },
+    {
+      "code": "065228",
+      "nom_commercial": "LCT 750 TP M1",
+      "nom_interface": "LCT 750 TP M2",
+      "nom_devis": "LCT 750 TP M3",
+      "nb_brides": null
+    },
+    {
+      "code": "065229",
+      "nom_commercial": "LCT 900 TP M2",
+      "nom_interface": "LCT 900 TP M3",
+      "nom_devis": "LCT 900 TP M4",
+      "nb_brides": null
+    },
+    {
+      "code": "065230",
+      "nom_commercial": "LCT 1000 TP M3",
+      "nom_interface": "LCT 1000 TP M4",
+      "nom_devis": "LCT 1000 TP M5",
+      "nb_brides": null
+    },
+    {
+      "code": "065232",
+      "nom_commercial": "LCT 1500 TP M4",
+      "nom_interface": "LCT 1500 TP M5",
+      "nom_devis": "LCT 1500 TP M6",
+      "nb_brides": null
+    },
+    {
+      "code": "065234",
+      "nom_commercial": "LCT 2000 TP M5",
+      "nom_interface": "LCT 2000 TP M6",
+      "nom_devis": "LCT 2000 TP M7",
+      "nb_brides": null
+    },
+    {
+      "code": "065235",
+      "nom_commercial": "LCT 2500 TP M6",
+      "nom_interface": "LCT 2500 TP M7",
+      "nom_devis": "LCT 2500 TP M8",
+      "nb_brides": null
+    },
+    {
+      "code": "065237",
+      "nom_commercial": "LCT 3000 TP M7",
+      "nom_interface": "LCT 3000 TP M8",
+      "nom_devis": "LCT 3000 TP M9",
+      "nb_brides": null
+    },
+    {
+      "code": "057062",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 206 SS",
+      "nom_devis": "Rubis EVO SI 206 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057063",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 210 SS",
+      "nom_devis": "Rubis EVO SI 210 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057064",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 214 SS",
+      "nom_devis": "Rubis EVO SI 214 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057065",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 218 SS",
+      "nom_devis": "Rubis EVO SI 218 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057066",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 222 SS",
+      "nom_devis": "Rubis EVO SI 222 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057067",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 226 SS",
+      "nom_devis": "Rubis EVO SI 226 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057068",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 230 SS",
+      "nom_devis": "Rubis EVO SI 230 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057069",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 608 SS",
+      "nom_devis": "Rubis EVO SI 608 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057070",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 612 SS",
+      "nom_devis": "Rubis EVO SI 612 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057071",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 616 SS",
+      "nom_devis": "Rubis EVO SI 616 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057072",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 620 SS",
+      "nom_devis": "Rubis EVO SI 620 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057073",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 624 SS",
+      "nom_devis": "Rubis EVO SI 624 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057074",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 628 SS",
+      "nom_devis": "Rubis EVO SI 628 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057075",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 632 SS",
+      "nom_devis": "Rubis EVO SI 632 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057076",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 636 SS",
+      "nom_devis": "Rubis EVO SI 636 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057077",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 640 SS",
+      "nom_devis": "Rubis EVO SI 640 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057078",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 820 SS",
+      "nom_devis": "Rubis EVO SI 820 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057079",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 824 SS",
+      "nom_devis": "Rubis EVO SI 824 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057080",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 828 SS",
+      "nom_devis": "Rubis EVO SI 828 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057081",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 832 SS",
+      "nom_devis": "Rubis EVO SI 832 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057082",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 836 SS",
+      "nom_devis": "Rubis EVO SI 836 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057083",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 840 SS",
+      "nom_devis": "Rubis EVO SI 840 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057084",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2420 SS",
+      "nom_devis": "Rubis EVO SI 2420 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057085",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2424 SS",
+      "nom_devis": "Rubis EVO SI 2424 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057086",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2428 SS",
+      "nom_devis": "Rubis EVO SI 2428 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057087",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2432 SS",
+      "nom_devis": "Rubis EVO SI 2432 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057088",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2436 SS",
+      "nom_devis": "Rubis EVO SI 2436 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057089",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2440 SS",
+      "nom_devis": "Rubis EVO SI 2440 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057090",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2444 SS",
+      "nom_devis": "Rubis EVO SI 2444 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057091",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2448 SS",
+      "nom_devis": "Rubis EVO SI 2448 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "057092",
+      "nom_commercial": "Rubis EVO SI",
+      "nom_interface": "Rubis EVO SI 2452 SS",
+      "nom_devis": "Rubis EVO SI 2452 SS",
+      "nb_brides": null
+    },
+    {
+      "code": "058026",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-06-11",
+      "nom_devis": "HeatSwitch 2 12-06-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058027",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-10-11",
+      "nom_devis": "HeatSwitch 2 12-10-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058028",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-14-11",
+      "nom_devis": "HeatSwitch 2 12-14-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058029",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-18-11",
+      "nom_devis": "HeatSwitch 2 12-18-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058030",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-22-11",
+      "nom_devis": "HeatSwitch 2 12-22-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058031",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-26-11",
+      "nom_devis": "HeatSwitch 2 12-26-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058032",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 12-30-11",
+      "nom_devis": "HeatSwitch 2 12-30-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058033",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-08-11",
+      "nom_devis": "HeatSwitch 2 32-08-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058034",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-12-11",
+      "nom_devis": "HeatSwitch 2 32-12-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058035",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-16-11",
+      "nom_devis": "HeatSwitch 2 32-16-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058036",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-20-11",
+      "nom_devis": "HeatSwitch 2 32-20-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058037",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-24-11",
+      "nom_devis": "HeatSwitch 2 32-24-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058038",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-28-11",
+      "nom_devis": "HeatSwitch 2 32-28-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058071",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-32-11",
+      "nom_devis": "HeatSwitch 2 32-32-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058072",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-36-11",
+      "nom_devis": "HeatSwitch 2 32-36-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058073",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 32-40-11",
+      "nom_devis": "HeatSwitch 2 32-40-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058281",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 40-20-11",
+      "nom_devis": "HeatSwitch 2 40-20-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058282",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 40-24-11",
+      "nom_devis": "HeatSwitch 2 40-24-11",
+      "nb_brides": null
+    },
+    {
+      "code": "058283",
+      "nom_commercial": "HeatSwitch 2",
+      "nom_interface": "HeatSwitch 2 40-28-11",
+      "nom_devis": "HeatSwitch 2 40-28-11",
+      "nb_brides": null
+    }
+  ],
+  "building_types": {
+    "Logements": [
+      "Logements privés",
+      "Logements sociaux",
+      "Résidence seniors",
+      "Foyer de jeunes travailleurs",
+      "Résidence étudiante"
+    ],
+    "Hôtel": [
+      "Affaire",
+      "Tourisme",
+      "Montagne"
+    ],
+    "Restaurant": [
+      "Traditionnelle",
+      "Gastronomique",
+      "Rapide",
+      "Collective (cantine/self)"
+    ],
+    "Etablissement sportif": [
+      "Stade de football",
+      "Stade de rugby",
+      "Gymnase / terrain couvert",
+      "Piscine",
+      "Salle de fitness / centre multisport"
+    ],
+    "Santé/Social": [
+      "EHPAD",
+      "Internat (douche collective)",
+      "Caserne",
+      "Hôpital / clinique (douches)"
+    ],
+    "Autre": [
+      "Vestiaire d'entreprise",
+      "Station de lavage",
+      "Tout processus jusqu'à 65°C"
+    ]
+  },
+  "glycol_options": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "circuit_types": [
+    "Régulé",
+    "Constant"
+  ],
+  "anti_legionelle_options": [
+    "60°C / 1h",
+    "70°C / 2min"
+  ],
+  "ecs_systems": [
+    "Serpentin",
+    "Échangeur à plaques"
+  ],
+  "validation_rules": {
+    "puissance_circuit": {
+      "min": 0.1,
+      "max": 1000,
+      "precision": 0.1,
+      "unit": "kW"
+    },
+    "consigne_depart": {
+      "min": 10,
+      "max": 75,
+      "precision": 1,
+      "unit": "°C"
+    },
+    "delta_t": {
+      "min": 1,
+      "max": 40,
+      "precision": 1,
+      "unit": "K"
+    },
+    "distance_pac_ballon": {
+      "min": 0,
+      "max": 200,
+      "precision": 1,
+      "unit": "m"
+    },
+    "distance_pac_batiment": {
+      "min": 0,
+      "max": 200,
+      "precision": 1,
+      "unit": "m"
+    },
+    "hauteur_sous_plafond": {
+      "min": 0,
+      "max": 5000,
+      "precision": 10,
+      "unit": "mm"
+    },
+    "largeur_passage": {
+      "min": 0,
+      "max": 5000,
+      "precision": 10,
+      "unit": "mm"
+    },
+    "altitude": {
+      "min": 0,
+      "max": 3000,
+      "precision": 1,
+      "unit": "m"
+    },
+    "glycol": {
+      "min": 0,
+      "max": 50,
+      "precision": 10,
+      "unit": "%"
+    }
+  }
+}
