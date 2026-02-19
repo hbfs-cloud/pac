@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
 :root{
   --mono:'DM Mono',monospace;
@@ -185,17 +183,15 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .anim:nth-child(4){animation-delay:.12s}
 
 /* ===== PDF ACTION BAR ===== */
-.pdf-actions{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;padding:12px 16px;background:#fff;
-  border:1.5px solid #e5e7eb;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.04);align-items:center}
-.pdf-actions-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;margin-right:4px}
-.btn-pdf{background:var(--atlantic);color:#fff;font-weight:600;font-size:.82rem;
-  border-radius:8px;padding:9px 16px;display:inline-flex;align-items:center;gap:6px;transition:all .2s;cursor:pointer;border:none}
-.btn-pdf:hover{background:var(--atlantic-light);color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,51,102,.2)}
+.pdf-actions{display:inline-flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.btn-pdf{background:var(--atlantic);color:#fff;font-weight:600;font-size:.72rem;
+  border-radius:6px;padding:5px 10px;display:inline-flex;align-items:center;gap:4px;transition:all .15s;cursor:pointer;border:none}
+.btn-pdf:hover{background:var(--atlantic-light);color:#fff;box-shadow:0 2px 8px rgba(0,51,102,.15)}
 .btn-pdf.orange{background:var(--orange)}
 .btn-pdf.orange:hover{background:var(--orange-hover)}
 .btn-pdf.teal{background:#0891b2}
 .btn-pdf.teal:hover{background:#0e7490}
-.btn-pdf i{font-size:1.1rem}
+.btn-pdf i{font-size:.9rem}
 
 /* ===== DEVIS MODAL ===== */
 .devis-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.5);
@@ -217,12 +213,12 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .btn-back-mobile{display:none}
 @media(max-width:991px){
   .btn-back-mobile{display:flex;align-items:center;gap:6px;background:var(--atlantic);color:#fff;
-    border:none;border-radius:8px;padding:10px 16px;font-weight:600;font-size:.85rem;cursor:pointer;
-    margin-bottom:12px;width:100%;justify-content:center}
+    border:none;border-radius:8px;padding:8px 14px;font-weight:600;font-size:.8rem;cursor:pointer;
+    margin-bottom:10px;width:100%;justify-content:center}
   .btn-back-mobile:hover{background:var(--atlantic-light)}
-  .pdf-actions{position:sticky;bottom:0;z-index:50;margin:0 -12px -12px;padding:12px;
+  .pdf-actions{position:sticky;bottom:0;z-index:50;margin:0 -12px -12px;padding:8px 12px;
     border-radius:0;border:none;border-top:1px solid #e5e7eb;background:#fff;
-    box-shadow:0 -4px 12px rgba(0,0,0,.08)}
+    box-shadow:0 -2px 8px rgba(0,0,0,.06);gap:6px;display:flex;justify-content:center}
 }
 
 /* ===== COLLAPSIBLE SECTIONS ===== */
@@ -483,6 +479,8 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 
 <!-- ===== SCRIPTS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script src="data/performance.js"></script>
 <script src="data/schemas.js"></script>
 <script src="assets/js/engine.js"></script>
@@ -643,6 +641,23 @@ function pdfCheckPage(doc,y,margin){
   return y;
 }
 
+function loadJsPDF(){
+  return new Promise((resolve,reject)=>{
+    if(window.jspdf){return resolve()}
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
+    s.onload=()=>{
+      const s2=document.createElement('script');
+      s2.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js';
+      s2.onload=()=>resolve();
+      s2.onerror=()=>reject(new Error('autoTable plugin failed'));
+      document.head.appendChild(s2);
+    };
+    s.onerror=()=>reject(new Error('jsPDF failed to load'));
+    document.head.appendChild(s);
+  });
+}
+
 function openPdfPreview(doc,filename){
   try{
     const blob=doc.output('blob');
@@ -652,9 +667,10 @@ function openPdfPreview(doc,filename){
   }catch(e){doc.save(filename)}
 }
 
-function generateQuickPDF(){
+async function generateQuickPDF(){
   if(!S.solutions||S.solutions.length===0)return alert('Calculez d\'abord une solution.');
-  if(!window.jspdf){return alert('Erreur: la librairie jsPDF n\'est pas chargee. Verifiez votre connexion internet.')}
+  if(!window.jspdf){try{await loadJsPDF()}catch(e){return alert('Impossible de charger jsPDF. Verifiez votre connexion internet et rechargez la page.')}}
+  if(!window.jspdf){return alert('jsPDF non disponible. Rechargez la page.')}
   try{
   const sol=S.solutions[S.selectedIdx];
   const {jsPDF}=window.jspdf;
@@ -739,9 +755,10 @@ function generateQuickPDF(){
 // ============================================================
 // DEVIS PDF (complet avec infos client)
 // ============================================================
-function generateDevisPDF(){
+async function generateDevisPDF(){
   if(!S.solutions||S.solutions.length===0)return alert('Calculez d\'abord une solution.');
-  if(!window.jspdf){return alert('Erreur: la librairie jsPDF n\'est pas chargee.')}
+  if(!window.jspdf){try{await loadJsPDF()}catch(e){return alert('Impossible de charger jsPDF.')}}
+  if(!window.jspdf){return alert('jsPDF non disponible.')}
   try{
   const sol=S.solutions[S.selectedIdx];
   const {jsPDF}=window.jspdf;
@@ -1021,29 +1038,37 @@ function doCalc(){
 // ============================================================
 function renderSolutions(sols){
   let h='<button class="btn-back-mobile" onclick="backToInputs()"><i class="ti ti-arrow-left"></i>Modifier les parametres</button>';
+
+  // Solution selector + inline actions
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px">';
+  h+='<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--atlantic)">'+sols.length+' solution'+(sols.length>1?'s':'')+' trouvee'+(sols.length>1?'s':'')+'</div>';
   h+='<div class="pdf-actions">';
-  h+='<span class="pdf-actions-label">Actions</span>';
-  h+='<button class="btn-pdf" onclick="generateQuickPDF()"><i class="ti ti-file-type-pdf"></i>Fiche PDF</button>';
-  h+='<button class="btn-pdf orange" onclick="openDevis()"><i class="ti ti-file-invoice"></i>Devis complet</button>';
+  h+='<button class="btn-pdf" onclick="generateQuickPDF()"><i class="ti ti-file-type-pdf"></i>PDF</button>';
+  h+='<button class="btn-pdf orange" onclick="openDevis()"><i class="ti ti-file-invoice"></i>Devis</button>';
   h+='<button class="btn-pdf teal" onclick="window.print()"><i class="ti ti-printer"></i>Imprimer</button>';
-  h+='</div>';
+  h+='</div></div>';
+
   h+='<div class="sol-grid">';
   sols.forEach((s,i)=>{
     const ok=s.taux_couverture>=90,w=s.taux_couverture>=70&&s.taux_couverture<90;
-    h+=`<div class="sol-card anim ${i===0?'active':''}" onclick="selectSol(${i})" id="card${i}">
-      <div class="d-flex justify-content-between align-items-start mb-2">
-        <div><div class="sol-name">${s.pac.nom}</div><div class="sol-sub">${s.nombre>1?s.nombre+' unites en cascade':'1 unite'}</div></div>
-        <span class="badge ${s.pac.refrigerant==='R290'?'bg-green-lt':'bg-blue-lt'}">${s.pac.refrigerant}</span>
+    h+=`<div class="sol-card anim" onclick="selectSol(${i})" id="card${i}">
+      <div class="d-flex justify-content-between align-items-start mb-1">
+        <div><div class="sol-name">${s.pac.nom}</div><div class="sol-sub">${s.nombre>1?s.nombre+' unites cascade':'1 unite'} &bull; ${s.pac.refrigerant}</div></div>
+        ${ok?'<span class="badge bg-green-lt" style="font-size:.65rem">&#10003; Optimal</span>':w?'<span class="badge bg-yellow-lt" style="font-size:.65rem">Partiel</span>':''}
       </div>
       <div class="sol-metrics">
-        <div class="sol-metric"><div class="sm-label">P. nominale</div><div class="sm-value">${s.puissance_totale_nom.toFixed(1)}<span class="sm-unit"> kW</span></div></div>
-        <div class="sol-metric"><div class="sm-label">Part PAC Tbase</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.part_pac.toFixed(1)}<span class="sm-unit"> %</span></div></div>
+        <div class="sol-metric"><div class="sm-label">P. totale</div><div class="sm-value">${s.puissance_totale_nom.toFixed(1)}<span class="sm-unit"> kW</span></div></div>
+        <div class="sol-metric"><div class="sm-label">Part PAC</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.part_pac.toFixed(1)}<span class="sm-unit"> %</span></div></div>
         <div class="sol-metric"><div class="sm-label">Couverture</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.taux_couverture.toFixed(1)}<span class="sm-unit"> %</span></div></div>
-        <div class="sol-metric"><div class="sm-label">Prix HT PAC</div><div class="sm-value">${s.pac.prix_ht?fmtPrice(s.pac.prix_ht*s.nombre):'\u2014'}</div></div>
+        <div class="sol-metric"><div class="sm-label">Budget PAC</div><div class="sm-value">${s.pac.prix_ht?fmtPrice(s.pac.prix_ht*s.nombre):'\u2014'}</div></div>
       </div>
     </div>`;
   });
-  h+='</div><div id="detailArea"></div><div id="schemaArea"></div>';
+  h+='</div>';
+
+  // Detail area FIRST, then chart and comparison below
+  h+='<div id="detailArea"></div>';
+  h+='<div id="schemaArea"></div>';
   h+='<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#3b82f6"></span>Courbe monotone de chauffage<i class="ti ti-chevron-down chevron"></i></div><div class="res-card-body padded"><div id="monotoneChart" class="chart-box"></div></div></div>';
   h+='<div id="compArea"></div>';
   return h;
@@ -1054,7 +1079,10 @@ function renderSolutions(sols){
 // ============================================================
 function selectSol(i){
   S.selectedIdx=i;const sol=S.solutions[i];if(!sol)return;
-  document.querySelectorAll('.sol-card').forEach((c,j)=>c.classList.toggle('active',j===i));
+  // Clear all active states, then set only the selected one
+  document.querySelectorAll('.sol-card').forEach(c=>c.classList.remove('active'));
+  const activeCard=document.getElementById('card'+i);
+  if(activeCard)activeCard.classList.add('active');
 
   const en=SizingEngine.calcAnnualEnergy({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,
     model:sol.pac,nombre:sol.nombre,tWater:S.tWater,climat:S.climat,mode:S.mode==='hybrid'?'hybrid':'elec'});
@@ -1123,6 +1151,18 @@ function selectSol(i){
   renderChart(sol,en);
   // Competitors
   renderComp(sol);
+
+  // Auto-scroll to detail area so user sees the results immediately
+  setTimeout(()=>{
+    const da=document.getElementById('detailArea');
+    if(da){
+      const container=da.closest('.app-col-results');
+      if(container&&window.innerWidth>=992){
+        // Desktop: scroll within the results column
+        da.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    }
+  },100);
 }
 
 // ============================================================
@@ -1258,9 +1298,10 @@ function calcECS(){
 // ============================================================
 // ECS PDF
 // ============================================================
-function generateECSPDF(){
+async function generateECSPDF(){
   const r=S.ecsResultData;if(!r)return alert('Calculez d\'abord l\'ECS.');
-  if(!window.jspdf){return alert('Erreur: la librairie jsPDF n\'est pas chargee.')}
+  if(!window.jspdf){try{await loadJsPDF()}catch(e){return alert('Impossible de charger jsPDF.')}}
+  if(!window.jspdf){return alert('jsPDF non disponible.')}
   try{
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({unit:'mm',format:'a4'});
