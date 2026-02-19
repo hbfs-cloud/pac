@@ -282,7 +282,7 @@ const PERFORMANCE_DATA = {
     mitsubishi: {
       brand: "Mitsubishi Electric",
       gamme: "Ecodan CAHV",
-      refrigerant: "R744 (CO2)",
+      refrigerant: "R407C",
       t_max: 90,
       models: [
         {nom:"CAHV-P500YA-HPB",puissance_nom:45,prix_ht:24000,
