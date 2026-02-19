@@ -227,6 +227,27 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .res-card.collapsed .res-card-body{display:none}
 .res-card.collapsed .chevron{transform:rotate(-90deg)}
 
+/* ===== SUMMARY DASHBOARD ===== */
+.summary-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;
+  background:#fff;border:1.5px solid var(--orange);border-radius:10px;padding:12px;box-shadow:0 2px 8px rgba(232,98,42,.08)}
+@media(max-width:575px){.summary-bar{grid-template-columns:repeat(3,1fr)}}
+.summary-item{text-align:center}
+.summary-val{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:var(--atlantic);line-height:1.1}
+.summary-val.accent{color:var(--orange)}
+.summary-val.green{color:#16a34a}
+.summary-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9ca3af;margin-top:2px}
+
+/* ===== TOAST ===== */
+.toast-wrap{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:6px}
+.toast-msg{padding:10px 16px;border-radius:8px;font-size:.82rem;font-weight:500;color:#fff;
+  display:flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,.15);
+  transform:translateX(120%);transition:transform .3s ease}
+.toast-msg.show{transform:translateX(0)}
+.toast-info{background:var(--atlantic)}
+.toast-success{background:#16a34a}
+.toast-error{background:#dc2626}
+.toast-msg i{font-size:1.1rem;flex-shrink:0}
+
 /* ===== PRINT ===== */
 @media print{.app-header,.calc-section,.mode-mobile,.pdf-actions{display:none!important}
   .app-main{display:block!important}.app-col-input{display:none!important}
@@ -477,6 +498,9 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
   <div class="lightbox-title" id="lightboxTitle"></div>
 </div>
 
+<!-- ===== TOAST ===== -->
+<div class="toast-wrap" id="toasts"></div>
+
 <!-- ===== SCRIPTS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
@@ -512,8 +536,10 @@ const S = {
   const bs = document.getElementById('buildingType');
   Object.entries(PERFORMANCE_DATA.buildingTypes).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label+' ('+v.description+')';if(k==='re2020')o.selected=true;bs.appendChild(o)});
 
+  loadState();
   onDeptChange();
   onBuildingChange();
+  onPACChange();
 })();
 
 function deptName(c){
@@ -551,11 +577,13 @@ function onBuildingChange(){
   if(r){S.deperditionsKW=r.deperditionsKW;S.dp=r.dp;
     document.getElementById('rdDep').innerHTML=r.deperditionsKW.toFixed(1)+'<span class="s-unit">kW</span>';
     document.getElementById('rdDp').innerHTML=r.dp.toFixed(1)+'<span class="s-unit">W/K</span>'}
+  saveState();scheduleCalc();
 }
 function onPACChange(){
   S.gamme=document.querySelector('input[name="gamme"]:checked').value;
   S.tWater=parseInt(document.getElementById('tWater').value);
   S.deltaT=parseInt(document.getElementById('deltaT').value);
+  saveState();scheduleCalc();
 }
 function onECSChange(){
   const t=document.getElementById('ecsType').value, isL=t==='logements';
@@ -663,14 +691,15 @@ function openPdfPreview(doc,filename){
     const blob=doc.output('blob');
     const url=URL.createObjectURL(blob);
     const win=window.open(url,'_blank');
-    if(!win){doc.save(filename)}
-  }catch(e){doc.save(filename)}
+    if(!win){doc.save(filename);toast('PDF telecharge: '+filename,'success')}
+    else{toast('PDF genere avec succes','success')}
+  }catch(e){doc.save(filename);toast('PDF telecharge','success')}
 }
 
 async function generateQuickPDF(){
-  if(!S.solutions||S.solutions.length===0)return alert('Calculez d\'abord une solution.');
-  if(!window.jspdf){try{await loadJsPDF()}catch(e){return alert('Impossible de charger jsPDF. Verifiez votre connexion internet et rechargez la page.')}}
-  if(!window.jspdf){return alert('jsPDF non disponible. Rechargez la page.')}
+  if(!S.solutions||S.solutions.length===0)return toast('Calculez d\'abord une solution.','error');
+  if(!window.jspdf){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF. Rechargez la page.','error')}}
+  if(!window.jspdf){return toast('jsPDF non disponible. Rechargez la page.','error')}
   try{
   const sol=S.solutions[S.selectedIdx];
   const {jsPDF}=window.jspdf;
@@ -749,16 +778,16 @@ async function generateQuickPDF(){
 
   pdfFooter(doc,page);
   openPdfPreview(doc,'PAC_Dimensionnement_'+sol.pac.nom.replace(/\s/g,'_')+'x'+sol.nombre+'.pdf');
-  }catch(e){alert('Erreur generation PDF: '+e.message);console.error('PDF error:',e)}
+  }catch(e){toast('Erreur PDF: '+e.message,'error');console.error('PDF error:',e)}
 }
 
 // ============================================================
 // DEVIS PDF (complet avec infos client)
 // ============================================================
 async function generateDevisPDF(){
-  if(!S.solutions||S.solutions.length===0)return alert('Calculez d\'abord une solution.');
-  if(!window.jspdf){try{await loadJsPDF()}catch(e){return alert('Impossible de charger jsPDF.')}}
-  if(!window.jspdf){return alert('jsPDF non disponible.')}
+  if(!S.solutions||S.solutions.length===0)return toast('Calculez d\'abord une solution.','error');
+  if(!window.jspdf){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF.','error')}}
+  if(!window.jspdf){return toast('jsPDF non disponible.','error')}
   try{
   const sol=S.solutions[S.selectedIdx];
   const {jsPDF}=window.jspdf;
@@ -986,7 +1015,7 @@ async function generateDevisPDF(){
 
   openPdfPreview(doc,'Devis_'+ref.replace(/[^a-zA-Z0-9-]/g,'_')+'.pdf');
   closeDevis();
-  }catch(e){alert('Erreur generation devis PDF: '+e.message);console.error('Devis PDF error:',e)}
+  }catch(e){toast('Erreur devis: '+e.message,'error');console.error('Devis PDF error:',e)}
 }
 
 // ============================================================
@@ -998,6 +1027,61 @@ function backToInputs(){
   document.querySelector('.app-main').classList.remove('has-results');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// Toast notifications
+function toast(msg,type){
+  type=type||'info';
+  const icons={info:'info-circle',success:'circle-check',error:'alert-circle'};
+  const el=document.createElement('div');
+  el.className='toast-msg toast-'+type;
+  el.innerHTML='<i class="ti ti-'+icons[type]+'"></i><span>'+msg+'</span>';
+  document.getElementById('toasts').appendChild(el);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),300)},4000);
+}
+
+// Auto-calc debounce
+let _calcTimer=null;
+function scheduleCalc(){
+  clearTimeout(_calcTimer);
+  _calcTimer=setTimeout(()=>{
+    if(S.deperditionsKW>0&&S.mode!=='ecs'){
+      calculate();
+    }
+  },800);
+}
+
+// localStorage persistence
+function saveState(){
+  try{localStorage.setItem('pac_state',JSON.stringify({
+    dept:S.dept,altitude:S.altitude,bordMer:S.bordMer,
+    buildingType:S.buildingType,surface:S.surface,tInt:S.tInt,
+    gamme:S.gamme,tWater:S.tWater,deltaT:S.deltaT,mode:S.mode
+  }))}catch(e){}
+}
+function loadState(){
+  try{
+    const s=JSON.parse(localStorage.getItem('pac_state'));
+    if(!s)return;
+    if(s.dept){document.getElementById('dept').value=s.dept;S.dept=s.dept}
+    if(s.altitude){document.getElementById('altitude').value=s.altitude}
+    if(s.bordMer){document.getElementById('bordMer').checked=s.bordMer}
+    if(s.buildingType){document.getElementById('buildingType').value=s.buildingType}
+    if(s.surface){document.getElementById('surface').value=s.surface}
+    if(s.tInt){document.getElementById('tConsigne').value=s.tInt}
+    if(s.gamme==='aptae'){document.querySelector('input[name="gamme"][value="aptae"]').checked=true}
+    if(s.tWater){document.getElementById('tWater').value=s.tWater}
+    if(s.deltaT){document.getElementById('deltaT').value=s.deltaT}
+    if(s.mode){switchMode(s.mode)}
+  }catch(e){}
+}
+
+// Keyboard shortcut: Enter to calculate
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&!e.target.closest('.devis-modal')&&!e.target.closest('textarea')){
+    e.preventDefault();calculate();
+  }
+});
 
 // Collapsible cards (delegate)
 document.addEventListener('click',function(e){
@@ -1090,7 +1174,17 @@ function selectSol(i){
   let biv=null;
   if(S.mode==='hybrid')biv=SizingEngine.calcBivalentPoint({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,model:sol.pac,nombre:sol.nombre,tWater:S.tWater});
 
-  let d=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#e8622a"></span>Resultats &mdash; ${sol.pac.nom} &times;${sol.nombre}<i class="ti ti-chevron-down chevron"></i></div>
+  // Summary dashboard - key metrics at a glance
+  const totalBudget=sol.pac.prix_ht?sol.pac.prix_ht*sol.nombre:null;
+  let d=`<div class="summary-bar anim">
+    <div class="summary-item"><div class="summary-val">${sol.puissance_totale_nom.toFixed(1)}</div><div class="summary-lbl">kW totale</div></div>
+    <div class="summary-item"><div class="summary-val ${sol.part_pac>=80?'green':'accent'}">${sol.part_pac.toFixed(0)}%</div><div class="summary-lbl">Part PAC</div></div>
+    <div class="summary-item"><div class="summary-val ${en.tauxCouverture>=90?'green':'accent'}">${en.tauxCouverture.toFixed(0)}%</div><div class="summary-lbl">Couverture</div></div>
+    <div class="summary-item"><div class="summary-val">${en.scopWeighted.toFixed(2)}</div><div class="summary-lbl">SCOP</div></div>
+    <div class="summary-item"><div class="summary-val accent">${totalBudget?fmtPrice(totalBudget):'\u2014'}</div><div class="summary-lbl">Budget PAC</div></div>
+  </div>`;
+
+  d+=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#e8622a"></span>Resultats &mdash; ${sol.pac.nom} &times;${sol.nombre}<i class="ti ti-chevron-down chevron"></i></div>
     <div class="res-card-body"><div class="table-responsive"><table class="table table-striped mb-0"><tbody>
       <tr><td>Puissance calorifique nominale</td><td>${sol.puissance_totale_nom.toFixed(1)} kW</td></tr>
       <tr><td>Puissance a Tbase (${S.tbase}&deg;C)</td><td>${sol.puissance_totale_tbase.toFixed(1)} kW</td></tr>
@@ -1127,9 +1221,11 @@ function selectSol(i){
         ${prixRegul?`<tr><td>Regulation Navistem T3100${regul.navistem_t3100&&regul.navistem_t3100.ref?' (ref. '+regul.navistem_t3100.ref+')':''}</td><td>${fmtPrice(prixRegul)}</td></tr>`:''}
         ${prixMES?`<tr><td>Mise en service (${sol.nombre>1?'1 + '+(sol.nombre-1)+' suppl.':'1 PAC'})</td><td>${fmtPrice(prixMES)}</td></tr>`:''}
         ${prixAntivib?`<tr><td>Supports antivibratiles ${chassis} &times; ${sol.nombre}</td><td>${fmtPrice(prixAntivib)}</td></tr>`:''}
-        <tr style="border-top:2px solid var(--atlantic)"><td><strong>TOTAL HT (hors options)</strong></td><td class="hl" style="font-size:1.1rem"><strong>${fmtPrice(totalHT)}</strong></td></tr>
+        <tr style="border-top:2px solid var(--atlantic)"><td><strong>TOTAL HT</strong></td><td class="hl" style="font-size:1.05rem"><strong>${fmtPrice(totalHT)}</strong></td></tr>
+        <tr class="text-muted"><td>TVA 20%</td><td>${fmtPrice(totalHT*0.20)}</td></tr>
+        <tr style="border-top:2px solid var(--orange)"><td><strong>TOTAL TTC</strong></td><td style="font-size:1.1rem;color:var(--orange);font-weight:800">${fmtPrice(totalHT*1.20)}</td></tr>
       </tbody></table>
-      <div class="p-3" style="font-size:.75rem;color:#9ca3af">Tarifs catalogue Atlantic Systemes au 1er fevrier 2025. Hors eco-participation, hors pose.</div>
+      <div class="p-3" style="font-size:.72rem;color:#9ca3af">Tarifs catalogue Atlantic Systemes 02/2025. Hors eco-participation, hors pose. TVA a 20% (taux normal).</div>
       </div></div>`;
   }
   }catch(e){console.warn('Pricing card error:',e)}
@@ -1299,9 +1395,9 @@ function calcECS(){
 // ECS PDF
 // ============================================================
 async function generateECSPDF(){
-  const r=S.ecsResultData;if(!r)return alert('Calculez d\'abord l\'ECS.');
-  if(!window.jspdf){try{await loadJsPDF()}catch(e){return alert('Impossible de charger jsPDF.')}}
-  if(!window.jspdf){return alert('jsPDF non disponible.')}
+  const r=S.ecsResultData;if(!r)return toast('Calculez d\'abord l\'ECS.','error');
+  if(!window.jspdf){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF.','error')}}
+  if(!window.jspdf){return toast('jsPDF non disponible.','error')}
   try{
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({unit:'mm',format:'a4'});
@@ -1357,7 +1453,7 @@ async function generateECSPDF(){
 
   pdfFooter(doc,1);
   openPdfPreview(doc,'ECS_Dimensionnement_'+S.dept+'.pdf');
-  }catch(e){alert('Erreur generation PDF ECS: '+e.message);console.error('ECS PDF error:',e)}
+  }catch(e){toast('Erreur PDF ECS: '+e.message,'error');console.error('ECS PDF error:',e)}
 }
 </script>
 </body>
