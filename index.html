@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
 :root{
   --mono:'DM Mono',monospace;
@@ -177,8 +179,33 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .anim:nth-child(3){animation-delay:.08s}
 .anim:nth-child(4){animation-delay:.12s}
 
+/* ===== PDF BUTTONS ===== */
+.pdf-actions{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.btn-pdf{background:var(--atlantic);border-color:var(--atlantic);color:#fff;font-weight:600;font-size:.85rem;
+  border-radius:8px;padding:8px 16px;display:flex;align-items:center;gap:6px;transition:all .2s;cursor:pointer;border:none}
+.btn-pdf:hover{background:var(--atlantic-light);color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,51,102,.2)}
+.btn-pdf.orange{background:var(--orange);border-color:var(--orange)}
+.btn-pdf.orange:hover{background:var(--orange-hover)}
+.btn-pdf i{font-size:1.1rem}
+
+/* ===== DEVIS MODAL ===== */
+.devis-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.5);
+  align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.devis-overlay.open{display:flex}
+.devis-modal{background:#fff;border-radius:12px;max-width:700px;width:100%;margin:20px auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.devis-header{background:var(--atlantic);color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.devis-header h3{margin:0;font-size:1.1rem;font-weight:700}
+.devis-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.devis-close:hover{background:rgba(255,255,255,.3)}
+.devis-body{padding:24px}
+.devis-body .form-label{font-weight:600;font-size:.82rem}
+.devis-body .form-control{font-size:.88rem}
+.devis-footer{padding:16px 24px;border-top:1px solid #e5e7eb;display:flex;gap:8px;justify-content:flex-end}
+
 /* ===== PRINT ===== */
-@media print{.app-header,.calc-section,.mode-mobile{display:none!important}
+@media print{.app-header,.calc-section,.mode-mobile,.pdf-actions{display:none!important}
   .app-main{display:block!important}.app-col-input{display:none!important}
   .app-col-results{height:auto!important;overflow:visible!important}
   .res-card{break-inside:avoid;box-shadow:none!important;border:1px solid #ccc!important}}
@@ -386,6 +413,40 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 
 </div>
 
+<!-- ===== DEVIS MODAL ===== -->
+<div class="devis-overlay" id="devisOverlay">
+  <div class="devis-modal">
+    <div class="devis-header">
+      <h3><i class="ti ti-file-text me-2"></i>Creer un devis</h3>
+      <button class="devis-close" onclick="closeDevis()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="devis-body">
+      <div class="row g-3">
+        <div class="col-12"><label class="form-label">Nom du projet / Affaire</label><input type="text" class="form-control" id="dvProjet" placeholder="ex: Residence Les Cedres - Lot CVC"></div>
+        <div class="col-6"><label class="form-label">Reference devis</label><input type="text" class="form-control" id="dvRef" placeholder="DEV-2024-001"></div>
+        <div class="col-6"><label class="form-label">Date</label><input type="date" class="form-control" id="dvDate"></div>
+        <div class="col-12"><hr class="my-2"><label class="form-label text-muted" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Client</label></div>
+        <div class="col-12"><label class="form-label">Societe / Bureau d'etudes</label><input type="text" class="form-control" id="dvClient" placeholder="ex: BET Thermique SARL"></div>
+        <div class="col-6"><label class="form-label">Contact</label><input type="text" class="form-control" id="dvContact" placeholder="M. Dupont"></div>
+        <div class="col-6"><label class="form-label">Email</label><input type="email" class="form-control" id="dvEmail" placeholder="contact@bet.fr"></div>
+        <div class="col-12"><label class="form-label">Adresse chantier</label><input type="text" class="form-control" id="dvAdresse" placeholder="ex: 12 rue des Lilas, 75015 Paris"></div>
+        <div class="col-12"><hr class="my-2"><label class="form-label text-muted" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em">Options PDF</label></div>
+        <div class="col-12">
+          <label class="form-check form-switch mb-2"><input class="form-check-input" type="checkbox" id="dvIncludeSchemas" checked><span class="form-check-label">Inclure les schemas techniques</span></label>
+          <label class="form-check form-switch mb-2"><input class="form-check-input" type="checkbox" id="dvIncludeChart" checked><span class="form-check-label">Inclure la courbe monotone</span></label>
+          <label class="form-check form-switch mb-2"><input class="form-check-input" type="checkbox" id="dvIncludeComp" checked><span class="form-check-label">Inclure la comparaison concurrents</span></label>
+          <label class="form-check form-switch"><input class="form-check-input" type="checkbox" id="dvIncludeECS" checked><span class="form-check-label">Inclure dimensionnement ECS</span></label>
+        </div>
+        <div class="col-12"><label class="form-label">Notes / Observations</label><textarea class="form-control" id="dvNotes" rows="3" placeholder="Conditions particulieres, hypotheses..."></textarea></div>
+      </div>
+    </div>
+    <div class="devis-footer">
+      <button class="btn" onclick="closeDevis()">Annuler</button>
+      <button class="btn-pdf orange" onclick="generateDevisPDF()"><i class="ti ti-download"></i>Telecharger PDF</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== LIGHTBOX ===== -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()"><i class="ti ti-x"></i></button>
@@ -492,7 +553,378 @@ function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow='';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLightbox();closeDevis()}});
+
+// ============================================================
+// DEVIS MODAL
+// ============================================================
+function openDevis(){
+  document.getElementById('dvDate').value=new Date().toISOString().split('T')[0];
+  if(!document.getElementById('dvRef').value){
+    document.getElementById('dvRef').value='DEV-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*999)+1).padStart(3,'0');
+  }
+  document.getElementById('devisOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDevis(){
+  document.getElementById('devisOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ============================================================
+// PDF GENERATION (jsPDF)
+// ============================================================
+function pdfColors(){return{navy:[0,51,102],orange:[232,98,42],lightBlue:[232,240,254],white:[255,255,255],gray:[107,114,128],darkText:[26,35,50],lightGray:[245,245,245]}}
+
+function pdfHeader(doc,title,subtitle){
+  const c=pdfColors(),w=doc.internal.pageSize.getWidth();
+  doc.setFillColor(...c.navy);doc.rect(0,0,w,28,'F');
+  doc.setFontSize(14);doc.setTextColor(...c.white);doc.text('PAC Dimensionnement',14,12);
+  doc.setFontSize(8);doc.setTextColor(180,200,220);doc.text('Outil de dimensionnement PAC collectives',14,18);
+  if(title){doc.setFontSize(9);doc.setTextColor(...c.orange);doc.text(title,14,25)}
+  if(subtitle){doc.setTextColor(180,200,220);doc.text(subtitle,w-14,25,{align:'right'})}
+  return 34;
+}
+
+function pdfFooter(doc,pageNum){
+  const c=pdfColors(),w=doc.internal.pageSize.getWidth(),h=doc.internal.pageSize.getHeight();
+  doc.setDrawColor(200,200,200);doc.line(14,h-16,w-14,h-16);
+  doc.setFontSize(7);doc.setTextColor(...c.gray);
+  doc.text('NF EN 12831 | EN 14825 | ADEME/COSTIC | Heat Pump Keymark',14,h-10);
+  doc.text('Page '+pageNum,w-14,h-10,{align:'right'});
+  doc.text('Document genere par PAC Dimensionnement — '+new Date().toLocaleDateString('fr-FR'),w/2,h-10,{align:'center'});
+}
+
+function pdfSection(doc,y,title){
+  const c=pdfColors(),w=doc.internal.pageSize.getWidth();
+  doc.setFillColor(...c.navy);doc.rect(14,y,w-28,7,'F');
+  doc.setFontSize(9);doc.setTextColor(...c.white);doc.text(title,17,y+5);
+  return y+10;
+}
+
+function pdfKeyValue(doc,y,label,value,highlight){
+  const c=pdfColors();
+  doc.setFontSize(8.5);doc.setTextColor(...c.gray);doc.text(label,16,y);
+  if(highlight)doc.setTextColor(...c.orange);else doc.setTextColor(...c.darkText);
+  doc.setFont(undefined,'bold');doc.text(String(value),100,y);doc.setFont(undefined,'normal');
+  return y+5.5;
+}
+
+function pdfCheckPage(doc,y,margin){
+  const h=doc.internal.pageSize.getHeight();
+  if(y>h-margin){doc.addPage();pdfFooter(doc,doc.internal.pages.length-1);return pdfHeader(doc,'','(suite)');}
+  return y;
+}
+
+function generateQuickPDF(){
+  if(!S.solutions||S.solutions.length===0)return alert('Calculez d\'abord une solution.');
+  const sol=S.solutions[S.selectedIdx];
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4'});
+  const w=doc.internal.pageSize.getWidth();
+  let y=pdfHeader(doc,'Fiche technique','Genere le '+new Date().toLocaleDateString('fr-FR'));
+  let page=1;
+
+  // Donnees projet
+  y=pdfSection(doc,y,'DONNEES CLIMATIQUES & BATIMENT');
+  y=pdfKeyValue(doc,y,'Departement',S.dept+' — '+deptName(S.dept));
+  y=pdfKeyValue(doc,y,'Altitude',S.altitude+' m');
+  y=pdfKeyValue(doc,y,'Tbase',S.tbase+' °C',true);
+  y=pdfKeyValue(doc,y,'Zone climatique',S.climat);
+  y=pdfKeyValue(doc,y,'Type batiment',document.getElementById('buildingType').selectedOptions[0].textContent);
+  y=pdfKeyValue(doc,y,'Surface',S.surface+' m²');
+  y=pdfKeyValue(doc,y,'T° consigne',S.tInt+' °C');
+  y=pdfKeyValue(doc,y,'Deperditions',S.deperditionsKW.toFixed(1)+' kW',true);
+  y+=4;
+
+  // PAC selection
+  y=pdfSection(doc,y,'SOLUTION PAC SELECTIONNEE');
+  y=pdfKeyValue(doc,y,'Gamme',sol.pac.refrigerant==='R290'?'Aptae (R290)':'Effipac (R32)');
+  y=pdfKeyValue(doc,y,'Modele',sol.pac.nom);
+  y=pdfKeyValue(doc,y,'Nombre d\'unites',sol.nombre);
+  y=pdfKeyValue(doc,y,'P. nominale totale',sol.puissance_totale_nom.toFixed(1)+' kW',true);
+  y=pdfKeyValue(doc,y,'P. a Tbase ('+S.tbase+'°C)',sol.puissance_totale_tbase.toFixed(1)+' kW',true);
+  y=pdfKeyValue(doc,y,'Part PAC a Tbase',sol.part_pac.toFixed(1)+' %',true);
+
+  const en=SizingEngine.calcAnnualEnergy({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,
+    model:sol.pac,nombre:sol.nombre,tWater:S.tWater,climat:S.climat,mode:S.mode==='hybrid'?'hybrid':'elec'});
+  y=pdfKeyValue(doc,y,'Taux couverture annuel',en.tauxCouverture.toFixed(1)+' %',true);
+  y=pdfKeyValue(doc,y,'SCOP pondere',en.scopWeighted.toFixed(2));
+  y=pdfKeyValue(doc,y,'Energie PAC annuelle',(en.ePac/1000).toFixed(0)+' MWh');
+  y=pdfKeyValue(doc,y,'Energie appoint',(en.eBackup/1000).toFixed(0)+' MWh');
+  y=pdfKeyValue(doc,y,'Conso elec PAC',(en.elecPac/1000).toFixed(0)+' MWh');
+  y=pdfKeyValue(doc,y,'P. elec absorbee max',sol.pabs_tbase.toFixed(1)+' kW');
+  y=pdfKeyValue(doc,y,'Intensite max (400V tri)',(sol.pabs_tbase*1000/(400*1.732)).toFixed(1)+' A');
+  y=pdfKeyValue(doc,y,'T° eau depart',S.tWater+' °C');
+  y=pdfKeyValue(doc,y,'Delta T',S.deltaT+' K');
+  y+=4;
+
+  // Hydraulique
+  const hy=SizingEngine.calcHydraulics(sol.puissance_totale_nom,S.deltaT);
+  y=pdfCheckPage(doc,y,60);
+  y=pdfSection(doc,y,'DIMENSIONNEMENT HYDRAULIQUE');
+  y=pdfKeyValue(doc,y,'Debit primaire',hy.debit_m3h.toFixed(2)+' m³/h ('+hy.debit_Lh+' L/h)');
+  y=pdfKeyValue(doc,y,'Diametre raccordement','Ø'+hy.diametre_int+'/'+hy.diametre_ext+' mm');
+  y=pdfKeyValue(doc,y,'Bouteille decouplage','Ø'+hy.diametre_bouteille+' mm');
+  y=pdfKeyValue(doc,y,'Ballon tampon',hy.ballon_tampon_L+' L',true);
+  y+=4;
+
+  // Chart as image
+  if(S.chart){
+    y=pdfCheckPage(doc,y,90);
+    y=pdfSection(doc,y,'COURBE MONOTONE DE CHAUFFAGE');
+    try{
+      const chartImg=S.chart.getDataURL({type:'png',pixelRatio:2,backgroundColor:'#fff'});
+      doc.addImage(chartImg,'PNG',14,y,w-28,70);y+=74;
+    }catch(e){y+=4}
+  }
+
+  // Competitor comparison
+  y=pdfCheckPage(doc,y,50);
+  y=pdfSection(doc,y,'COMPARAISON CONCURRENTS');
+  const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
+  doc.autoTable({
+    startY:y,margin:{left:14,right:14},
+    head:[['Marque','Modele','Qty','P.nom (kW)','Refrig.','COP','Part PAC','Couv.']],
+    body:cs.map(c=>[c.brand,c.model,c.nombre,c.puissance_nom.toFixed(1),c.refrigerant,c.cop_a7?c.cop_a7.toFixed(2):'-',c.part_pac.toFixed(1)+'%',c.taux_couverture.toFixed(1)+'%']),
+    headStyles:{fillColor:[0,51,102],fontSize:7.5,cellPadding:2},
+    bodyStyles:{fontSize:7.5,cellPadding:2},
+    alternateRowStyles:{fillColor:[245,245,245]},
+    didParseCell:function(data){if(data.section==='body'){const r=cs[data.row.index];if(r&&r.isAtlantic){data.cell.styles.fillColor=[255,243,230];data.cell.styles.fontStyle='bold'}}}
+  });
+
+  pdfFooter(doc,page);
+  doc.save('PAC_Dimensionnement_'+sol.pac.nom.replace(/\s/g,'_')+'x'+sol.nombre+'.pdf');
+}
+
+// ============================================================
+// DEVIS PDF (complet avec infos client)
+// ============================================================
+function generateDevisPDF(){
+  if(!S.solutions||S.solutions.length===0)return alert('Calculez d\'abord une solution.');
+  const sol=S.solutions[S.selectedIdx];
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4'});
+  const w=doc.internal.pageSize.getWidth(),h=doc.internal.pageSize.getHeight();
+  const c=pdfColors();
+  let page=1;
+
+  // Get form values
+  const projet=document.getElementById('dvProjet').value||'Projet PAC collective';
+  const ref=document.getElementById('dvRef').value||'DEV-'+Date.now();
+  const date=document.getElementById('dvDate').value||new Date().toISOString().split('T')[0];
+  const client=document.getElementById('dvClient').value||'';
+  const contact=document.getElementById('dvContact').value||'';
+  const email=document.getElementById('dvEmail').value||'';
+  const adresse=document.getElementById('dvAdresse').value||'';
+  const notes=document.getElementById('dvNotes').value||'';
+  const inclSchemas=document.getElementById('dvIncludeSchemas').checked;
+  const inclChart=document.getElementById('dvIncludeChart').checked;
+  const inclComp=document.getElementById('dvIncludeComp').checked;
+  const inclECS=document.getElementById('dvIncludeECS').checked;
+
+  // ======== PAGE 1: COVER ========
+  // Full navy header
+  doc.setFillColor(...c.navy);doc.rect(0,0,w,50,'F');
+  doc.setFontSize(20);doc.setTextColor(...c.white);doc.text('DEVIS TECHNIQUE',14,22);
+  doc.setFontSize(10);doc.text('Dimensionnement PAC collective',14,30);
+  doc.setFontSize(8);doc.setTextColor(180,200,220);doc.text('PAC Dimensionnement — Atlantic Effipac / Aptae',14,38);
+
+  // Orange accent bar
+  doc.setFillColor(...c.orange);doc.rect(0,50,w,3,'F');
+
+  // Reference & date
+  let y=62;
+  doc.setFillColor(...c.lightBlue);doc.roundedRect(14,y-4,w-28,20,3,3,'F');
+  doc.setFontSize(9);doc.setTextColor(...c.navy);
+  doc.setFont(undefined,'bold');doc.text('Reference:',16,y+2);doc.text('Date:',16,y+8);doc.text('Projet:',16,y+14);
+  doc.setFont(undefined,'normal');doc.setTextColor(...c.darkText);
+  doc.text(ref,50,y+2);doc.text(new Date(date).toLocaleDateString('fr-FR'),50,y+8);doc.text(projet,50,y+14);
+  y+=24;
+
+  // Client info
+  if(client||contact||adresse){
+    y=pdfSection(doc,y,'INFORMATIONS CLIENT');
+    if(client)y=pdfKeyValue(doc,y,'Societe / BET',client);
+    if(contact)y=pdfKeyValue(doc,y,'Contact',contact);
+    if(email)y=pdfKeyValue(doc,y,'Email',email);
+    if(adresse)y=pdfKeyValue(doc,y,'Adresse chantier',adresse);
+    y+=4;
+  }
+
+  // Donnees du batiment
+  y=pdfSection(doc,y,'DONNEES DU BATIMENT');
+  y=pdfKeyValue(doc,y,'Departement',S.dept+' — '+deptName(S.dept));
+  y=pdfKeyValue(doc,y,'Altitude',S.altitude+' m'+(S.bordMer?' (bord de mer)':''));
+  y=pdfKeyValue(doc,y,'Tbase',S.tbase+' °C',true);
+  y=pdfKeyValue(doc,y,'Zone climatique',S.climat+' / Zone '+S.zone);
+  y=pdfKeyValue(doc,y,'Type batiment',document.getElementById('buildingType').selectedOptions[0].textContent);
+  y=pdfKeyValue(doc,y,'Surface habitable',S.surface+' m²');
+  y=pdfKeyValue(doc,y,'T° consigne interieure',S.tInt+' °C');
+  y=pdfKeyValue(doc,y,'Deperditions totales',S.deperditionsKW.toFixed(1)+' kW',true);
+  y=pdfKeyValue(doc,y,'Dp (W/K)',S.dp.toFixed(1)+' W/K');
+  y+=4;
+
+  // Mode
+  const modeLabels={elec:'Chauffage 100% Electrique',double:'Double Service (Chauffage + ECS)',ecs:'ECS Seul',hybrid:'Chauffage Hybride'};
+  y=pdfKeyValue(doc,y,'Mode de fonctionnement',modeLabels[S.mode]||S.mode);
+  y+=2;
+
+  // Solution PAC
+  y=pdfCheckPage(doc,y,70);
+  y=pdfSection(doc,y,'SOLUTION PAC PRECONISEE');
+
+  const en=SizingEngine.calcAnnualEnergy({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,
+    model:sol.pac,nombre:sol.nombre,tWater:S.tWater,climat:S.climat,mode:S.mode==='hybrid'?'hybrid':'elec'});
+
+  // PAC details table
+  doc.autoTable({
+    startY:y,margin:{left:14,right:14},
+    head:[['Caracteristique','Valeur']],
+    body:[
+      ['Gamme',sol.pac.refrigerant==='R290'?'Atlantic Aptae (R290)':'Atlantic Effipac (R32)'],
+      ['Modele',sol.pac.nom],
+      ['Code',sol.pac.code],
+      ['Nombre d\'unites',String(sol.nombre)+(sol.nombre>1?' (cascade)':'')],
+      ['Chassis',sol.pac.chassis],
+      ['Refrigerant',sol.pac.refrigerant],
+      ['T° max eau',sol.pac.t_max+' °C'],
+      ['T° eau depart projet',S.tWater+' °C'],
+      ['Delta T circuit',S.deltaT+' K'],
+      ['',''],
+      ['Puissance nominale totale',sol.puissance_totale_nom.toFixed(1)+' kW'],
+      ['Puissance a Tbase ('+S.tbase+'°C)',sol.puissance_totale_tbase.toFixed(1)+' kW'],
+      ['Part PAC a Tbase',sol.part_pac.toFixed(1)+' %'],
+      ['Taux de couverture annuel',en.tauxCouverture.toFixed(1)+' %'],
+      ['SCOP pondere',en.scopWeighted.toFixed(2)],
+      ['',''],
+      ['Energie PAC annuelle',(en.ePac/1000).toFixed(1)+' MWh'],
+      ['Energie appoint electrique',(en.eBackup/1000).toFixed(1)+' MWh'],
+      ['Consommation elec PAC',(en.elecPac/1000).toFixed(1)+' MWh'],
+      ['P. electrique absorbee max',sol.pabs_tbase.toFixed(1)+' kW'],
+      ['Intensite max (400V tri)',(sol.pabs_tbase*1000/(400*1.732)).toFixed(1)+' A'],
+    ],
+    headStyles:{fillColor:[0,51,102],fontSize:8,cellPadding:3},
+    bodyStyles:{fontSize:8,cellPadding:2.5},
+    columnStyles:{0:{fontStyle:'bold',cellWidth:75},1:{halign:'right'}},
+    alternateRowStyles:{fillColor:[248,250,252]},
+    didParseCell:function(data){
+      if(data.section==='body'){
+        const key=data.row.cells[0]?.text?.[0]||'';
+        if(['Part PAC','Taux de couverture','Puissance nominale'].some(k=>key.includes(k))){
+          data.cell.styles.textColor=[232,98,42];data.cell.styles.fontStyle='bold'}
+        if(data.row.cells[0]?.text?.[0]==='')data.cell.styles.fillColor=[255,255,255];
+      }
+    }
+  });
+  y=doc.lastAutoTable.finalY+6;
+
+  // Hydraulique
+  y=pdfCheckPage(doc,y,50);
+  const hy=SizingEngine.calcHydraulics(sol.puissance_totale_nom,S.deltaT);
+  y=pdfSection(doc,y,'DIMENSIONNEMENT HYDRAULIQUE');
+  doc.autoTable({
+    startY:y,margin:{left:14,right:14},
+    body:[
+      ['Debit primaire',hy.debit_m3h.toFixed(2)+' m³/h ('+hy.debit_Lh+' L/h)'],
+      ['Delta T',hy.deltaT+' K'],
+      ['Diametre raccordement','Ø'+hy.diametre_int+'/'+hy.diametre_ext+' mm'],
+      ['Bouteille decouplage','Ø'+hy.diametre_bouteille+' mm'],
+      ['Ballon tampon recommande',hy.ballon_tampon_L+' L'],
+    ],
+    bodyStyles:{fontSize:8,cellPadding:2.5},
+    columnStyles:{0:{fontStyle:'bold',cellWidth:75},1:{halign:'right'}},
+    alternateRowStyles:{fillColor:[248,250,252]}
+  });
+  y=doc.lastAutoTable.finalY+6;
+
+  // Bivalent point for hybrid
+  if(S.mode==='hybrid'){
+    const biv=SizingEngine.calcBivalentPoint({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,model:sol.pac,nombre:sol.nombre,tWater:S.tWater});
+    if(biv){
+      y=pdfCheckPage(doc,y,30);
+      y=pdfSection(doc,y,'POINT DE BIVALENCE');
+      y=pdfKeyValue(doc,y,'Temperature bivalence',biv.tBivalent.toFixed(1)+' °C',true);
+      y=pdfKeyValue(doc,y,'Charge au point bivalent',biv.loadAtBivalent.toFixed(1)+' kW');
+      y=pdfKeyValue(doc,y,'Capacite PAC au point bivalent',biv.capacityAtBivalent.toFixed(1)+' kW');
+      y+=6;
+    }
+  }
+
+  // ======== PAGE 2: Chart + Comparison ========
+  if(inclChart&&S.chart){
+    doc.addPage();page++;
+    y=pdfHeader(doc,'Courbe monotone','Page '+page);
+    y=pdfSection(doc,y,'COURBE MONOTONE DE CHAUFFAGE');
+    try{
+      const chartImg=S.chart.getDataURL({type:'png',pixelRatio:2,backgroundColor:'#fff'});
+      doc.addImage(chartImg,'PNG',14,y,w-28,80);y+=84;
+    }catch(e){y+=4}
+
+    // Energy summary
+    y=pdfSection(doc,y,'BILAN ENERGETIQUE ANNUEL');
+    doc.autoTable({
+      startY:y,margin:{left:14,right:14},
+      body:[
+        ['Energie totale chauffage',(en.eTotal/1000).toFixed(1)+' MWh/an'],
+        ['Couvert par PAC',(en.ePac/1000).toFixed(1)+' MWh/an ('+en.tauxCouverture.toFixed(1)+'%)'],
+        ['Appoint electrique',(en.eBackup/1000).toFixed(1)+' MWh/an'],
+        ['Consommation elec PAC',(en.elecPac/1000).toFixed(1)+' MWh/an'],
+        ['SCOP pondere',en.scopWeighted.toFixed(2)],
+      ],
+      bodyStyles:{fontSize:8.5,cellPadding:3},
+      columnStyles:{0:{fontStyle:'bold',cellWidth:80},1:{halign:'right'}},
+      alternateRowStyles:{fillColor:[248,250,252]}
+    });
+    y=doc.lastAutoTable.finalY+6;
+  }
+
+  // Comparison
+  if(inclComp){
+    y=pdfCheckPage(doc,y,50);
+    y=pdfSection(doc,y,'COMPARAISON CONCURRENTS');
+    const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
+    doc.autoTable({
+      startY:y,margin:{left:14,right:14},
+      head:[['Marque','Modele','Qty','P.nom (kW)','Refrig.','COP A7','Part PAC','Couv.']],
+      body:cs.map(cc=>[cc.brand,cc.model,cc.nombre,cc.puissance_nom.toFixed(1),cc.refrigerant,cc.cop_a7?cc.cop_a7.toFixed(2):'-',cc.part_pac.toFixed(1)+'%',cc.taux_couverture.toFixed(1)+'%']),
+      headStyles:{fillColor:[0,51,102],fontSize:7.5,cellPadding:2},
+      bodyStyles:{fontSize:7.5,cellPadding:2},
+      alternateRowStyles:{fillColor:[245,245,245]},
+      didParseCell:function(data){if(data.section==='body'){const r=cs[data.row.index];if(r&&r.isAtlantic){data.cell.styles.fillColor=[255,243,230];data.cell.styles.fontStyle='bold'}}}
+    });
+    y=doc.lastAutoTable.finalY+6;
+  }
+
+  // Notes
+  if(notes){
+    y=pdfCheckPage(doc,y,30);
+    y=pdfSection(doc,y,'NOTES & OBSERVATIONS');
+    doc.setFontSize(8);doc.setTextColor(...c.darkText);
+    const lines=doc.splitTextToSize(notes,w-28);
+    doc.text(lines,14,y);y+=lines.length*4+6;
+  }
+
+  // Conditions
+  y=pdfCheckPage(doc,y,40);
+  y=pdfSection(doc,y,'CONDITIONS & REFERENCES');
+  doc.setFontSize(7);doc.setTextColor(...c.gray);
+  const conditions=[
+    'Ce document est un dimensionnement indicatif. Il ne remplace pas une etude thermique detaillee (NF EN 12831).',
+    'Les performances PAC sont issues des fiches techniques Atlantic / certifications Heat Pump Keymark.',
+    'Le SCOP est calcule par methode des bins (EN 14825) avec les donnees climatiques departementales.',
+    'Les debits et diametres sont donnes a titre indicatif. Verifier les pertes de charge reelles.',
+    'Normes: NF EN 12831, EN 14825, ADEME/COSTIC (ECS), RE2020, NF DTU 65.16.',
+  ];
+  conditions.forEach(txt=>{doc.text('• '+txt,16,y);y+=4});
+
+  // Add footers to all pages
+  const totalPages=doc.internal.pages.length-1;
+  for(let p=1;p<=totalPages;p++){doc.setPage(p);pdfFooter(doc,p)}
+
+  doc.save('Devis_'+ref.replace(/[^a-zA-Z0-9-]/g,'_')+'.pdf');
+  closeDevis();
+}
 
 // ============================================================
 // CALCULATE
@@ -523,7 +955,12 @@ function doCalc(){
 // RENDER SOLUTIONS
 // ============================================================
 function renderSolutions(sols){
-  let h='<div class="sol-grid">';
+  let h='<div class="pdf-actions">';
+  h+='<button class="btn-pdf" onclick="generateQuickPDF()"><i class="ti ti-file-type-pdf"></i>Export PDF rapide</button>';
+  h+='<button class="btn-pdf orange" onclick="openDevis()"><i class="ti ti-file-text"></i>Creer un devis</button>';
+  h+='<button class="btn-pdf" style="background:#0891b2" onclick="window.print()"><i class="ti ti-printer"></i>Imprimer</button>';
+  h+='</div>';
+  h+='<div class="sol-grid">';
   sols.forEach((s,i)=>{
     const ok=s.taux_couverture>=90,w=s.taux_couverture>=70&&s.taux_couverture<90;
     h+=`<div class="sol-card anim ${i===0?'active':''}" onclick="selectSol(${i})" id="card${i}">
@@ -608,7 +1045,8 @@ function renderSchemas(sol){
   let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#8b5cf6"></span>Schemas &amp; documentation</div>
     <div class="res-card-body padded"><div class="schema-grid">`;
   items.forEach(it=>{
-    h+=`<div class="schema-thumb" onclick="openLightbox('${it.src}','${it.label}')">
+    const safeLabel=it.label.replace(/'/g,"\\'");
+    h+=`<div class="schema-thumb" onclick="openLightbox('${it.src}','${safeLabel}')">
       <img src="${it.src}" alt="${it.label}" loading="lazy">
       <div class="st-label">${it.label}</div>
     </div>`;
@@ -688,7 +1126,11 @@ function calcECS(){
   if(!r)return'<div class="results-empty"><p>Erreur calcul ECS.</p></div>';
   S.ecsResult=r;
 
-  let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Resultats ECS</div>
+  let h='<div class="pdf-actions">';
+  h+='<button class="btn-pdf" onclick="generateECSPDF()"><i class="ti ti-file-type-pdf"></i>Export PDF ECS</button>';
+  h+='<button class="btn-pdf" style="background:#0891b2" onclick="window.print()"><i class="ti ti-printer"></i>Imprimer</button>';
+  h+='</div>';
+  h+=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Resultats ECS</div>
     <div class="res-card-body"><table class="table table-striped mb-0"><tbody>`;
   if(r.ns!==undefined){
     h+=`<tr><td>Logements standards (Ns)</td><td class="hl">${r.ns}</td></tr>
@@ -705,6 +1147,8 @@ function calcECS(){
       <tr><td>P. accumulation 8h</td><td class="hl">${r.pAccumulation} kW</td></tr>`;
   }
   h+=`<tr><td>T&deg; ECS</td><td>${r.tEcs}&deg;C</td></tr><tr><td>T&deg; eau froide</td><td>${r.tEf}&deg;C</td></tr></tbody></table></div></div>`;
+  // Store for PDF
+  S.ecsResultData=r;
   h+=`<div class="res-card card-danger anim"><div class="res-card-head text-danger"><i class="ti ti-alert-triangle me-2"></i>Prevention legionellose</div>
     <div class="res-card-body"><table class="table mb-0"><tbody>
       <tr><td>Stockage minimum</td><td>&ge; 55&deg;C</td></tr>
@@ -712,6 +1156,66 @@ function calcECS(){
       <tr><td>Choc thermique</td><td>60&deg;C / 30 min / jour</td></tr>
       <tr><td>Robinet SdB</td><td>&le; 50&deg;C</td></tr></tbody></table></div></div>`;
   return h;
+}
+// ============================================================
+// ECS PDF
+// ============================================================
+function generateECSPDF(){
+  const r=S.ecsResultData;if(!r)return alert('Calculez d\'abord l\'ECS.');
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4'});
+  const w=doc.internal.pageSize.getWidth();
+  let y=pdfHeader(doc,'Dimensionnement ECS','Genere le '+new Date().toLocaleDateString('fr-FR'));
+
+  y=pdfSection(doc,y,'DONNEES PROJET');
+  y=pdfKeyValue(doc,y,'Departement',S.dept+' — '+deptName(S.dept));
+  y=pdfKeyValue(doc,y,'Zone climatique',S.climat);
+  y+=4;
+
+  y=pdfSection(doc,y,'RESULTATS ECS');
+  const rows=[];
+  if(r.ns!==undefined){
+    rows.push(['Logements standards (Ns)',String(r.ns)]);
+    rows.push(['Volume journalier 60°C',r.vj+' L/j']);
+    rows.push(['Volume pointe 10 min',r.v10+' L']);
+    rows.push(['Volume pointe 1h',r.v1h+' L']);
+    rows.push(['Volume stockage minimum',r.vStockage+' L']);
+    rows.push(['Puissance production',r.pProduction+' kW']);
+    rows.push(['Puissance instantanee',r.pInstantanee+' kW']);
+  }else{
+    rows.push(['Type',r.type]);
+    rows.push(['Nb '+r.unite+'s',String(r.nombre)]);
+    rows.push(['Volume journalier 60°C',r.vj+' L/j']);
+    rows.push(['Puissance accumulation 8h',r.pAccumulation+' kW']);
+  }
+  rows.push(['T° ECS',r.tEcs+' °C']);
+  rows.push(['T° eau froide',r.tEf+' °C']);
+
+  doc.autoTable({
+    startY:y,margin:{left:14,right:14},
+    body:rows,
+    bodyStyles:{fontSize:9,cellPadding:3},
+    columnStyles:{0:{fontStyle:'bold',cellWidth:80},1:{halign:'right'}},
+    alternateRowStyles:{fillColor:[248,250,252]}
+  });
+  y=doc.lastAutoTable.finalY+8;
+
+  y=pdfSection(doc,y,'PREVENTION LEGIONELLOSE');
+  doc.autoTable({
+    startY:y,margin:{left:14,right:14},
+    body:[
+      ['Stockage minimum','>= 55 °C'],
+      ['Distribution','>= 50 °C en tout point'],
+      ['Choc thermique','60 °C / 30 min / jour'],
+      ['Robinet SdB','<= 50 °C max'],
+    ],
+    bodyStyles:{fontSize:8.5,cellPadding:2.5},
+    columnStyles:{0:{fontStyle:'bold',cellWidth:80},1:{halign:'right'}},
+    alternateRowStyles:{fillColor:[255,245,245]}
+  });
+
+  pdfFooter(doc,1);
+  doc.save('ECS_Dimensionnement_'+S.dept+'.pdf');
 }
 </script>
 </body>
