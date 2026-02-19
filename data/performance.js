@@ -259,19 +259,19 @@ const PERFORMANCE_DATA = {
       refrigerant: "R290",
       t_max: 70,
       models: [
-        {nom:"EABH16DA9W",puissance_nom:16,
+        {nom:"EABH16DA9W",puissance_nom:16,prix_ht:9500,
          performance:{
            "A7/W35":{pcalo:16.00,cop:4.60},
            "A7/W55":{pcalo:16.00,cop:3.10},
            "A-7/W35":{pcalo:16.00,cop:3.20},
            "A-7/W55":{pcalo:14.00,cop:2.00}
          }},
-        {nom:"EABX16DA9W",puissance_nom:16,
+        {nom:"EABX16DA9W",puissance_nom:16,prix_ht:10200,
          performance:{
            "A7/W35":{pcalo:16.00,cop:4.56},
            "A7/W55":{pcalo:16.00,cop:3.08}
          }},
-        {nom:"Daikin Altherma 3 R ECH2O 500",puissance_nom:14,
+        {nom:"Altherma 3 R ECH2O 500",puissance_nom:14,prix_ht:12500,
          performance:{
            "A7/W35":{pcalo:14.50,cop:4.30},
            "A7/W55":{pcalo:14.50,cop:2.90}
@@ -285,14 +285,14 @@ const PERFORMANCE_DATA = {
       refrigerant: "R744 (CO2)",
       t_max: 90,
       models: [
-        {nom:"CAHV-P500YA-HPB",puissance_nom:45,
+        {nom:"CAHV-P500YA-HPB",puissance_nom:45,prix_ht:24000,
          performance:{
            "A7/W65":{pcalo:45.00,cop:3.80},
            "A7/W90":{pcalo:40.00,cop:2.80},
            "A-7/W65":{pcalo:36.00,cop:2.90},
            "A-7/W90":{pcalo:32.00,cop:2.20}
          }},
-        {nom:"CAHV-P500YB-HPB",puissance_nom:50,
+        {nom:"CAHV-P500YB-HPB",puissance_nom:50,prix_ht:28000,
          performance:{
            "A7/W65":{pcalo:50.00,cop:3.90},
            "A7/W90":{pcalo:44.00,cop:2.85},

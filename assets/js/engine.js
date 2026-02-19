@@ -492,6 +492,7 @@ const SizingEngine = {
             cop_a7: perf.cop,
             refrigerant: comp.refrigerant,
             t_max: comp.t_max,
+            prix_ht: cModel.prix_ht ? cModel.prix_ht * n : null,
             isAtlantic: false
           });
           break; // Only first valid config per model
