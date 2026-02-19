@@ -94,11 +94,13 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
   .calc-section{position:sticky;bottom:0;z-index:50;background:#fff;border-top:1px solid #e5e7eb;
     box-shadow:0 -4px 12px rgba(0,0,0,.08);padding:12px 16px}
 }
-.btn-calc{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;font-size:1rem;
-  border-radius:10px;padding:12px;transition:all .2s}
-.btn-calc:hover{background:var(--orange-hover);border-color:var(--orange-hover);color:#fff;
-  transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,98,42,.3)}
-.btn-calc:active{transform:translateY(0)}
+.btn-calc{background:linear-gradient(135deg,var(--orange),#f07830);border:none;color:#fff;font-weight:700;font-size:1rem;
+  border-radius:10px;padding:12px;transition:all .25s;position:relative;overflow:hidden}
+.btn-calc::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .5s}
+.btn-calc:hover{color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,98,42,.35)}
+.btn-calc:hover::after{transform:translateX(100%)}
+.btn-calc:active{transform:translateY(0);box-shadow:0 2px 8px rgba(232,98,42,.2)}
 
 /* ===== PLACEHOLDER ===== */
 .results-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -109,11 +111,11 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .sol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px}
 @media(max-width:575px){.sol-grid{grid-template-columns:1fr}}
 .sol-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:16px;
-  cursor:pointer;transition:all .2s;position:relative}
-.sol-card:hover{border-color:var(--orange);box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.sol-card.active{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange)}
+  cursor:pointer;transition:all .25s;position:relative}
+.sol-card:hover{border-color:var(--orange);box-shadow:0 6px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
+.sol-card.active{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange),0 4px 16px rgba(232,98,42,.12)}
 .sol-card.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:var(--orange);border-radius:12px 12px 0 0}
+  background:linear-gradient(90deg,var(--orange),#f5a623);border-radius:12px 12px 0 0}
 .sol-card .sol-name{font-weight:700;font-size:1.05rem;color:var(--atlantic)}
 .sol-card .sol-sub{font-size:.78rem;color:#9ca3af;margin-top:1px}
 .sol-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
@@ -126,7 +128,8 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 
 /* ===== RESULT CARDS ===== */
 .res-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:16px;
-  box-shadow:0 1px 3px rgba(0,0,0,.03)}
+  box-shadow:0 1px 4px rgba(0,0,0,.04);transition:box-shadow .2s}
+.res-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .res-card-head{padding:14px 16px;border-bottom:1px solid #f0f1f3;display:flex;align-items:center;gap:8px;
   font-weight:700;font-size:.9rem;color:#1f2937}
 .res-card-head .bar{width:3px;height:16px;border-radius:2px;flex-shrink:0}
@@ -165,27 +168,53 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .lightbox-title{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);
   font-size:.85rem;font-weight:500;z-index:10000;background:rgba(0,0,0,.5);padding:6px 16px;border-radius:20px}
 
+/* ===== BRAND LOGOS ===== */
+.brand-logo{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-logo svg{height:100%;width:auto}
+.brand-logo-sm{height:18px;width:auto}
+.brand-logo-md{height:24px;width:auto}
+.brand-logo-lg{height:32px;width:auto}
+/* Desktop table brand cell */
+.brand-cell{display:flex;align-items:center;gap:8px}
+.brand-cell .brand-logo{height:20px}
+
 /* ===== COMPETITOR CARDS (mobile) ===== */
 .comp-desktop{display:block}
 .comp-mobile{display:none}
+.comp-card{background:#f8fafc;border:1.5px solid #e5e7eb;border-radius:10px;overflow:hidden;transition:all .2s}
+.comp-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.comp-card.comp-atlantic{border-color:var(--atlantic);background:rgba(0,51,102,.03);box-shadow:0 2px 12px rgba(0,51,102,.08)}
+.comp-card-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #e5e7eb;
+  font-size:.82rem;flex-wrap:wrap}
+.comp-card.comp-atlantic .comp-card-head{border-bottom-color:rgba(0,51,102,.15)}
+.comp-model{font-family:var(--mono);font-size:.75rem;color:#6b7280}
+.comp-badge{margin-left:auto;background:var(--atlantic);color:#fff;font-size:.6rem;font-weight:700;
+  padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.05em}
+.comp-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.comp-kv{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;
+  border-bottom:1px solid #f0f1f3;font-size:.78rem}
+.comp-kv:nth-last-child(-n+2){border-bottom:none}
+.comp-k{color:#9ca3af;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.comp-v{font-family:var(--mono);font-weight:500;color:var(--atlantic)}
 @media(max-width:991px){
   .comp-desktop{display:none}
   .comp-mobile{display:flex;flex-direction:column;gap:10px}
-  .comp-card{background:#f8fafc;border:1.5px solid #e5e7eb;border-radius:10px;overflow:hidden}
-  .comp-card.comp-atlantic{border-color:var(--atlantic);background:rgba(0,51,102,.03)}
-  .comp-card-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #e5e7eb;
-    font-size:.82rem;flex-wrap:wrap}
-  .comp-card.comp-atlantic .comp-card-head{border-bottom-color:rgba(0,51,102,.15)}
-  .comp-model{font-family:var(--mono);font-size:.75rem;color:#6b7280}
-  .comp-badge{margin-left:auto;background:var(--atlantic);color:#fff;font-size:.6rem;font-weight:700;
-    padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.05em}
-  .comp-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-  .comp-kv{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;
-    border-bottom:1px solid #f0f1f3;font-size:.78rem}
-  .comp-kv:nth-last-child(-n+2){border-bottom:none}
-  .comp-k{color:#9ca3af;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-  .comp-v{font-family:var(--mono);font-weight:500;color:var(--atlantic)}
 }
+@media(min-width:992px){.comp-mobile{display:none}}
+
+/* ===== EMPTY STATE ===== */
+.results-empty svg.empty-illus{width:120px;height:120px;opacity:.2;margin-bottom:8px}
+.results-empty .empty-tip{font-size:.75rem;color:#b0b8c4;margin-top:4px;font-style:italic}
+
+/* ===== SELECTION PULSE ===== */
+@keyframes selectPulse{0%{box-shadow:0 0 0 0 rgba(232,98,42,.4)}70%{box-shadow:0 0 0 10px rgba(232,98,42,0)}100%{box-shadow:0 0 0 0 rgba(232,98,42,0)}}
+.sol-card.active{animation:selectPulse .6s ease-out}
+
+/* ===== GAMME SELECTOR ENHANCED ===== */
+.gamme-info{display:flex;align-items:center;gap:6px;margin-top:6px;padding:8px 10px;
+  background:#f8fafc;border-radius:8px;border:1px solid #e5e7eb;font-size:.72rem;color:#6b7280}
+.gamme-info .brand-logo{height:22px}
+.gamme-info span{font-weight:600;color:var(--atlantic)}
 
 /* ===== CHART ===== */
 .chart-box{width:100%;height:400px}
@@ -261,7 +290,8 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 
 /* ===== SUMMARY DASHBOARD ===== */
 .summary-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;
-  background:#fff;border:1.5px solid var(--orange);border-radius:10px;padding:12px;box-shadow:0 2px 8px rgba(232,98,42,.08)}
+  background:linear-gradient(135deg,#fff 0%,#fff8f4 100%);border:1.5px solid var(--orange);border-radius:10px;padding:12px 16px;
+  box-shadow:0 2px 12px rgba(232,98,42,.1)}
 @media(max-width:575px){.summary-bar{grid-template-columns:repeat(3,1fr)}}
 .summary-item{text-align:center}
 .summary-val{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:var(--atlantic);line-height:1.1}
@@ -308,7 +338,7 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
     <path d="M8 23V9h3.5l4.5 8 4.5-8H24v14h-3.5V14l-4.5 8-4.5-8v9z" fill="#fff"/></svg>
     <div>
       <div class="app-brand-text">PAC Dimensionnement</div>
-      <div class="app-brand-sub d-none d-md-block">Outil de dimensionnement PAC collectives</div>
+      <div class="app-brand-sub d-none d-md-block">Atlantic Effipac &bull; Aptae &mdash; Outil de dimensionnement PAC collectives</div>
     </div>
   </a>
   <nav class="mode-tabs" id="desktopTabs">
@@ -400,7 +430,8 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
           </label>
         </div>
       </div>
-      <div class="row g-2">
+      <div class="gamme-info" id="gammeInfo"></div>
+      <div class="row g-2 mt-2">
         <div class="col-7">
           <label class="form-label">T eau depart</label>
           <select class="form-select" id="tWater" onchange="onPACChange()">
@@ -493,8 +524,18 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
   <!-- ===== RIGHT: RESULTS ===== -->
   <div class="app-col-results">
     <div class="results-empty" id="placeholder">
-      <i class="ti ti-snowflake" style="font-size:48px;opacity:.15"></i>
+      <svg class="empty-illus" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="35" width="80" height="55" rx="6" stroke="#003366" stroke-width="2" opacity=".25"/>
+        <circle cx="60" cy="62" r="16" stroke="#e8622a" stroke-width="2" opacity=".3"/>
+        <path d="M60 52v20M50 62h20" stroke="#e8622a" stroke-width="1.5" stroke-linecap="round" opacity=".3"/>
+        <path d="M35 35v-8a4 4 0 014-4h42a4 4 0 014 4v8" stroke="#003366" stroke-width="2" opacity=".15"/>
+        <rect x="45" y="16" width="30" height="6" rx="3" fill="#003366" opacity=".08"/>
+        <path d="M30 90h60" stroke="#003366" stroke-width="1" stroke-dasharray="4 3" opacity=".12"/>
+        <circle cx="38" cy="45" r="3" fill="#e8622a" opacity=".2"/>
+        <circle cx="82" cy="45" r="3" fill="#0891b2" opacity=".2"/>
+      </svg>
       <p>Renseignez les parametres puis cliquez sur <strong>Dimensionner</strong> pour obtenir les solutions.</p>
+      <div class="empty-tip">Astuce : les resultats se mettent a jour automatiquement</div>
     </div>
     <div id="results" style="display:none"></div>
   </div>
@@ -553,6 +594,21 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 <script src="data/schemas.js"></script>
 <script src="assets/js/engine.js"></script>
 <script>
+// ============================================================
+// BRAND LOGOS (inline SVG)
+// ============================================================
+const BRAND_SVG={
+  atlantic:`<svg viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="28" rx="4" fill="#003366"/><text x="8" y="18.5" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="13" fill="#fff" letter-spacing=".5">ATLANTIC</text><path d="M95 8c3 0 5.5 2.5 5.5 5.5S98 19 95 19s-5.5-2.5-5.5-5.5S92 8 95 8z" fill="none" stroke="#e8622a" stroke-width="2"/><path d="M95 11v5M92.5 13.5h5" stroke="#e8622a" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  daikin:`<svg viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="28" rx="4" fill="#0083C1"/><text x="8" y="18.5" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="13" fill="#fff" letter-spacing=".5">DAIKIN</text></svg>`,
+  mitsubishi:`<svg viewBox="0 0 130 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="130" height="28" rx="4" fill="#E60012"/><path d="M10 7l5 8.66L20 7z" fill="#fff"/><path d="M10 21l5-8.66L20 21z" fill="#fff"/><path d="M5 14l5-8.66L15 14z" fill="#fff" opacity=".85"/><text x="24" y="18" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="10.5" fill="#fff" letter-spacing=".3">MITSUBISHI</text></svg>`
+};
+function brandLogo(brand,size){
+  size=size||'sm';
+  const key=brand.toLowerCase().replace(/[^a-z]/g,'');
+  const svg=BRAND_SVG[key]||BRAND_SVG.atlantic;
+  return `<span class="brand-logo brand-logo-${size}">${svg}</span>`;
+}
+
 // ============================================================
 // STATE
 // ============================================================
@@ -627,6 +683,15 @@ function onPACChange(){
   S.gamme=document.querySelector('input[name="gamme"]:checked').value;
   S.tWater=parseInt(document.getElementById('tWater').value);
   S.deltaT=parseInt(document.getElementById('deltaT').value);
+  // Update gamme info display
+  const gi=document.getElementById('gammeInfo');
+  if(gi){
+    if(S.gamme==='aptae'){
+      gi.innerHTML=brandLogo('atlantic','sm')+' <span>Aptae</span> — R290 (propane) &bull; Jusqu\'a 65 kW &bull; T max 65°C';
+    }else{
+      gi.innerHTML=brandLogo('atlantic','sm')+' <span>Effipac</span> — R32 &bull; 14 a 70 kW &bull; T max 60°C';
+    }
+  }
   saveState();scheduleCalc();
 }
 function onECSChange(){
@@ -1138,9 +1203,21 @@ document.addEventListener('click',function(e){
 // ============================================================
 function calculate(){
   const btn=document.getElementById('btnCalc');
-  btn.innerHTML='<span class="spinner-border spinner-border-sm me-2"></span>Calcul...';
+  btn.innerHTML='<span class="spinner-border spinner-border-sm me-2"></span>Calcul en cours...';
   btn.disabled=true;
-  setTimeout(()=>{try{doCalc()}finally{btn.innerHTML='<i class="ti ti-calculator me-2"></i>Dimensionner';btn.disabled=false}},50);
+  btn.style.opacity='.7';
+  setTimeout(()=>{
+    try{
+      doCalc();
+      if(S.solutions&&S.solutions.length>0){
+        toast(S.solutions.length+' solution'+(S.solutions.length>1?'s':'')+' trouvee'+(S.solutions.length>1?'s':''),'success');
+      }
+    }finally{
+      btn.innerHTML='<i class="ti ti-calculator me-2"></i>Dimensionner';
+      btn.disabled=false;
+      btn.style.opacity='';
+    }
+  },50);
 }
 function doCalc(){
   let html='';
@@ -1184,7 +1261,11 @@ function renderSolutions(sols){
     const ok=s.taux_couverture>=90,w=s.taux_couverture>=70&&s.taux_couverture<90;
     h+=`<div class="sol-card anim" onclick="selectSol(${i})" id="card${i}">
       <div class="d-flex justify-content-between align-items-start mb-1">
-        <div><div class="sol-name">${s.pac.nom}</div><div class="sol-sub">${s.nombre>1?s.nombre+' unites cascade':'1 unite'} &bull; ${s.pac.refrigerant}</div></div>
+        <div>
+          <div style="margin-bottom:4px">${brandLogo('atlantic','sm')}</div>
+          <div class="sol-name">${s.pac.nom}</div>
+          <div class="sol-sub">${s.nombre>1?s.nombre+' unites cascade':'1 unite'} &bull; ${s.pac.refrigerant}</div>
+        </div>
         ${ok?'<span class="badge bg-green-lt" style="font-size:.65rem">&#10003; Optimal</span>':w?'<span class="badge bg-yellow-lt" style="font-size:.65rem">Partiel</span>':''}
       </div>
       <div class="sol-metrics">
@@ -1389,12 +1470,12 @@ window.addEventListener('resize',()=>{if(S.chart)S.chart.resize()});
 function renderComp(sol){
   const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
 
-  // Desktop: table view
+  // Desktop: table view with brand logos
   let tbl=`<div class="comp-desktop"><table class="table table-striped table-hover mb-0" style="font-size:.82rem">
     <thead><tr><th>Marque</th><th>Modele</th><th class="text-center">Qty</th><th class="text-end">P.nom</th><th>Refrig.</th><th class="text-end">COP</th><th class="text-end">Part PAC</th><th class="text-end">Prix HT</th></tr></thead><tbody>`;
   cs.forEach(c=>{
     tbl+=`<tr${c.isAtlantic?' class="atlantic-row"':''}>
-      <td><strong>${c.brand}</strong></td><td style="font-family:var(--mono)">${c.model}</td>
+      <td><div class="brand-cell">${brandLogo(c.brand,'sm')}</div></td><td style="font-family:var(--mono)">${c.model}</td>
       <td class="text-center" style="font-family:var(--mono)">${c.nombre}</td>
       <td class="text-end" style="font-family:var(--mono)">${c.puissance_nom.toFixed(1)}</td>
       <td>${c.refrigerant}</td>
@@ -1409,7 +1490,7 @@ function renderComp(sol){
   cs.forEach(c=>{
     const isAtl=c.isAtlantic;
     cards+=`<div class="comp-card${isAtl?' comp-atlantic':''}">
-      <div class="comp-card-head"><strong>${c.brand}</strong><span class="comp-model">${c.model}</span>${isAtl?'<span class="comp-badge">Atlantic</span>':''}</div>
+      <div class="comp-card-head">${brandLogo(c.brand,'sm')}<span class="comp-model">${c.model}</span></div>
       <div class="comp-card-grid">
         <div class="comp-kv"><span class="comp-k">Quantite</span><span class="comp-v">${c.nombre}</span></div>
         <div class="comp-kv"><span class="comp-k">P. nominale</span><span class="comp-v">${c.puissance_nom.toFixed(1)} kW</span></div>
