@@ -503,8 +503,8 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 
 <!-- ===== SCRIPTS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script src="data/performance.js"></script>
 <script src="data/schemas.js"></script>
 <script src="assets/js/engine.js"></script>
@@ -671,7 +671,7 @@ function pdfCheckPage(doc,y,margin){
 
 function loadJsPDF(){
   return new Promise((resolve,reject)=>{
-    if(window.jspdf){return resolve()}
+    if(window.jspdf&&window.jspdf.jsPDF.prototype.autoTable){return resolve()}
     const s=document.createElement('script');
     s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
     s.onload=()=>{
@@ -698,7 +698,7 @@ function openPdfPreview(doc,filename){
 
 async function generateQuickPDF(){
   if(!S.solutions||S.solutions.length===0)return toast('Calculez d\'abord une solution.','error');
-  if(!window.jspdf){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF. Rechargez la page.','error')}}
+  if(!window.jspdf||!window.jspdf.jsPDF.prototype.autoTable){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF. Rechargez la page.','error')}}
   if(!window.jspdf){return toast('jsPDF non disponible. Rechargez la page.','error')}
   try{
   const sol=S.solutions[S.selectedIdx];
@@ -786,7 +786,7 @@ async function generateQuickPDF(){
 // ============================================================
 async function generateDevisPDF(){
   if(!S.solutions||S.solutions.length===0)return toast('Calculez d\'abord une solution.','error');
-  if(!window.jspdf){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF.','error')}}
+  if(!window.jspdf||!window.jspdf.jsPDF.prototype.autoTable){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF.','error')}}
   if(!window.jspdf){return toast('jsPDF non disponible.','error')}
   try{
   const sol=S.solutions[S.selectedIdx];
@@ -1396,7 +1396,7 @@ function calcECS(){
 // ============================================================
 async function generateECSPDF(){
   const r=S.ecsResultData;if(!r)return toast('Calculez d\'abord l\'ECS.','error');
-  if(!window.jspdf){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF.','error')}}
+  if(!window.jspdf||!window.jspdf.jsPDF.prototype.autoTable){try{await loadJsPDF()}catch(e){return toast('Impossible de charger jsPDF.','error')}}
   if(!window.jspdf){return toast('jsPDF non disponible.','error')}
   try{
   const {jsPDF}=window.jspdf;
