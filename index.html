@@ -237,6 +237,18 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .summary-val.green{color:#16a34a}
 .summary-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9ca3af;margin-top:2px}
 
+/* ===== SCROLL HINT (mobile) ===== */
+.scroll-hint{display:none}
+@media(max-width:991px){
+  .scroll-hint{display:flex;flex-direction:column;align-items:center;padding:14px 0;color:var(--orange);
+    font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;gap:4px;
+    animation:bounceDown 1.5s ease-in-out infinite;background:linear-gradient(to bottom,transparent,rgba(232,98,42,.06));
+    border-radius:0 0 10px 10px;margin:-4px 0 8px}
+  .scroll-hint i{font-size:1.6rem}
+  .scroll-hint span{opacity:.85}
+  @keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+}
+
 /* ===== TOAST ===== */
 .toast-wrap{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:6px}
 .toast-msg{padding:10px 16px;border-radius:8px;font-size:.82rem;font-weight:500;color:#fff;
@@ -1150,6 +1162,9 @@ function renderSolutions(sols){
   });
   h+='</div>';
 
+  // Scroll hint for mobile - indicates more content below
+  h+='<div class="scroll-hint" id="scrollHint"><span>Selectionnez une solution puis scrollez</span><i class="ti ti-chevrons-down"></i></div>';
+
   // Detail area FIRST, then chart and comparison below
   h+='<div id="detailArea"></div>';
   h+='<div id="schemaArea"></div>';
@@ -1248,12 +1263,18 @@ function selectSol(i){
   // Competitors
   renderComp(sol);
 
+  // Hide scroll hint once a solution is selected
+  const hint=document.getElementById('scrollHint');
+  if(hint)hint.style.display='none';
+
   // Auto-scroll to detail area so user sees the results immediately
   setTimeout(()=>{
     const da=document.getElementById('detailArea');
     if(da){
-      const container=da.closest('.app-col-results');
-      if(container&&window.innerWidth>=992){
+      if(window.innerWidth<992){
+        // Mobile: scroll entire page to detail area
+        da.scrollIntoView({behavior:'smooth',block:'start'});
+      }else{
         // Desktop: scroll within the results column
         da.scrollIntoView({behavior:'smooth',block:'start'});
       }
