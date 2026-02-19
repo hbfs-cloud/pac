@@ -165,6 +165,28 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .lightbox-title{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);
   font-size:.85rem;font-weight:500;z-index:10000;background:rgba(0,0,0,.5);padding:6px 16px;border-radius:20px}
 
+/* ===== COMPETITOR CARDS (mobile) ===== */
+.comp-desktop{display:block}
+.comp-mobile{display:none}
+@media(max-width:991px){
+  .comp-desktop{display:none}
+  .comp-mobile{display:flex;flex-direction:column;gap:10px}
+  .comp-card{background:#f8fafc;border:1.5px solid #e5e7eb;border-radius:10px;overflow:hidden}
+  .comp-card.comp-atlantic{border-color:var(--atlantic);background:rgba(0,51,102,.03)}
+  .comp-card-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #e5e7eb;
+    font-size:.82rem;flex-wrap:wrap}
+  .comp-card.comp-atlantic .comp-card-head{border-bottom-color:rgba(0,51,102,.15)}
+  .comp-model{font-family:var(--mono);font-size:.75rem;color:#6b7280}
+  .comp-badge{margin-left:auto;background:var(--atlantic);color:#fff;font-size:.6rem;font-weight:700;
+    padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.05em}
+  .comp-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .comp-kv{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;
+    border-bottom:1px solid #f0f1f3;font-size:.78rem}
+  .comp-kv:nth-last-child(-n+2){border-bottom:none}
+  .comp-k{color:#9ca3af;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .comp-v{font-family:var(--mono);font-weight:500;color:var(--atlantic)}
+}
+
 /* ===== CHART ===== */
 .chart-box{width:100%;height:400px}
 @media(max-width:575px){.chart-box{height:300px}}
@@ -1366,11 +1388,12 @@ window.addEventListener('resize',()=>{if(S.chart)S.chart.resize()});
 // ============================================================
 function renderComp(sol){
   const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
-  let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Comparaison concurrents<i class="ti ti-chevron-down chevron"></i></div>
-    <div class="res-card-body"><div class="table-responsive"><table class="table table-striped table-hover mb-0" style="font-size:.82rem">
-      <thead><tr><th>Marque</th><th>Modele</th><th class="text-center">Qty</th><th class="text-end">P.nom</th><th>Refrig.</th><th class="text-end">COP</th><th class="text-end">Part PAC</th><th class="text-end">Prix HT</th></tr></thead><tbody>`;
+
+  // Desktop: table view
+  let tbl=`<div class="comp-desktop"><table class="table table-striped table-hover mb-0" style="font-size:.82rem">
+    <thead><tr><th>Marque</th><th>Modele</th><th class="text-center">Qty</th><th class="text-end">P.nom</th><th>Refrig.</th><th class="text-end">COP</th><th class="text-end">Part PAC</th><th class="text-end">Prix HT</th></tr></thead><tbody>`;
   cs.forEach(c=>{
-    h+=`<tr${c.isAtlantic?' class="atlantic-row"':''}>
+    tbl+=`<tr${c.isAtlantic?' class="atlantic-row"':''}>
       <td><strong>${c.brand}</strong></td><td style="font-family:var(--mono)">${c.model}</td>
       <td class="text-center" style="font-family:var(--mono)">${c.nombre}</td>
       <td class="text-end" style="font-family:var(--mono)">${c.puissance_nom.toFixed(1)}</td>
@@ -1379,7 +1402,28 @@ function renderComp(sol){
       <td class="text-end" style="font-family:var(--mono)">${c.part_pac.toFixed(1)}%</td>
       <td class="text-end" style="font-family:var(--mono)">${c.prix_ht?fmtPrice(c.prix_ht):'\u2014'}</td></tr>`;
   });
-  h+='</tbody></table></div></div></div>';
+  tbl+='</tbody></table></div>';
+
+  // Mobile: stacked cards
+  let cards='<div class="comp-mobile">';
+  cs.forEach(c=>{
+    const isAtl=c.isAtlantic;
+    cards+=`<div class="comp-card${isAtl?' comp-atlantic':''}">
+      <div class="comp-card-head"><strong>${c.brand}</strong><span class="comp-model">${c.model}</span>${isAtl?'<span class="comp-badge">Atlantic</span>':''}</div>
+      <div class="comp-card-grid">
+        <div class="comp-kv"><span class="comp-k">Quantite</span><span class="comp-v">${c.nombre}</span></div>
+        <div class="comp-kv"><span class="comp-k">P. nominale</span><span class="comp-v">${c.puissance_nom.toFixed(1)} kW</span></div>
+        <div class="comp-kv"><span class="comp-k">Refrigerant</span><span class="comp-v">${c.refrigerant}</span></div>
+        <div class="comp-kv"><span class="comp-k">COP (A7/W35)</span><span class="comp-v">${c.cop_a7?c.cop_a7.toFixed(2):'\u2014'}</span></div>
+        <div class="comp-kv"><span class="comp-k">Part PAC</span><span class="comp-v" style="font-weight:700;color:${c.part_pac>=80?'#16a34a':'var(--orange)'}">${c.part_pac.toFixed(1)}%</span></div>
+        <div class="comp-kv"><span class="comp-k">Prix HT</span><span class="comp-v" style="font-weight:700">${c.prix_ht?fmtPrice(c.prix_ht):'\u2014'}</span></div>
+      </div>
+    </div>`;
+  });
+  cards+='</div>';
+
+  let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Comparaison concurrents<i class="ti ti-chevron-down chevron"></i></div>
+    <div class="res-card-body">${tbl}${cards}</div></div>`;
   document.getElementById('compArea').innerHTML=h;
 }
 
