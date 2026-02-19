@@ -15,213 +15,287 @@
   --atlantic-light:#004488;
   --orange:#e8622a;
   --orange-hover:#f07830;
+  --header-h:56px;
 }
-/* LAYOUT: two-panel app */
-.app-layout{display:flex;min-height:calc(100vh - 102px)}
-.panel-input{width:420px;flex-shrink:0;background:#fff;border-right:1px solid var(--tblr-border-color);overflow-y:auto}
-.panel-results{flex:1;background:#f8fafc;overflow-y:auto;padding:24px}
+body{background:#f1f5f9}
+
+/* ===== HEADER ===== */
+.app-header{background:var(--atlantic);height:var(--header-h);display:flex;align-items:center;
+  padding:0 16px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.app-brand{display:flex;align-items:center;gap:10px;flex-shrink:0;text-decoration:none}
+.app-brand svg{width:28px;height:28px;flex-shrink:0}
+.app-brand-text{color:#fff;font-weight:700;font-size:1rem;white-space:nowrap}
+.app-brand-sub{color:rgba(255,255,255,.45);font-size:.7rem;font-weight:400}
+/* Desktop tabs */
+.mode-tabs{display:flex;gap:2px;margin-left:auto}
+.mode-tab{padding:8px 16px;color:rgba(255,255,255,.5);font-size:.8rem;font-weight:600;cursor:pointer;
+  border-radius:6px 6px 0 0;transition:all .15s;white-space:nowrap;user-select:none;text-decoration:none;display:flex;align-items:center;gap:6px}
+.mode-tab:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.06)}
+.mode-tab.active{color:#fff;background:rgba(255,255,255,.12);box-shadow:inset 0 -2px 0 var(--orange)}
+.mode-tab .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+/* Mobile mode selector */
+.mode-mobile{display:none;width:100%;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+.mode-mobile select{font-weight:600}
+@media(max-width:991px){.mode-tabs{display:none}.mode-mobile{display:block}}
+
+/* ===== APP LAYOUT ===== */
+.app-main{display:grid;grid-template-columns:400px 1fr;min-height:calc(100vh - var(--header-h))}
 @media(min-width:992px){
-  .panel-input,.panel-results{height:calc(100vh - 102px)}
+  .app-col-input,.app-col-results{height:calc(100vh - var(--header-h));overflow-y:auto}
 }
-@media(max-width:991.98px){
-  .app-layout{flex-direction:column}
-  .panel-input{width:100%;border-right:none;border-bottom:1px solid var(--tblr-border-color)}
-  .panel-results{padding:16px}
+@media(max-width:991px){
+  .app-main{grid-template-columns:1fr;min-height:auto}
+  .app-col-input{border-bottom:2px solid #e5e7eb}
+  .app-col-results{min-height:50vh}
 }
+.app-col-input{background:#fff;border-right:1px solid #e5e7eb}
+.app-col-results{background:#f1f5f9;padding:20px}
+@media(max-width:575px){.app-col-results{padding:12px}}
 /* Scrollbar */
-.panel-input::-webkit-scrollbar,.panel-results::-webkit-scrollbar{width:5px}
-.panel-input::-webkit-scrollbar-thumb,.panel-results::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-/* Section titles */
-.section-head{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--atlantic);margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
-.section-head::before{content:'';display:block;width:3px;height:14px;border-radius:2px;background:var(--orange)}
-/* Stat readout */
-.stat-readout{background:#f1f5f9;border-radius:6px;padding:10px 12px;text-align:center}
-.stat-readout .stat-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3af}
-.stat-readout .stat-value{font-family:var(--mono);font-size:1.15rem;font-weight:500;color:var(--atlantic);margin-top:2px}
-.stat-readout .stat-value.teal{color:#0891b2}
-/* Orange button */
-.btn-atlantic{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700}
-.btn-atlantic:hover{background:var(--orange-hover);border-color:var(--orange-hover);color:#fff;box-shadow:0 4px 12px rgba(232,98,42,.25)}
-/* Selectgroup wider */
+.app-col-input::-webkit-scrollbar,.app-col-results::-webkit-scrollbar{width:4px}
+.app-col-input::-webkit-scrollbar-thumb,.app-col-results::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:2px}
+
+/* ===== FORM SECTIONS ===== */
+.form-section{padding:16px;border-bottom:1px solid #f0f1f3}
+.form-section:last-child{border-bottom:none}
+.section-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--atlantic);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-label i{font-size:1rem;opacity:.5}
+.form-label{font-size:.8rem;font-weight:600;color:#374151;margin-bottom:4px}
+.form-control,.form-select{font-size:.88rem;border-radius:8px;border:1.5px solid #d1d5db;transition:all .15s}
+.form-control:focus,.form-select:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+.form-control:hover,.form-select:hover{border-color:#9ca3af}
+/* Number input wider stepper */
+input[type="number"]{font-family:var(--mono)}
+input[type="number"]::-webkit-inner-spin-button{opacity:0;height:32px;cursor:pointer}
+input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus::-webkit-inner-spin-button{opacity:1}
+
+/* ===== STAT READOUT ===== */
+.stat-row{display:grid;gap:8px;margin-top:12px}
+.stat-row.cols-3{grid-template-columns:repeat(3,1fr)}
+.stat-row.cols-2{grid-template-columns:repeat(2,1fr)}
+.stat-box{background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:10px;text-align:center}
+.stat-box .s-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af}
+.stat-box .s-value{font-family:var(--mono);font-size:1.2rem;font-weight:500;color:var(--atlantic);margin-top:2px}
+.stat-box .s-value.teal{color:#0891b2}
+.stat-box .s-unit{font-size:.65rem;color:#9ca3af;font-weight:400;margin-left:2px}
+
+/* ===== SELECTGROUP (radio toggle) ===== */
 .form-selectgroup{width:100%}
 .form-selectgroup-item{flex:1}
-/* Solutions grid */
-.solutions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:24px}
-.sol-card{transition:all .15s;cursor:pointer;position:relative}
-.sol-card:hover{border-color:var(--orange);box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.sol-card.selected{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}
-.sol-card.selected::after{content:'SELECTIONNE';position:absolute;top:10px;right:10px;
-  font-size:.58rem;font-weight:800;letter-spacing:.06em;padding:2px 8px;border-radius:4px;
-  background:var(--orange);color:#fff}
-/* Metrics in card */
-.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.metric-box{background:#f8fafc;border-radius:6px;padding:10px}
-.metric-box .m-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3af}
-.metric-box .m-value{font-family:var(--mono);font-size:1rem;font-weight:500;color:#1a2332;margin-top:2px}
-.metric-box .m-value .m-unit{font-size:.72rem;color:#94a3af;font-weight:400}
-.metric-box .m-value.good{color:#16a34a}
-.metric-box .m-value.warn{color:var(--orange)}
-/* Detail tables */
-.detail-card .card-header{padding:.75rem 1rem}
-.detail-card .badge-bar{width:4px;height:16px;border-radius:2px;display:inline-block;margin-right:8px;vertical-align:middle}
-.mono{font-family:var(--mono)!important}
-.highlight{color:var(--orange)!important;font-weight:600!important}
-/* Atlantic row in comparison */
-.table .atlantic-row{background:rgba(232,98,42,.04)}
-.table .atlantic-row td:first-child{border-left:3px solid var(--orange);padding-left:calc(.75rem - 3px)}
-/* Chart */
-.chart-box{width:100%;height:360px}
-/* Legionella card */
-.card-danger-accent{border-left:3px solid #dc2626}
-/* Active tab override for dark navbar */
-.navbar-dark .nav-link.active,.navbar-dark .nav-link.active:hover{color:#fff;opacity:1;
-  border-bottom:2px solid var(--orange);padding-bottom:6px;margin-bottom:-8px}
-.navbar-dark .nav-link{color:rgba(255,255,255,.6);font-weight:600;font-size:.82rem;transition:color .15s}
-.navbar-dark .nav-link:hover{color:rgba(255,255,255,.85)}
-.nav-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
-/* Print hide */
-@media print{.panel-input,.navbar{display:none!important}.panel-results{height:auto!important}}
-/* Animation */
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .25s ease-out both}
-/* Placeholder */
-.results-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:400px;color:#94a3af;text-align:center;gap:16px}
-.results-placeholder p{max-width:380px;line-height:1.7;font-size:.92rem}
+.form-selectgroup-label{justify-content:center;font-weight:600;font-size:.85rem}
+
+/* ===== STICKY CALCULATE BUTTON (mobile) ===== */
+.calc-section{padding:16px}
+@media(max-width:991px){
+  .calc-section{position:sticky;bottom:0;z-index:50;background:#fff;border-top:1px solid #e5e7eb;
+    box-shadow:0 -4px 12px rgba(0,0,0,.08);padding:12px 16px}
+}
+.btn-calc{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;font-size:1rem;
+  border-radius:10px;padding:12px;transition:all .2s}
+.btn-calc:hover{background:var(--orange-hover);border-color:var(--orange-hover);color:#fff;
+  transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,98,42,.3)}
+.btn-calc:active{transform:translateY(0)}
+
+/* ===== PLACEHOLDER ===== */
+.results-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:400px;text-align:center;gap:12px;color:#94a3af}
+.results-empty p{max-width:350px;line-height:1.7;font-size:.9rem}
+
+/* ===== SOLUTION CARDS ===== */
+.sol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:20px}
+@media(max-width:575px){.sol-grid{grid-template-columns:1fr}}
+.sol-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:16px;
+  cursor:pointer;transition:all .2s;position:relative}
+.sol-card:hover{border-color:var(--orange);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.sol-card.active{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange)}
+.sol-card.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--orange);border-radius:12px 12px 0 0}
+.sol-card .sol-name{font-weight:700;font-size:1.05rem;color:var(--atlantic)}
+.sol-card .sol-sub{font-size:.78rem;color:#9ca3af;margin-top:1px}
+.sol-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.sol-metric{background:#f8fafc;border-radius:6px;padding:8px 10px}
+.sol-metric .sm-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af}
+.sol-metric .sm-value{font-family:var(--mono);font-size:.95rem;font-weight:500;margin-top:2px}
+.sm-value .sm-unit{font-size:.7rem;color:#9ca3af;font-weight:400}
+.sm-value.good{color:#16a34a}
+.sm-value.warn{color:var(--orange)}
+
+/* ===== RESULT CARDS ===== */
+.res-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.res-card-head{padding:14px 16px;border-bottom:1px solid #f0f1f3;display:flex;align-items:center;gap:8px;
+  font-weight:700;font-size:.9rem;color:#1f2937}
+.res-card-head .bar{width:3px;height:16px;border-radius:2px;flex-shrink:0}
+.res-card-body{padding:0}
+.res-card-body.padded{padding:16px}
+/* Tables in result cards */
+.res-card .table{margin:0;font-size:.85rem}
+.res-card .table td,.res-card .table th{padding:10px 16px}
+.res-card .table td:last-child{text-align:right;font-family:var(--mono);white-space:nowrap}
+.res-card .table .hl{color:var(--orange);font-weight:700}
+.res-card .table .atlantic-row{background:rgba(232,98,42,.04)}
+.res-card .table .atlantic-row td:first-child{border-left:3px solid var(--orange)}
+
+/* ===== SCHEMA THUMBNAILS ===== */
+.schema-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+@media(max-width:575px){.schema-grid{grid-template-columns:repeat(2,1fr)}}
+.schema-thumb{border:1.5px solid #e5e7eb;border-radius:8px;overflow:hidden;cursor:pointer;
+  transition:all .2s;background:#fff}
+.schema-thumb:hover{border-color:var(--atlantic);box-shadow:0 4px 12px rgba(0,0,0,.08);transform:translateY(-2px)}
+.schema-thumb img{width:100%;height:120px;object-fit:contain;padding:8px;background:#fafafa}
+.schema-thumb .st-label{padding:6px 10px;font-size:.72rem;font-weight:600;color:#6b7280;
+  border-top:1px solid #f0f1f3;text-align:center;background:#fff}
+
+/* ===== LIGHTBOX MODAL ===== */
+.lightbox-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);
+  align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.lightbox-overlay.open{display:flex}
+.lightbox-overlay img{max-width:100%;max-height:90vh;object-fit:contain;border-radius:8px;
+  box-shadow:0 8px 40px rgba(0,0,0,.4)}
+.lightbox-close{position:fixed;top:16px;right:16px;width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.15);color:#fff;border:none;font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:10000}
+.lightbox-close:hover{background:rgba(255,255,255,.3)}
+.lightbox-title{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);
+  font-size:.85rem;font-weight:500;z-index:10000;background:rgba(0,0,0,.5);padding:6px 16px;border-radius:20px}
+
+/* ===== CHART ===== */
+.chart-box{width:100%;height:400px}
+@media(max-width:575px){.chart-box{height:300px}}
+
+/* ===== ECS TABLE ===== */
+.ecs-grid .form-control{text-align:center;padding:6px 8px}
+
+/* ===== DANGER ACCENT ===== */
+.card-danger{border-left:3px solid #dc2626}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:slideUp .3s ease-out both}
+.anim:nth-child(2){animation-delay:.04s}
+.anim:nth-child(3){animation-delay:.08s}
+.anim:nth-child(4){animation-delay:.12s}
+
+/* ===== PRINT ===== */
+@media print{.app-header,.calc-section,.mode-mobile{display:none!important}
+  .app-main{display:block!important}.app-col-input{display:none!important}
+  .app-col-results{height:auto!important;overflow:visible!important}
+  .res-card{break-inside:avoid;box-shadow:none!important;border:1px solid #ccc!important}}
 </style>
 </head>
-<body class="theme-light">
+<body>
 
-<!-- ===== NAVBAR ===== -->
-<header class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:var(--atlantic)">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-expanded="false">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand d-none-navbar-horizontal pe-0 pe-md-3" href="#">
-      <svg viewBox="0 0 32 32" width="28" height="28" fill="none" class="me-2">
-        <rect width="32" height="32" rx="7" fill="#e8622a"/>
-        <path d="M8 23V9h3.5l4.5 8 4.5-8H24v14h-3.5V14l-4.5 8-4.5-8v9z" fill="#fff"/>
-      </svg>
-      <span>PAC Dimensionnement</span>
-    </a>
-    <small class="text-white opacity-50 d-none d-md-inline ms-2" style="font-size:.75rem">Outil de dimensionnement PAC collectives</small>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto" id="tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#" data-mode="elec" onclick="switchMode('elec');return false">
-            <span class="nav-dot" style="background:#4a9af5"></span>Chauffage 100% Elec
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-mode="double" onclick="switchMode('double');return false">
-            <span class="nav-dot" style="background:#0891b2"></span>Double Service
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-mode="ecs" onclick="switchMode('ecs');return false">
-            <span class="nav-dot" style="background:#16a34a"></span>ECS Seul
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-mode="hybrid" onclick="switchMode('hybrid');return false">
-            <span class="nav-dot" style="background:#e8622a"></span>Chauffage Hybride
-          </a>
-        </li>
-      </ul>
+<!-- ===== HEADER ===== -->
+<header class="app-header">
+  <a class="app-brand" href="#">
+    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#e8622a"/>
+    <path d="M8 23V9h3.5l4.5 8 4.5-8H24v14h-3.5V14l-4.5 8-4.5-8v9z" fill="#fff"/></svg>
+    <div>
+      <div class="app-brand-text">PAC Dimensionnement</div>
+      <div class="app-brand-sub d-none d-md-block">Outil de dimensionnement PAC collectives</div>
     </div>
-  </div>
+  </a>
+  <nav class="mode-tabs" id="desktopTabs">
+    <a class="mode-tab active" data-mode="elec" onclick="switchMode('elec')"><span class="dot" style="background:#3b82f6"></span>Chauffage 100% Elec</a>
+    <a class="mode-tab" data-mode="double" onclick="switchMode('double')"><span class="dot" style="background:#0891b2"></span>Double Service</a>
+    <a class="mode-tab" data-mode="ecs" onclick="switchMode('ecs')"><span class="dot" style="background:#16a34a"></span>ECS Seul</a>
+    <a class="mode-tab" data-mode="hybrid" onclick="switchMode('hybrid')"><span class="dot" style="background:#e8622a"></span>Chauffage Hybride</a>
+  </nav>
 </header>
 
-<!-- ===== SUB-HEADER: context bar ===== -->
-<div class="bg-white border-bottom py-2 px-3 d-flex align-items-center gap-2" style="font-size:.78rem">
-  <i class="ti ti-info-circle text-muted"></i>
-  <span class="text-muted">Methodologie : NF EN 12831 / EN 14825 / ADEME-COSTIC &mdash; Donnees certifiees Heat Pump Keymark</span>
+<!-- MOBILE MODE SELECTOR -->
+<div class="mode-mobile" id="mobileMode">
+  <select class="form-select" id="modeSelect" onchange="switchMode(this.value)">
+    <option value="elec" selected>Chauffage 100% Electrique</option>
+    <option value="double">Double Service (Chauffage + ECS)</option>
+    <option value="ecs">ECS Seul</option>
+    <option value="hybrid">Chauffage Hybride (PAC + Chaudiere)</option>
+  </select>
 </div>
 
-<!-- ===== MAIN LAYOUT ===== -->
-<div class="app-layout">
+<!-- ===== MAIN ===== -->
+<div class="app-main">
 
-  <!-- ===== LEFT: INPUT PANEL ===== -->
-  <div class="panel-input" id="panelLeft">
+  <!-- ===== LEFT: INPUTS ===== -->
+  <div class="app-col-input">
 
     <!-- LOCALISATION -->
-    <div class="p-3 border-bottom">
-      <div class="section-head">Localisation</div>
+    <div class="form-section">
+      <div class="section-label"><i class="ti ti-map-pin"></i>Localisation</div>
       <div class="mb-3">
-        <label class="form-label" for="dept">Departement</label>
+        <label class="form-label">Departement</label>
         <select class="form-select" id="dept" onchange="onDeptChange()"></select>
       </div>
-      <div class="row g-3 mb-2">
+      <div class="row g-2 mb-1">
         <div class="col-6">
-          <label class="form-label" for="altitude">Altitude (m)</label>
-          <input type="number" class="form-control" id="altitude" value="0" min="0" max="3000" step="50" placeholder="0" onchange="onLocationChange()">
+          <label class="form-label">Altitude (m)</label>
+          <input type="number" class="form-control" id="altitude" value="0" min="0" max="3000" step="50" onchange="onLocationChange()">
         </div>
         <div class="col-6 d-flex align-items-end pb-1">
-          <label class="form-check form-switch">
+          <label class="form-check form-switch mb-0">
             <input class="form-check-input" type="checkbox" id="bordMer" onchange="onLocationChange()">
             <span class="form-check-label">Bord de mer</span>
           </label>
         </div>
       </div>
-      <div class="row g-2 mt-2">
-        <div class="col-4"><div class="stat-readout"><div class="stat-label">T base</div><div class="stat-value teal" id="rdTbase">&mdash;</div></div></div>
-        <div class="col-4"><div class="stat-readout"><div class="stat-label">Zone</div><div class="stat-value" id="rdZone">&mdash;</div></div></div>
-        <div class="col-4"><div class="stat-readout"><div class="stat-label">Climat</div><div class="stat-value" id="rdClimat">&mdash;</div></div></div>
+      <div class="stat-row cols-3">
+        <div class="stat-box"><div class="s-label">T base</div><div class="s-value teal" id="rdTbase">&mdash;</div></div>
+        <div class="stat-box"><div class="s-label">Zone</div><div class="s-value" id="rdZone">&mdash;</div></div>
+        <div class="stat-box"><div class="s-label">Climat</div><div class="s-value" id="rdClimat">&mdash;</div></div>
       </div>
     </div>
 
     <!-- BATIMENT -->
-    <div class="p-3 border-bottom">
-      <div class="section-head">Batiment</div>
+    <div class="form-section">
+      <div class="section-label"><i class="ti ti-building"></i>Batiment</div>
       <div class="mb-3">
-        <label class="form-label" for="buildingType">Type de batiment</label>
+        <label class="form-label">Type de batiment</label>
         <select class="form-select" id="buildingType" onchange="onBuildingChange()"></select>
       </div>
-      <div class="row g-3">
-        <div class="col-6">
-          <label class="form-label" for="surface">Surface (m&sup2;)</label>
+      <div class="row g-2">
+        <div class="col-7">
+          <label class="form-label">Surface habitable (m&sup2;)</label>
           <input type="number" class="form-control" id="surface" value="1500" min="50" max="50000" step="50" onchange="onBuildingChange()">
         </div>
-        <div class="col-6">
-          <label class="form-label" for="tConsigne">T consigne (&deg;C)</label>
+        <div class="col-5">
+          <label class="form-label">T consigne (&deg;C)</label>
           <input type="number" class="form-control" id="tConsigne" value="19" min="15" max="25" step="1" onchange="onBuildingChange()">
         </div>
       </div>
-      <div class="row g-2 mt-2">
-        <div class="col-6"><div class="stat-readout"><div class="stat-label">Deperditions</div><div class="stat-value" id="rdDep">&mdash; <small class="text-muted" style="font-size:.7rem">kW</small></div></div></div>
-        <div class="col-6"><div class="stat-readout"><div class="stat-label">Dp</div><div class="stat-value" id="rdDp">&mdash; <small class="text-muted" style="font-size:.7rem">W/K</small></div></div></div>
+      <div class="stat-row cols-2">
+        <div class="stat-box"><div class="s-label">Deperditions</div><div class="s-value" id="rdDep">&mdash;<span class="s-unit">kW</span></div></div>
+        <div class="stat-box"><div class="s-label">Dp</div><div class="s-value" id="rdDp">&mdash;<span class="s-unit">W/K</span></div></div>
       </div>
     </div>
 
     <!-- PAC -->
-    <div class="p-3 border-bottom" id="sectionPAC">
-      <div class="section-head">Pompe a chaleur</div>
+    <div class="form-section" id="sectionPAC">
+      <div class="section-label"><i class="ti ti-temperature-snow"></i>Pompe a chaleur</div>
       <div class="mb-3">
         <label class="form-label">Gamme PAC</label>
         <div class="form-selectgroup w-100">
           <label class="form-selectgroup-item flex-fill">
             <input type="radio" name="gamme" value="effipac" class="form-selectgroup-input" checked onchange="onPACChange()">
-            <div class="form-selectgroup-label d-flex align-items-center justify-content-center">Effipac <span class="badge bg-blue-lt ms-2">R32</span></div>
+            <div class="form-selectgroup-label d-flex align-items-center justify-content-center gap-2">Effipac <span class="badge bg-blue-lt">R32</span></div>
           </label>
           <label class="form-selectgroup-item flex-fill">
             <input type="radio" name="gamme" value="aptae" class="form-selectgroup-input" onchange="onPACChange()">
-            <div class="form-selectgroup-label d-flex align-items-center justify-content-center">Aptae <span class="badge bg-green-lt ms-2">R290</span></div>
+            <div class="form-selectgroup-label d-flex align-items-center justify-content-center gap-2">Aptae <span class="badge bg-green-lt">R290</span></div>
           </label>
         </div>
       </div>
-      <div class="row g-3">
-        <div class="col-6">
-          <label class="form-label" for="tWater">T eau depart</label>
+      <div class="row g-2">
+        <div class="col-7">
+          <label class="form-label">T eau depart</label>
           <select class="form-select" id="tWater" onchange="onPACChange()">
-            <option value="35">35&deg;C &mdash; plancher</option>
-            <option value="45" selected>45&deg;C &mdash; rad. BT</option>
-            <option value="55">55&deg;C &mdash; rad. HT</option>
+            <option value="35">35&deg;C &mdash; plancher chauffant</option>
+            <option value="45" selected>45&deg;C &mdash; radiateurs BT</option>
+            <option value="55">55&deg;C &mdash; radiateurs HT</option>
           </select>
         </div>
-        <div class="col-6">
-          <label class="form-label" for="deltaT">&Delta;T</label>
+        <div class="col-5">
+          <label class="form-label">&Delta;T circuit</label>
           <select class="form-select" id="deltaT" onchange="onPACChange()">
             <option value="3">3 K</option>
             <option value="5" selected>5 K</option>
@@ -232,10 +306,10 @@
     </div>
 
     <!-- ECS -->
-    <div class="p-3 border-bottom" id="sectionECS" style="display:none">
-      <div class="section-head">Eau Chaude Sanitaire</div>
+    <div class="form-section" id="sectionECS" style="display:none">
+      <div class="section-label"><i class="ti ti-droplet"></i>Eau Chaude Sanitaire</div>
       <div class="mb-3">
-        <label class="form-label" for="ecsType">Type batiment ECS</label>
+        <label class="form-label">Type batiment ECS</label>
         <select class="form-select" id="ecsType" onchange="onECSChange()">
           <option value="logements" selected>Logements collectifs</option>
           <optgroup label="Tertiaire">
@@ -263,615 +337,382 @@
             </label>
           </div>
         </div>
-        <table class="table table-sm table-borderless mb-0" id="ecsGrid">
-          <thead>
-            <tr class="text-muted" style="font-size:.7rem">
-              <th>Type</th>
-              <th class="text-center">Equiv. LS</th>
-              <th class="text-center" style="width:90px">Nombre</th>
-            </tr>
-          </thead>
+        <table class="table table-sm ecs-grid" id="ecsGrid">
+          <thead><tr class="text-muted" style="font-size:.7rem"><th>Type</th><th class="text-center">Equiv. LS</th><th class="text-center" style="width:80px">Nb</th></tr></thead>
           <tbody>
-            <tr>
-              <td class="align-middle">T1 / Studio</td>
-              <td class="align-middle text-center mono text-muted" id="eqT1">0.6</td>
-              <td><input type="number" class="form-control form-control-sm text-center" data-type="T1" value="6" min="0" max="500" onchange="onECSChange()"></td>
-            </tr>
-            <tr>
-              <td class="align-middle">T2</td>
-              <td class="align-middle text-center mono text-muted" id="eqT2">0.7</td>
-              <td><input type="number" class="form-control form-control-sm text-center" data-type="T2" value="12" min="0" max="500" onchange="onECSChange()"></td>
-            </tr>
-            <tr>
-              <td class="align-middle">T3</td>
-              <td class="align-middle text-center mono text-muted" id="eqT3">1.0</td>
-              <td><input type="number" class="form-control form-control-sm text-center" data-type="T3" value="20" min="0" max="500" onchange="onECSChange()"></td>
-            </tr>
-            <tr>
-              <td class="align-middle">T4</td>
-              <td class="align-middle text-center mono text-muted" id="eqT4">1.4</td>
-              <td><input type="number" class="form-control form-control-sm text-center" data-type="T4" value="8" min="0" max="500" onchange="onECSChange()"></td>
-            </tr>
-            <tr>
-              <td class="align-middle">T5+</td>
-              <td class="align-middle text-center mono text-muted" id="eqT5">1.8</td>
-              <td><input type="number" class="form-control form-control-sm text-center" data-type="T5" value="4" min="0" max="500" onchange="onECSChange()"></td>
-            </tr>
+            <tr><td>T1 / Studio</td><td class="text-center text-muted" id="eqT1" style="font-family:var(--mono)">0.6</td><td><input type="number" class="form-control form-control-sm" data-type="T1" value="6" min="0" max="500" onchange="onECSChange()"></td></tr>
+            <tr><td>T2</td><td class="text-center text-muted" id="eqT2" style="font-family:var(--mono)">0.7</td><td><input type="number" class="form-control form-control-sm" data-type="T2" value="12" min="0" max="500" onchange="onECSChange()"></td></tr>
+            <tr><td>T3</td><td class="text-center text-muted" id="eqT3" style="font-family:var(--mono)">1.0</td><td><input type="number" class="form-control form-control-sm" data-type="T3" value="20" min="0" max="500" onchange="onECSChange()"></td></tr>
+            <tr><td>T4</td><td class="text-center text-muted" id="eqT4" style="font-family:var(--mono)">1.4</td><td><input type="number" class="form-control form-control-sm" data-type="T4" value="8" min="0" max="500" onchange="onECSChange()"></td></tr>
+            <tr><td>T5+</td><td class="text-center text-muted" id="eqT5" style="font-family:var(--mono)">1.8</td><td><input type="number" class="form-control form-control-sm" data-type="T5" value="4" min="0" max="500" onchange="onECSChange()"></td></tr>
           </tbody>
         </table>
       </div>
       <div id="ecsTertiaire" style="display:none">
-        <div class="mb-3">
-          <label class="form-label" for="ecsUnits">Nombre d'unites</label>
-          <input type="number" class="form-control" id="ecsUnits" value="50" min="1" max="5000" onchange="onECSChange()">
-        </div>
+        <label class="form-label">Nombre d'unites</label>
+        <input type="number" class="form-control" id="ecsUnits" value="50" min="1" max="5000" onchange="onECSChange()">
       </div>
     </div>
 
     <!-- HYBRID -->
-    <div class="p-3 border-bottom" id="sectionHybrid" style="display:none">
-      <div class="section-head">Chaudiere d'appoint</div>
+    <div class="form-section" id="sectionHybrid" style="display:none">
+      <div class="section-label"><i class="ti ti-flame"></i>Chaudiere d'appoint</div>
       <div class="mb-3">
-        <label class="form-label" for="boilerType">Type de chaudiere</label>
-        <select class="form-select" id="boilerType" onchange="onHybridChange()">
-          <option value="gaz_condensation">Gaz condensation (&eta;=0.95)</option>
-          <option value="gaz_standard">Gaz standard (&eta;=0.85)</option>
-          <option value="fioul">Fioul (&eta;=0.90)</option>
-        </select>
+        <label class="form-label">Type de chaudiere</label>
+        <select class="form-select" id="boilerType"><option value="gaz_condensation">Gaz condensation (&eta;=0.95)</option><option value="gaz_standard">Gaz standard (&eta;=0.85)</option><option value="fioul">Fioul (&eta;=0.90)</option></select>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="bivalentMode">Mode bivalent</label>
-        <select class="form-select" id="bivalentMode" onchange="onHybridChange()">
-          <option value="parallel">Bivalent parallele</option>
-          <option value="alternatif">Bivalent alternatif</option>
-        </select>
+        <label class="form-label">Mode bivalent</label>
+        <select class="form-select" id="bivalentMode"><option value="parallel">Bivalent parallele</option><option value="alternatif">Bivalent alternatif</option></select>
       </div>
     </div>
 
     <!-- CALCULATE -->
-    <div class="p-3">
-      <button class="btn btn-atlantic w-100 btn-lg" onclick="calculate()" id="btnCalc">
+    <div class="calc-section">
+      <button class="btn btn-calc w-100" onclick="calculate()" id="btnCalc">
         <i class="ti ti-calculator me-2"></i>Dimensionner
       </button>
     </div>
   </div>
 
-  <!-- ===== RIGHT: RESULTS PANEL ===== -->
-  <div class="panel-results" id="panelRight">
-    <div class="results-placeholder" id="placeholder">
-      <i class="ti ti-snowflake" style="font-size:48px;opacity:.2"></i>
-      <p>Renseignez les parametres du projet puis cliquez sur <strong>Dimensionner</strong> pour obtenir les solutions PAC.</p>
+  <!-- ===== RIGHT: RESULTS ===== -->
+  <div class="app-col-results">
+    <div class="results-empty" id="placeholder">
+      <i class="ti ti-snowflake" style="font-size:48px;opacity:.15"></i>
+      <p>Renseignez les parametres puis cliquez sur <strong>Dimensionner</strong> pour obtenir les solutions.</p>
     </div>
     <div id="results" style="display:none"></div>
   </div>
 
 </div>
 
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="ti ti-x"></i></button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-title" id="lightboxTitle"></div>
+</div>
+
 <!-- ===== SCRIPTS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
 <script src="data/performance.js"></script>
+<script src="data/schemas.js"></script>
 <script src="assets/js/engine.js"></script>
 <script>
 // ============================================================
-// APP STATE
+// STATE
 // ============================================================
-let state = {
-  mode: 'elec',
-  dept: '75',
-  altitude: 0,
-  bordMer: false,
-  tbase: -5,
-  zone: 'D',
-  climat: 'H1c',
-  buildingType: 're2020',
-  surface: 1500,
-  tInt: 19,
-  deperditionsKW: 0,
-  dp: 0,
-  gamme: 'effipac',
-  tWater: 45,
-  deltaT: 5,
-  solutions: [],
-  selectedIdx: 0,
-  ecsResult: null,
-  monotoneChart: null
+const S = {
+  mode:'elec', dept:'75', altitude:0, bordMer:false,
+  tbase:-5, zone:'D', climat:'H1c',
+  buildingType:'re2020', surface:1500, tInt:19,
+  deperditionsKW:0, dp:0,
+  gamme:'effipac', tWater:45, deltaT:5,
+  solutions:[], selectedIdx:0, ecsResult:null,
+  chart:null
 };
 
 // ============================================================
 // INIT
 // ============================================================
-function init() {
-  const deptSelect = document.getElementById('dept');
-  const depts = Object.keys(PERFORMANCE_DATA.tbase).sort((a,b) => {
-    if (a === '2A' || a === '2B' || b === '2A' || b === '2B') return a < b ? -1 : a > b ? 1 : 0;
-    return parseInt(a) - parseInt(b);
+(function init(){
+  const ds = document.getElementById('dept');
+  const depts = Object.keys(PERFORMANCE_DATA.tbase).sort((a,b)=>{
+    if(a==='2A'||a==='2B'||b==='2A'||b==='2B') return a<b?-1:a>b?1:0;
+    return parseInt(a)-parseInt(b);
   });
-  for (const d of depts) {
-    const opt = document.createElement('option');
-    opt.value = d;
-    opt.textContent = d + ' \u2014 ' + getDeptName(d);
-    if (d === '75') opt.selected = true;
-    deptSelect.appendChild(opt);
-  }
+  depts.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d+' \u2014 '+deptName(d);if(d==='75')o.selected=true;ds.appendChild(o)});
 
-  const btSelect = document.getElementById('buildingType');
-  for (const [key, val] of Object.entries(PERFORMANCE_DATA.buildingTypes)) {
-    const opt = document.createElement('option');
-    opt.value = key;
-    opt.textContent = val.label + ' (' + val.description + ')';
-    if (key === 're2020') opt.selected = true;
-    btSelect.appendChild(opt);
-  }
+  const bs = document.getElementById('buildingType');
+  Object.entries(PERFORMANCE_DATA.buildingTypes).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label+' ('+v.description+')';if(k==='re2020')o.selected=true;bs.appendChild(o)});
 
   onDeptChange();
   onBuildingChange();
-}
+})();
 
-function getDeptName(code) {
-  const names = {
-    "01":"Ain","02":"Aisne","03":"Allier","04":"Alpes-de-Haute-Provence","05":"Hautes-Alpes",
-    "06":"Alpes-Maritimes","07":"Ardeche","08":"Ardennes","09":"Ariege","10":"Aube",
-    "11":"Aude","12":"Aveyron","13":"Bouches-du-Rhone","14":"Calvados","15":"Cantal",
-    "16":"Charente","17":"Charente-Maritime","18":"Cher","19":"Correze",
-    "2A":"Corse-du-Sud","2B":"Haute-Corse",
-    "21":"Cote-d'Or","22":"Cotes-d'Armor","23":"Creuse","24":"Dordogne","25":"Doubs",
-    "26":"Drome","27":"Eure","28":"Eure-et-Loir","29":"Finistere","30":"Gard",
-    "31":"Haute-Garonne","32":"Gers","33":"Gironde","34":"Herault","35":"Ille-et-Vilaine",
-    "36":"Indre","37":"Indre-et-Loire","38":"Isere","39":"Jura","40":"Landes",
-    "41":"Loir-et-Cher","42":"Loire","43":"Haute-Loire","44":"Loire-Atlantique","45":"Loiret",
-    "46":"Lot","47":"Lot-et-Garonne","48":"Lozere","49":"Maine-et-Loire","50":"Manche",
-    "51":"Marne","52":"Haute-Marne","53":"Mayenne","54":"Meurthe-et-Moselle","55":"Meuse",
-    "56":"Morbihan","57":"Moselle","58":"Nievre","59":"Nord","60":"Oise",
-    "61":"Orne","62":"Pas-de-Calais","63":"Puy-de-Dome","64":"Pyrenees-Atlantiques",
-    "65":"Hautes-Pyrenees","66":"Pyrenees-Orientales","67":"Bas-Rhin","68":"Haut-Rhin",
-    "69":"Rhone","70":"Haute-Saone","71":"Saone-et-Loire","72":"Sarthe","73":"Savoie",
-    "74":"Haute-Savoie","75":"Paris","76":"Seine-Maritime","77":"Seine-et-Marne",
-    "78":"Yvelines","79":"Deux-Sevres","80":"Somme","81":"Tarn","82":"Tarn-et-Garonne",
-    "83":"Var","84":"Vaucluse","85":"Vendee","86":"Vienne","87":"Haute-Vienne",
-    "88":"Vosges","89":"Yonne","90":"Territoire de Belfort",
-    "91":"Essonne","92":"Hauts-de-Seine","93":"Seine-Saint-Denis","94":"Val-de-Marne","95":"Val-d'Oise"
-  };
-  return names[code] || code;
+function deptName(c){
+  const N={"01":"Ain","02":"Aisne","03":"Allier","04":"Alpes-de-Hte-Provence","05":"Hautes-Alpes","06":"Alpes-Maritimes","07":"Ardeche","08":"Ardennes","09":"Ariege","10":"Aube","11":"Aude","12":"Aveyron","13":"Bouches-du-Rhone","14":"Calvados","15":"Cantal","16":"Charente","17":"Charente-Maritime","18":"Cher","19":"Correze","2A":"Corse-du-Sud","2B":"Haute-Corse","21":"Cote-d'Or","22":"Cotes-d'Armor","23":"Creuse","24":"Dordogne","25":"Doubs","26":"Drome","27":"Eure","28":"Eure-et-Loir","29":"Finistere","30":"Gard","31":"Haute-Garonne","32":"Gers","33":"Gironde","34":"Herault","35":"Ille-et-Vilaine","36":"Indre","37":"Indre-et-Loire","38":"Isere","39":"Jura","40":"Landes","41":"Loir-et-Cher","42":"Loire","43":"Haute-Loire","44":"Loire-Atlantique","45":"Loiret","46":"Lot","47":"Lot-et-Garonne","48":"Lozere","49":"Maine-et-Loire","50":"Manche","51":"Marne","52":"Haute-Marne","53":"Mayenne","54":"Meurthe-et-Moselle","55":"Meuse","56":"Morbihan","57":"Moselle","58":"Nievre","59":"Nord","60":"Oise","61":"Orne","62":"Pas-de-Calais","63":"Puy-de-Dome","64":"Pyrenees-Atlantiques","65":"Hautes-Pyrenees","66":"Pyrenees-Orientales","67":"Bas-Rhin","68":"Haut-Rhin","69":"Rhone","70":"Haute-Saone","71":"Saone-et-Loire","72":"Sarthe","73":"Savoie","74":"Haute-Savoie","75":"Paris","76":"Seine-Maritime","77":"Seine-et-Marne","78":"Yvelines","79":"Deux-Sevres","80":"Somme","81":"Tarn","82":"Tarn-et-Garonne","83":"Var","84":"Vaucluse","85":"Vendee","86":"Vienne","87":"Haute-Vienne","88":"Vosges","89":"Yonne","90":"Belfort","91":"Essonne","92":"Hauts-de-Seine","93":"Seine-St-Denis","94":"Val-de-Marne","95":"Val-d'Oise"};
+  return N[c]||c;
 }
 
 // ============================================================
-// EVENT HANDLERS
+// EVENTS
 // ============================================================
-function switchMode(mode) {
-  state.mode = mode;
-  document.querySelectorAll('#tabs .nav-link').forEach(a => {
-    a.classList.toggle('active', a.dataset.mode === mode);
-  });
-
-  document.getElementById('sectionPAC').style.display = mode !== 'ecs' ? '' : 'none';
-  document.getElementById('sectionECS').style.display = (mode === 'ecs' || mode === 'double') ? '' : 'none';
-  document.getElementById('sectionHybrid').style.display = mode === 'hybrid' ? '' : 'none';
+function switchMode(m){
+  S.mode=m;
+  document.querySelectorAll('.mode-tab').forEach(t=>t.classList.toggle('active',t.dataset.mode===m));
+  document.getElementById('modeSelect').value=m;
+  document.getElementById('sectionPAC').style.display=m!=='ecs'?'':'none';
+  document.getElementById('sectionECS').style.display=(m==='ecs'||m==='double')?'':'none';
+  document.getElementById('sectionHybrid').style.display=m==='hybrid'?'':'none';
 }
-
-function onDeptChange() {
-  state.dept = document.getElementById('dept').value;
-  onLocationChange();
-}
-
-function onLocationChange() {
-  state.altitude = parseInt(document.getElementById('altitude').value) || 0;
-  state.bordMer = document.getElementById('bordMer').checked;
-
-  const d = PERFORMANCE_DATA.tbase[state.dept];
-  if (d) {
-    state.tbase = SizingEngine.getTbase(state.dept, state.altitude, state.bordMer);
-    state.zone = d.zone;
-    state.climat = d.climat;
-  }
-
-  document.getElementById('rdTbase').innerHTML = state.tbase + '&deg;C';
-  document.getElementById('rdZone').textContent = state.zone;
-  document.getElementById('rdClimat').textContent = state.climat;
+function onDeptChange(){S.dept=document.getElementById('dept').value;onLocationChange()}
+function onLocationChange(){
+  S.altitude=parseInt(document.getElementById('altitude').value)||0;
+  S.bordMer=document.getElementById('bordMer').checked;
+  const d=PERFORMANCE_DATA.tbase[S.dept];
+  if(d){S.tbase=SizingEngine.getTbase(S.dept,S.altitude,S.bordMer);S.zone=d.zone;S.climat=d.climat}
+  document.getElementById('rdTbase').innerHTML=S.tbase+'&deg;C';
+  document.getElementById('rdZone').textContent=S.zone;
+  document.getElementById('rdClimat').textContent=S.climat;
   onBuildingChange();
 }
-
-function onBuildingChange() {
-  state.buildingType = document.getElementById('buildingType').value;
-  state.surface = parseInt(document.getElementById('surface').value) || 1500;
-  state.tInt = parseInt(document.getElementById('tConsigne').value) || 19;
-
-  const result = SizingEngine.calcDeperditions({
-    surface: state.surface,
-    buildingType: state.buildingType,
-    tInt: state.tInt,
-    tBase: state.tbase
-  });
-
-  if (result) {
-    state.deperditionsKW = result.deperditionsKW;
-    state.dp = result.dp;
-    document.getElementById('rdDep').innerHTML = result.deperditionsKW.toFixed(1) + ' <small class="text-muted" style="font-size:.7rem">kW</small>';
-    document.getElementById('rdDp').innerHTML = result.dp.toFixed(1) + ' <small class="text-muted" style="font-size:.7rem">W/K</small>';
-  }
+function onBuildingChange(){
+  S.buildingType=document.getElementById('buildingType').value;
+  S.surface=parseInt(document.getElementById('surface').value)||1500;
+  S.tInt=parseInt(document.getElementById('tConsigne').value)||19;
+  const r=SizingEngine.calcDeperditions({surface:S.surface,buildingType:S.buildingType,tInt:S.tInt,tBase:S.tbase});
+  if(r){S.deperditionsKW=r.deperditionsKW;S.dp=r.dp;
+    document.getElementById('rdDep').innerHTML=r.deperditionsKW.toFixed(1)+'<span class="s-unit">kW</span>';
+    document.getElementById('rdDp').innerHTML=r.dp.toFixed(1)+'<span class="s-unit">W/K</span>'}
+}
+function onPACChange(){
+  S.gamme=document.querySelector('input[name="gamme"]:checked').value;
+  S.tWater=parseInt(document.getElementById('tWater').value);
+  S.deltaT=parseInt(document.getElementById('deltaT').value);
+}
+function onECSChange(){
+  const t=document.getElementById('ecsType').value, isL=t==='logements';
+  document.getElementById('ecsLogements').style.display=isL?'':'none';
+  document.getElementById('ecsTertiaire').style.display=isL?'none':'';
+  if(isL){const p=document.querySelector('input[name="parc"]:checked').value,c=PERFORMANCE_DATA.ecs.equivalenceParc[p];
+    ['T1','T2','T3','T4','T5'].forEach(k=>document.getElementById('eq'+k).textContent=c[k])}
 }
 
-function onPACChange() {
-  state.gamme = document.querySelector('input[name="gamme"]:checked').value;
-  state.tWater = parseInt(document.getElementById('tWater').value);
-  state.deltaT = parseInt(document.getElementById('deltaT').value);
+// ============================================================
+// LIGHTBOX
+// ============================================================
+function openLightbox(src,title){
+  document.getElementById('lightboxImg').src=src;
+  document.getElementById('lightboxTitle').textContent=title||'';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
 }
-
-function onECSChange() {
-  const ecsType = document.getElementById('ecsType').value;
-  const isLogements = ecsType === 'logements';
-  document.getElementById('ecsLogements').style.display = isLogements ? '' : 'none';
-  document.getElementById('ecsTertiaire').style.display = isLogements ? 'none' : '';
-
-  if (isLogements) {
-    const parc = document.querySelector('input[name="parc"]:checked').value;
-    const coeffs = PERFORMANCE_DATA.ecs.equivalenceParc[parc];
-    document.getElementById('eqT1').textContent = coeffs.T1;
-    document.getElementById('eqT2').textContent = coeffs.T2;
-    document.getElementById('eqT3').textContent = coeffs.T3;
-    document.getElementById('eqT4').textContent = coeffs.T4;
-    document.getElementById('eqT5').textContent = coeffs.T5;
-  }
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
 }
-
-function onHybridChange() {}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
 
 // ============================================================
 // CALCULATE
 // ============================================================
-function calculate() {
-  const btn = document.getElementById('btnCalc');
-  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Calcul en cours...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    try { doCalculate(); }
-    finally { btn.innerHTML = '<i class="ti ti-calculator me-2"></i>Dimensionner'; btn.disabled = false; }
-  }, 50);
+function calculate(){
+  const btn=document.getElementById('btnCalc');
+  btn.innerHTML='<span class="spinner-border spinner-border-sm me-2"></span>Calcul...';
+  btn.disabled=true;
+  setTimeout(()=>{try{doCalc()}finally{btn.innerHTML='<i class="ti ti-calculator me-2"></i>Dimensionner';btn.disabled=false}},50);
 }
-
-function doCalculate() {
-  let html = '';
-
-  if (state.mode === 'ecs') {
-    html = calcECS();
-  } else {
-    const solutions = SizingEngine.selectPAC({
-      deperditionsKW: state.deperditionsKW,
-      gamme: state.gamme,
-      tWater: state.tWater,
-      mode: state.mode === 'hybrid' ? 'hybrid' : 'elec',
-      tBase: state.tbase,
-      tInt: state.tInt
-    });
-
-    state.solutions = solutions;
-    state.selectedIdx = 0;
-
-    if (solutions.length === 0) {
-      html = '<div class="results-placeholder"><p>Aucune solution trouvee. Modifiez la gamme PAC ou la surface.</p></div>';
-    } else {
-      html = renderSolutions(solutions);
-    }
+function doCalc(){
+  let html='';
+  if(S.mode==='ecs'){html=calcECS()}
+  else{
+    const sols=SizingEngine.selectPAC({deperditionsKW:S.deperditionsKW,gamme:S.gamme,tWater:S.tWater,
+      mode:S.mode==='hybrid'?'hybrid':'elec',tBase:S.tbase,tInt:S.tInt});
+    S.solutions=sols;S.selectedIdx=0;
+    html=sols.length===0?'<div class="results-empty"><p>Aucune solution trouvee. Modifiez la gamme ou la surface.</p></div>':renderSolutions(sols);
   }
-
-  document.getElementById('placeholder').style.display = 'none';
-  const r = document.getElementById('results');
-  r.style.display = '';
-  r.innerHTML = html;
-
-  if (state.mode !== 'ecs' && state.solutions.length > 0) {
-    selectSolution(0);
-  }
+  document.getElementById('placeholder').style.display='none';
+  const r=document.getElementById('results');r.style.display='';r.innerHTML=html;
+  if(S.mode!=='ecs'&&S.solutions.length>0)selectSol(0);
+  // Scroll to results on mobile
+  if(window.innerWidth<992)r.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 // ============================================================
 // RENDER SOLUTIONS
 // ============================================================
-function renderSolutions(solutions) {
-  let html = '<div class="solutions-grid">';
-  solutions.forEach((sol, i) => {
-    const ok = sol.taux_couverture >= 90, warn = sol.taux_couverture >= 70 && sol.taux_couverture < 90;
-    html += `
-    <div class="card sol-card fade-up ${i===0?'selected':''}" onclick="selectSolution(${i})" id="card${i}">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div>
-            <h3 class="mb-0" style="color:var(--atlantic)">${sol.pac.nom}</h3>
-            <small class="text-muted">${sol.nombre > 1 ? sol.nombre + ' unites en cascade' : '1 unite'}</small>
-          </div>
-          <span class="badge ${sol.pac.refrigerant==='R290'?'bg-green-lt':'bg-blue-lt'}">${sol.pac.refrigerant}</span>
-        </div>
-        <div class="metric-grid">
-          <div class="metric-box"><div class="m-label">P. nominale</div><div class="m-value">${sol.puissance_totale_nom.toFixed(1)} <span class="m-unit">kW</span></div></div>
-          <div class="metric-box"><div class="m-label">Part PAC Tbase</div><div class="m-value ${ok?'good':warn?'warn':''}">${sol.part_pac.toFixed(1)} <span class="m-unit">%</span></div></div>
-          <div class="metric-box"><div class="m-label">Taux couverture</div><div class="m-value ${ok?'good':warn?'warn':''}">${sol.taux_couverture.toFixed(1)} <span class="m-unit">%</span></div></div>
-          <div class="metric-box"><div class="m-label">COP A7</div><div class="m-value">${sol.cop_a7 ? sol.cop_a7.toFixed(2) : '\u2014'}</div></div>
-        </div>
+function renderSolutions(sols){
+  let h='<div class="sol-grid">';
+  sols.forEach((s,i)=>{
+    const ok=s.taux_couverture>=90,w=s.taux_couverture>=70&&s.taux_couverture<90;
+    h+=`<div class="sol-card anim ${i===0?'active':''}" onclick="selectSol(${i})" id="card${i}">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <div><div class="sol-name">${s.pac.nom}</div><div class="sol-sub">${s.nombre>1?s.nombre+' unites en cascade':'1 unite'}</div></div>
+        <span class="badge ${s.pac.refrigerant==='R290'?'bg-green-lt':'bg-blue-lt'}">${s.pac.refrigerant}</span>
+      </div>
+      <div class="sol-metrics">
+        <div class="sol-metric"><div class="sm-label">P. nominale</div><div class="sm-value">${s.puissance_totale_nom.toFixed(1)}<span class="sm-unit"> kW</span></div></div>
+        <div class="sol-metric"><div class="sm-label">Part PAC Tbase</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.part_pac.toFixed(1)}<span class="sm-unit"> %</span></div></div>
+        <div class="sol-metric"><div class="sm-label">Couverture</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.taux_couverture.toFixed(1)}<span class="sm-unit"> %</span></div></div>
+        <div class="sol-metric"><div class="sm-label">COP A7</div><div class="sm-value">${s.cop_a7?s.cop_a7.toFixed(2):'\u2014'}</div></div>
       </div>
     </div>`;
   });
-  html += '</div>';
-
-  html += '<div id="detailArea"></div>';
-  html += '<div class="card detail-card fade-up mb-3"><div class="card-header"><h3 class="card-title"><span class="badge-bar" style="background:#1a73e8"></span>Courbe monotone de chauffage</h3></div><div class="card-body"><div id="monotoneChart" class="chart-box"></div></div></div>';
-  html += '<div id="comparisonArea"></div>';
-
-  return html;
+  h+='</div><div id="detailArea"></div><div id="schemaArea"></div>';
+  h+='<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#3b82f6"></span>Courbe monotone de chauffage</div><div class="res-card-body padded"><div id="monotoneChart" class="chart-box"></div></div></div>';
+  h+='<div id="compArea"></div>';
+  return h;
 }
 
 // ============================================================
-// SELECT SOLUTION & DETAIL
+// SELECT SOLUTION
 // ============================================================
-function selectSolution(idx) {
-  state.selectedIdx = idx;
-  const sol = state.solutions[idx];
-  if (!sol) return;
+function selectSol(i){
+  S.selectedIdx=i;const sol=S.solutions[i];if(!sol)return;
+  document.querySelectorAll('.sol-card').forEach((c,j)=>c.classList.toggle('active',j===i));
 
-  document.querySelectorAll('.sol-card').forEach((c,i) => c.classList.toggle('selected', i===idx));
+  const en=SizingEngine.calcAnnualEnergy({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,
+    model:sol.pac,nombre:sol.nombre,tWater:S.tWater,climat:S.climat,mode:S.mode==='hybrid'?'hybrid':'elec'});
+  const hy=SizingEngine.calcHydraulics(sol.puissance_totale_nom,S.deltaT);
+  let biv=null;
+  if(S.mode==='hybrid')biv=SizingEngine.calcBivalentPoint({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,model:sol.pac,nombre:sol.nombre,tWater:S.tWater});
 
-  const energy = SizingEngine.calcAnnualEnergy({
-    deperditionsKW: state.deperditionsKW, dp: state.dp, tInt: state.tInt, tBase: state.tbase,
-    model: sol.pac, nombre: sol.nombre, tWater: state.tWater, climat: state.climat,
-    mode: state.mode === 'hybrid' ? 'hybrid' : 'elec'
-  });
+  let d=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#e8622a"></span>Resultats &mdash; ${sol.pac.nom} &times;${sol.nombre}</div>
+    <div class="res-card-body"><table class="table table-striped mb-0"><tbody>
+      <tr><td>Puissance calorifique nominale</td><td>${sol.puissance_totale_nom.toFixed(1)} kW</td></tr>
+      <tr><td>Puissance a Tbase (${S.tbase}&deg;C)</td><td>${sol.puissance_totale_tbase.toFixed(1)} kW</td></tr>
+      <tr><td>Part PAC a Tbase</td><td class="hl">${sol.part_pac.toFixed(1)} %</td></tr>
+      <tr><td>Taux de couverture annuel</td><td class="hl">${en.tauxCouverture.toFixed(1)} %</td></tr>
+      <tr><td>SCOP pondere</td><td>${en.scopWeighted.toFixed(2)}</td></tr>
+      <tr><td>Energie PAC annuelle</td><td>${(en.ePac/1000).toFixed(0)} MWh</td></tr>
+      <tr><td>Energie appoint</td><td>${(en.eBackup/1000).toFixed(0)} MWh</td></tr>
+      <tr><td>Consommation elec PAC</td><td>${(en.elecPac/1000).toFixed(0)} MWh</td></tr>
+      <tr><td>P. electrique absorbee max</td><td>${sol.pabs_tbase.toFixed(1)} kW</td></tr>
+      <tr><td>Intensite max (400V tri)</td><td>${(sol.pabs_tbase*1000/(400*1.732)).toFixed(1)} A</td></tr>
+      ${biv?`<tr><td>Point de bivalence</td><td class="hl">${biv.tBivalent.toFixed(1)}&deg;C</td></tr>`:''}
+    </tbody></table></div></div>`;
 
-  const hyd = SizingEngine.calcHydraulics(sol.puissance_totale_nom, state.deltaT);
+  d+=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#0891b2"></span>Hydraulique</div>
+    <div class="res-card-body"><table class="table table-striped mb-0"><tbody>
+      <tr><td>Debit primaire</td><td>${hy.debit_m3h.toFixed(2)} m&sup3;/h (${hy.debit_Lh} L/h)</td></tr>
+      <tr><td>&Delta;T</td><td>${hy.deltaT} K</td></tr>
+      <tr><td>Diametre raccordement</td><td>&empty;${hy.diametre_int}/${hy.diametre_ext} mm</td></tr>
+      <tr><td>Bouteille decouplage</td><td>&empty;${hy.diametre_bouteille} mm</td></tr>
+      <tr><td>Ballon tampon</td><td class="hl">${hy.ballon_tampon_L} L</td></tr>
+    </tbody></table></div></div>`;
 
-  let biv = null;
-  if (state.mode === 'hybrid') {
-    biv = SizingEngine.calcBivalentPoint({
-      deperditionsKW: state.deperditionsKW, dp: state.dp, tInt: state.tInt, tBase: state.tbase,
-      model: sol.pac, nombre: sol.nombre, tWater: state.tWater
-    });
-  }
+  document.getElementById('detailArea').innerHTML=d;
 
-  // Detail table
-  let detail = `<div class="card detail-card fade-up mb-3">
-    <div class="card-header"><h3 class="card-title"><span class="badge-bar" style="background:var(--orange)"></span>Resultats detailles &mdash; ${sol.pac.nom} &times;${sol.nombre}</h3></div>
-    <div class="card-body p-0">
-      <table class="table table-striped table-hover mb-0">
-        <tbody>
-          <tr><td>Puissance calorifique nominale</td><td class="mono text-end">${sol.puissance_totale_nom.toFixed(1)} kW</td></tr>
-          <tr><td>Puissance a Tbase (${state.tbase}&deg;C)</td><td class="mono text-end">${sol.puissance_totale_tbase.toFixed(1)} kW</td></tr>
-          <tr><td>Part PAC a Tbase</td><td class="mono text-end highlight">${sol.part_pac.toFixed(1)} %</td></tr>
-          <tr><td>Taux de couverture annuel</td><td class="mono text-end highlight">${energy.tauxCouverture.toFixed(1)} %</td></tr>
-          <tr><td>SCOP pondere</td><td class="mono text-end">${energy.scopWeighted.toFixed(2)}</td></tr>
-          <tr><td>Energie PAC annuelle</td><td class="mono text-end">${(energy.ePac/1000).toFixed(0)} MWh</td></tr>
-          <tr><td>Energie appoint annuelle</td><td class="mono text-end">${(energy.eBackup/1000).toFixed(0)} MWh</td></tr>
-          <tr><td>Consommation elec PAC</td><td class="mono text-end">${(energy.elecPac/1000).toFixed(0)} MWh</td></tr>
-          <tr><td>Puissance electrique absorbee max</td><td class="mono text-end">${sol.pabs_tbase.toFixed(1)} kW</td></tr>
-          <tr><td>Intensite max (400V tri)</td><td class="mono text-end">${(sol.pabs_tbase * 1000 / (400 * 1.732)).toFixed(1)} A</td></tr>
-          ${biv ? `<tr><td>Point de bivalence</td><td class="mono text-end highlight">${biv.tBivalent.toFixed(1)}&deg;C</td></tr>` : ''}
-        </tbody>
-      </table>
-    </div>
-  </div>`;
-
-  // Hydraulics
-  detail += `<div class="card detail-card fade-up mb-3">
-    <div class="card-header"><h3 class="card-title"><span class="badge-bar" style="background:#0891b2"></span>Hydraulique</h3></div>
-    <div class="card-body p-0">
-      <table class="table table-striped table-hover mb-0">
-        <tbody>
-          <tr><td>Debit primaire PAC</td><td class="mono text-end">${hyd.debit_m3h.toFixed(2)} m&sup3;/h (${hyd.debit_Lh} L/h)</td></tr>
-          <tr><td>Delta T</td><td class="mono text-end">${hyd.deltaT} K</td></tr>
-          <tr><td>Diametre raccordement</td><td class="mono text-end">&empty;${hyd.diametre_int}/${hyd.diametre_ext} mm</td></tr>
-          <tr><td>Diametre bouteille decouplage</td><td class="mono text-end">&empty;${hyd.diametre_bouteille} mm</td></tr>
-          <tr><td>Ballon tampon recommande</td><td class="mono text-end highlight">${hyd.ballon_tampon_L} L</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>`;
-
-  document.getElementById('detailArea').innerHTML = detail;
-  renderMonotoneChart(sol, energy);
-  renderComparison(sol);
+  // Schemas
+  renderSchemas(sol);
+  // Chart
+  renderChart(sol,en);
+  // Competitors
+  renderComp(sol);
 }
 
 // ============================================================
-// ECHARTS MONOTONE
+// SCHEMAS
 // ============================================================
-function renderMonotoneChart(sol, energy) {
-  const container = document.getElementById('monotoneChart');
-  if (!container) return;
+function renderSchemas(sol){
+  const imgs=SCHEMA_CATALOG.getImagesForSolution(sol.pac,S.mode,sol.nombre);
+  const items=[];
+  if(imgs.photo)items.push({src:imgs.photo,label:'Photo produit'});
+  if(imgs.dimensions)items.push({src:imgs.dimensions,label:'Plan d\'encombrement'});
+  if(imgs.degagements)items.push({src:imgs.degagements,label:'Degagements techniques'});
+  if(imgs.hydraulic)items.push({src:imgs.hydraulic,label:'Schema hydraulique'});
 
-  if (state.monotoneChart) { state.monotoneChart.dispose(); state.monotoneChart = null; }
+  if(items.length===0){document.getElementById('schemaArea').innerHTML='';return}
 
-  const data = SizingEngine.generateMonotoneData({
-    deperditionsKW: state.deperditionsKW, dp: state.dp, tInt: state.tInt, tBase: state.tbase,
-    climat: state.climat, model: sol.pac, nombre: sol.nombre, tWater: state.tWater
+  let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#8b5cf6"></span>Schemas &amp; documentation</div>
+    <div class="res-card-body padded"><div class="schema-grid">`;
+  items.forEach(it=>{
+    h+=`<div class="schema-thumb" onclick="openLightbox('${it.src}','${it.label}')">
+      <img src="${it.src}" alt="${it.label}" loading="lazy">
+      <div class="st-label">${it.label}</div>
+    </div>`;
   });
+  h+='</div></div></div>';
+  document.getElementById('schemaArea').innerHTML=h;
+}
 
-  const hours = data.map(d => d.hours);
-  const loads = data.map(d => d.load);
-  const pacCaps = data.map(d => d.pacCapacity);
+// ============================================================
+// ECHARTS
+// ============================================================
+function renderChart(sol,en){
+  const el=document.getElementById('monotoneChart');if(!el)return;
+  if(S.chart){S.chart.dispose();S.chart=null}
+  const data=SizingEngine.generateMonotoneData({deperditionsKW:S.deperditionsKW,dp:S.dp,tInt:S.tInt,tBase:S.tbase,climat:S.climat,model:sol.pac,nombre:sol.nombre,tWater:S.tWater});
+  const hrs=data.map(d=>d.hours),lds=data.map(d=>d.load),pcs=data.map(d=>d.pacCapacity);
 
-  state.monotoneChart = echarts.init(container);
-  state.monotoneChart.setOption({
-    tooltip: {
-      trigger: 'axis',
-      backgroundColor: '#fff',
-      borderColor: '#e5e7eb',
-      borderWidth: 1,
-      textStyle: { color: '#1a2332', fontFamily: "'Source Sans 3', sans-serif", fontSize: 13 },
-      formatter: function(params) {
-        let s = '<strong>' + params[0].axisValueLabel + ' h</strong><br/>';
-        params.forEach(p => {
-          s += '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' + p.color + ';margin-right:6px"></span>';
-          s += p.seriesName + ': <strong>' + p.value.toFixed(1) + ' kW</strong><br/>';
-        });
-        return s;
-      }
-    },
-    legend: {
-      data: ['Besoin chauffage', 'Capacite PAC'],
-      bottom: 0,
-      textStyle: { fontFamily: "'Source Sans 3', sans-serif", fontSize: 12, color: '#6b7280' }
-    },
-    grid: { top: 20, right: 20, bottom: 50, left: 60 },
-    xAxis: {
-      type: 'category',
-      data: hours,
-      name: 'Heures cumulees',
-      nameLocation: 'center',
-      nameGap: 30,
-      nameTextStyle: { fontFamily: "'Source Sans 3', sans-serif", fontSize: 12, color: '#9ca3af' },
-      axisLabel: { fontFamily: "'DM Mono', monospace", fontSize: 10, color: '#9ca3af',
-        formatter: function(v,i){ return i % Math.ceil(hours.length/8) === 0 ? v : ''; } },
-      axisLine: { lineStyle: { color: '#e5e7eb' } },
-      axisTick: { show: false },
-      splitLine: { show: false }
-    },
-    yAxis: {
-      type: 'value',
-      name: 'Puissance (kW)',
-      nameTextStyle: { fontFamily: "'Source Sans 3', sans-serif", fontSize: 12, color: '#9ca3af' },
-      axisLabel: { fontFamily: "'DM Mono', monospace", fontSize: 10, color: '#9ca3af' },
-      axisLine: { show: false },
-      splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } }
-    },
-    series: [
-      {
-        name: 'Besoin chauffage',
-        type: 'line',
-        data: loads,
-        smooth: 0.3,
-        symbol: 'none',
-        lineStyle: { width: 1.5, color: '#94a3b8' },
-        areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[
-          {offset:0,color:'rgba(148,163,184,0.15)'},{offset:1,color:'rgba(148,163,184,0.01)'}
-        ])}
-      },
-      {
-        name: 'Capacite PAC',
-        type: 'line',
-        data: pacCaps,
-        smooth: 0.3,
-        symbol: 'none',
-        lineStyle: { width: 2.5, color: '#e8622a', type: 'dashed' },
-        areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[
-          {offset:0,color:'rgba(232,98,42,0.12)'},{offset:1,color:'rgba(232,98,42,0.01)'}
-        ])}
-      }
+  S.chart=echarts.init(el);
+  S.chart.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#e5e7eb',borderWidth:1,textStyle:{color:'#1a2332',fontSize:13},
+      formatter:p=>'<b>'+p[0].axisValueLabel+' h</b><br/>'+p.map(x=>'<span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+x.color+';margin-right:5px"></span>'+x.seriesName+': <b>'+x.value.toFixed(1)+' kW</b>').join('<br/>')},
+    legend:{data:['Besoin chauffage','Capacite PAC'],bottom:0,left:'center',textStyle:{fontSize:12,color:'#6b7280'},itemGap:24},
+    grid:{top:24,right:24,bottom:60,left:65,containLabel:false},
+    xAxis:{type:'category',data:hrs,name:'Heures cumulees',nameLocation:'center',nameGap:32,
+      nameTextStyle:{fontSize:12,color:'#6b7280',fontWeight:'bold'},
+      axisLabel:{fontSize:10,color:'#9ca3af',fontFamily:'DM Mono',margin:10,
+        formatter:(v,i)=>i%Math.ceil(hrs.length/7)===0?v:''},
+      axisLine:{lineStyle:{color:'#e5e7eb'}},axisTick:{show:false}},
+    yAxis:{type:'value',name:'Puissance (kW)',nameTextStyle:{fontSize:12,color:'#6b7280',fontWeight:'bold',padding:[0,0,0,0]},
+      nameGap:12,
+      axisLabel:{fontSize:10,color:'#9ca3af',fontFamily:'DM Mono',margin:8},axisLine:{show:false},
+      splitLine:{lineStyle:{color:'#f3f4f6',type:'dashed'}}},
+    series:[
+      {name:'Besoin chauffage',type:'line',data:lds,smooth:.3,symbol:'none',
+        lineStyle:{width:1.5,color:'#94a3b8'},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(148,163,184,.12)'},{offset:1,color:'rgba(148,163,184,.01)'}])}},
+      {name:'Capacite PAC',type:'line',data:pcs,smooth:.3,symbol:'none',
+        lineStyle:{width:2.5,color:'#e8622a',type:'dashed'},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(232,98,42,.1)'},{offset:1,color:'rgba(232,98,42,.01)'}])}}
     ]
   });
 }
-
-// Resize charts on window resize
-window.addEventListener('resize', function() {
-  if (state.monotoneChart) state.monotoneChart.resize();
-});
+window.addEventListener('resize',()=>{if(S.chart)S.chart.resize()});
 
 // ============================================================
-// COMPETITOR COMPARISON
+// COMPETITORS
 // ============================================================
-function renderComparison(sol) {
-  const comparisons = SizingEngine.compareWithCompetitors(sol, state.deperditionsKW, state.tbase, state.tWater);
-
-  let html = `<div class="card detail-card fade-up mb-3">
-    <div class="card-header"><h3 class="card-title"><span class="badge-bar" style="background:#16a34a"></span>Comparaison concurrents</h3></div>
-    <div class="card-body p-0">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover table-nowrap mb-0">
-          <thead>
-            <tr>
-              <th>Marque / Gamme</th><th>Modele</th><th class="text-center">Qty</th>
-              <th class="text-end">P. nom.</th><th>Refrig.</th><th class="text-end">T max</th>
-              <th class="text-end">COP A7</th><th class="text-end">Part PAC</th><th class="text-end">Couverture</th>
-            </tr>
-          </thead>
-          <tbody>`;
-
-  for (const c of comparisons) {
-    const cls = c.isAtlantic ? ' class="atlantic-row"' : '';
-    html += `<tr${cls}>
-      <td><strong>${c.brand}</strong></td>
-      <td class="mono">${c.model}</td>
-      <td class="mono text-center">${c.nombre}</td>
-      <td class="mono text-end">${c.puissance_nom.toFixed(1)} kW</td>
+function renderComp(sol){
+  const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
+  let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Comparaison concurrents</div>
+    <div class="res-card-body"><div class="table-responsive"><table class="table table-striped table-hover mb-0" style="font-size:.82rem">
+      <thead><tr><th>Marque</th><th>Modele</th><th class="text-center">Qty</th><th class="text-end">P.nom</th><th>Refrig.</th><th class="text-end">COP</th><th class="text-end">Part PAC</th><th class="text-end">Couv.</th></tr></thead><tbody>`;
+  cs.forEach(c=>{
+    h+=`<tr${c.isAtlantic?' class="atlantic-row"':''}>
+      <td><strong>${c.brand}</strong></td><td style="font-family:var(--mono)">${c.model}</td>
+      <td class="text-center" style="font-family:var(--mono)">${c.nombre}</td>
+      <td class="text-end" style="font-family:var(--mono)">${c.puissance_nom.toFixed(1)}</td>
       <td>${c.refrigerant}</td>
-      <td class="mono text-end">${c.t_max}&deg;C</td>
-      <td class="mono text-end">${c.cop_a7 ? c.cop_a7.toFixed(2) : '\u2014'}</td>
-      <td class="mono text-end">${c.part_pac.toFixed(1)}%</td>
-      <td class="mono text-end">${c.taux_couverture.toFixed(1)}%</td>
-    </tr>`;
-  }
-
-  html += '</tbody></table></div></div></div>';
-  document.getElementById('comparisonArea').innerHTML = html;
+      <td class="text-end" style="font-family:var(--mono)">${c.cop_a7?c.cop_a7.toFixed(2):'\u2014'}</td>
+      <td class="text-end" style="font-family:var(--mono)">${c.part_pac.toFixed(1)}%</td>
+      <td class="text-end" style="font-family:var(--mono)">${c.taux_couverture.toFixed(1)}%</td></tr>`;
+  });
+  h+='</tbody></table></div></div></div>';
+  document.getElementById('compArea').innerHTML=h;
 }
 
 // ============================================================
-// ECS CALCULATION
+// ECS
 // ============================================================
-function calcECS() {
-  const ecsType = document.getElementById('ecsType').value;
-  let ecsResult;
+function calcECS(){
+  const t=document.getElementById('ecsType').value;let r;
+  if(t==='logements'){
+    const p=document.querySelector('input[name="parc"]:checked').value,logs=[];
+    document.querySelectorAll('#ecsGrid input[type="number"]').forEach(inp=>{const c=parseInt(inp.value)||0;if(c>0)logs.push({type:inp.dataset.type,count:c})});
+    r=SizingEngine.calcECS({logements:logs,parc:p});
+  }else{r=SizingEngine.calcECS({buildingType:t,units:parseInt(document.getElementById('ecsUnits').value)||50})}
+  if(!r)return'<div class="results-empty"><p>Erreur calcul ECS.</p></div>';
+  S.ecsResult=r;
 
-  if (ecsType === 'logements') {
-    const parc = document.querySelector('input[name="parc"]:checked').value;
-    const logements = [];
-    document.querySelectorAll('#ecsGrid input[type="number"]').forEach(inp => {
-      const type = inp.dataset.type;
-      const count = parseInt(inp.value) || 0;
-      if (count > 0) logements.push({ type, count });
-    });
-    ecsResult = SizingEngine.calcECS({ logements, parc });
-  } else {
-    const units = parseInt(document.getElementById('ecsUnits').value) || 50;
-    ecsResult = SizingEngine.calcECS({ buildingType: ecsType, units });
+  let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Resultats ECS</div>
+    <div class="res-card-body"><table class="table table-striped mb-0"><tbody>`;
+  if(r.ns!==undefined){
+    h+=`<tr><td>Logements standards (Ns)</td><td class="hl">${r.ns}</td></tr>
+      <tr><td>Volume journalier 60&deg;C</td><td>${r.vj} L/j</td></tr>
+      <tr><td>V. pointe 10 min</td><td>${r.v10} L</td></tr>
+      <tr><td>V. pointe 1h</td><td>${r.v1h} L</td></tr>
+      <tr><td>Volume stockage min</td><td class="hl">${r.vStockage} L</td></tr>
+      <tr><td>P. production (semi-accum.)</td><td class="hl">${r.pProduction} kW</td></tr>
+      <tr><td>P. instantanee</td><td>${r.pInstantanee} kW</td></tr>`;
+  }else{
+    h+=`<tr><td>Type</td><td>${r.type}</td></tr>
+      <tr><td>Nb ${r.unite}s</td><td>${r.nombre}</td></tr>
+      <tr><td>Volume journalier 60&deg;C</td><td>${r.vj} L/j</td></tr>
+      <tr><td>P. accumulation 8h</td><td class="hl">${r.pAccumulation} kW</td></tr>`;
   }
-
-  if (!ecsResult) return '<div class="results-placeholder"><p>Erreur de calcul ECS.</p></div>';
-  state.ecsResult = ecsResult;
-
-  let html = `<div class="card detail-card fade-up mb-3">
-    <div class="card-header"><h3 class="card-title"><span class="badge-bar" style="background:#16a34a"></span>Resultats ECS</h3></div>
-    <div class="card-body p-0">
-      <table class="table table-striped mb-0"><tbody>`;
-
-  if (ecsResult.ns !== undefined) {
-    html += `
-      <tr><td>Nombre de logements standards (Ns)</td><td class="mono text-end highlight">${ecsResult.ns}</td></tr>
-      <tr><td>Volume journalier a 60&deg;C</td><td class="mono text-end">${ecsResult.vj} L/jour</td></tr>
-      <tr><td>Volume de pointe 10 min</td><td class="mono text-end">${ecsResult.v10} L</td></tr>
-      <tr><td>Volume de pointe 1h</td><td class="mono text-end">${ecsResult.v1h} L</td></tr>
-      <tr><td>Volume stockage minimum</td><td class="mono text-end highlight">${ecsResult.vStockage} L</td></tr>
-      <tr><td>Puissance production (semi-accum.)</td><td class="mono text-end highlight">${ecsResult.pProduction} kW</td></tr>
-      <tr><td>Puissance instantanee</td><td class="mono text-end">${ecsResult.pInstantanee} kW</td></tr>`;
-  } else {
-    html += `
-      <tr><td>Type</td><td class="text-end">${ecsResult.type}</td></tr>
-      <tr><td>Nombre de ${ecsResult.unite}s</td><td class="mono text-end">${ecsResult.nombre}</td></tr>
-      <tr><td>Volume journalier a 60&deg;C</td><td class="mono text-end">${ecsResult.vj} L/jour</td></tr>
-      <tr><td>Puissance accumulation (8h)</td><td class="mono text-end highlight">${ecsResult.pAccumulation} kW</td></tr>`;
-  }
-
-  html += `
-      <tr><td>Temperature ECS</td><td class="mono text-end">${ecsResult.tEcs}&deg;C</td></tr>
-      <tr><td>Temperature eau froide</td><td class="mono text-end">${ecsResult.tEf}&deg;C</td></tr>
-    </tbody></table></div></div>`;
-
-  // Legionella
-  html += `<div class="card detail-card card-danger-accent fade-up mb-3">
-    <div class="card-header"><h3 class="card-title text-danger"><i class="ti ti-alert-triangle me-2"></i>Prevention legionellose</h3></div>
-    <div class="card-body p-0">
-      <table class="table table-striped mb-0"><tbody>
-        <tr><td>Stockage minimum</td><td class="mono text-end">&ge; 55&deg;C</td></tr>
-        <tr><td>Distribution minimum</td><td class="mono text-end">&ge; 50&deg;C en tout point</td></tr>
-        <tr><td>Choc thermique quotidien</td><td class="mono text-end">60&deg;C pendant 30 min</td></tr>
-        <tr><td>Robinet salle de bain</td><td class="mono text-end">&le; 50&deg;C</td></tr>
-      </tbody></table>
-    </div>
-  </div>`;
-
-  return html;
+  h+=`<tr><td>T&deg; ECS</td><td>${r.tEcs}&deg;C</td></tr><tr><td>T&deg; eau froide</td><td>${r.tEf}&deg;C</td></tr></tbody></table></div></div>`;
+  h+=`<div class="res-card card-danger anim"><div class="res-card-head text-danger"><i class="ti ti-alert-triangle me-2"></i>Prevention legionellose</div>
+    <div class="res-card-body"><table class="table mb-0"><tbody>
+      <tr><td>Stockage minimum</td><td>&ge; 55&deg;C</td></tr>
+      <tr><td>Distribution</td><td>&ge; 50&deg;C partout</td></tr>
+      <tr><td>Choc thermique</td><td>60&deg;C / 30 min / jour</td></tr>
+      <tr><td>Robinet SdB</td><td>&le; 50&deg;C</td></tr></tbody></table></div></div>`;
+  return h;
 }
-
-// ============================================================
-// BOOTSTRAP
-// ============================================================
-init();
 </script>
 </body>
 </html>
