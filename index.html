@@ -685,8 +685,8 @@ function generateQuickPDF(){
   const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
   doc.autoTable({
     startY:y,margin:{left:14,right:14},
-    head:[['Marque','Modele','Qty','P.nom (kW)','Refrig.','COP','Part PAC','Couv.']],
-    body:cs.map(c=>[c.brand,c.model,c.nombre,c.puissance_nom.toFixed(1),c.refrigerant,c.cop_a7?c.cop_a7.toFixed(2):'-',c.part_pac.toFixed(1)+'%',c.taux_couverture.toFixed(1)+'%']),
+    head:[['Marque','Modele','Qty','P.nom (kW)','Refrig.','COP','Part PAC','Prix HT']],
+    body:cs.map(c=>[c.brand,c.model,c.nombre,c.puissance_nom.toFixed(1),c.refrigerant,c.cop_a7?c.cop_a7.toFixed(2):'-',c.part_pac.toFixed(1)+'%',c.prix_ht?c.prix_ht.toLocaleString('fr-FR')+' €':'-']),
     headStyles:{fillColor:[0,51,102],fontSize:7.5,cellPadding:2},
     bodyStyles:{fontSize:7.5,cellPadding:2},
     alternateRowStyles:{fillColor:[245,245,245]},
@@ -803,6 +803,10 @@ function generateDevisPDF(){
       ['Consommation elec PAC',(en.elecPac/1000).toFixed(1)+' MWh'],
       ['P. electrique absorbee max',sol.pabs_tbase.toFixed(1)+' kW'],
       ['Intensite max (400V tri)',(sol.pabs_tbase*1000/(400*1.732)).toFixed(1)+' A'],
+      ['',''],
+      ['Reference catalogue',sol.pac.ref||'-'],
+      ['Prix unitaire HT',sol.pac.prix_ht?sol.pac.prix_ht.toLocaleString('fr-FR')+' € HT':'-'],
+      ['Prix total PAC (x'+sol.nombre+')',sol.pac.prix_ht?(sol.pac.prix_ht*sol.nombre).toLocaleString('fr-FR')+' € HT':'-'],
     ],
     headStyles:{fillColor:[0,51,102],fontSize:8,cellPadding:3},
     bodyStyles:{fontSize:8,cellPadding:2.5},
@@ -886,8 +890,8 @@ function generateDevisPDF(){
     const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
     doc.autoTable({
       startY:y,margin:{left:14,right:14},
-      head:[['Marque','Modele','Qty','P.nom (kW)','Refrig.','COP A7','Part PAC','Couv.']],
-      body:cs.map(cc=>[cc.brand,cc.model,cc.nombre,cc.puissance_nom.toFixed(1),cc.refrigerant,cc.cop_a7?cc.cop_a7.toFixed(2):'-',cc.part_pac.toFixed(1)+'%',cc.taux_couverture.toFixed(1)+'%']),
+      head:[['Marque','Modele','Qty','P.nom (kW)','Refrig.','COP A7','Part PAC','Prix HT']],
+      body:cs.map(cc=>[cc.brand,cc.model,cc.nombre,cc.puissance_nom.toFixed(1),cc.refrigerant,cc.cop_a7?cc.cop_a7.toFixed(2):'-',cc.part_pac.toFixed(1)+'%',cc.prix_ht?cc.prix_ht.toLocaleString('fr-FR')+' €':'-']),
       headStyles:{fillColor:[0,51,102],fontSize:7.5,cellPadding:2},
       bodyStyles:{fontSize:7.5,cellPadding:2},
       alternateRowStyles:{fillColor:[245,245,245]},
@@ -925,6 +929,11 @@ function generateDevisPDF(){
   doc.save('Devis_'+ref.replace(/[^a-zA-Z0-9-]/g,'_')+'.pdf');
   closeDevis();
 }
+
+// ============================================================
+// HELPERS
+// ============================================================
+function fmtPrice(v){return v?new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',minimumFractionDigits:0,maximumFractionDigits:0}).format(v):'\u2014'}
 
 // ============================================================
 // CALCULATE
@@ -972,7 +981,7 @@ function renderSolutions(sols){
         <div class="sol-metric"><div class="sm-label">P. nominale</div><div class="sm-value">${s.puissance_totale_nom.toFixed(1)}<span class="sm-unit"> kW</span></div></div>
         <div class="sol-metric"><div class="sm-label">Part PAC Tbase</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.part_pac.toFixed(1)}<span class="sm-unit"> %</span></div></div>
         <div class="sol-metric"><div class="sm-label">Couverture</div><div class="sm-value ${ok?'good':w?'warn':''}">${s.taux_couverture.toFixed(1)}<span class="sm-unit"> %</span></div></div>
-        <div class="sol-metric"><div class="sm-label">COP A7</div><div class="sm-value">${s.cop_a7?s.cop_a7.toFixed(2):'\u2014'}</div></div>
+        <div class="sol-metric"><div class="sm-label">Prix HT PAC</div><div class="sm-value">${s.pac.prix_ht?fmtPrice(s.pac.prix_ht*s.nombre):'\u2014'}</div></div>
       </div>
     </div>`;
   });
@@ -1009,6 +1018,32 @@ function selectSol(i){
       <tr><td>Intensite max (400V tri)</td><td>${(sol.pabs_tbase*1000/(400*1.732)).toFixed(1)} A</td></tr>
       ${biv?`<tr><td>Point de bivalence</td><td class="hl">${biv.tBivalent.toFixed(1)}&deg;C</td></tr>`:''}
     </tbody></table></div></div>`;
+
+  // Pricing card
+  if(sol.pac.prix_ht){
+    const gammeData=S.gamme==='aptae'?PERFORMANCE_DATA.aptae:PERFORMANCE_DATA.effipac;
+    const regul=gammeData.regulation;
+    const mes=gammeData.mise_en_service;
+    const acces=PERFORMANCE_DATA.accessoires;
+    const chassis=sol.pac.chassis;
+    const prixPAC=sol.pac.prix_ht*sol.nombre;
+    const prixRegul=regul.navistem_t3100?regul.navistem_t3100.prix_ht:0;
+    const prixMES=mes.premiere.prix_ht+(sol.nombre>1?(sol.nombre-1)*mes.supplementaire.prix_ht:0);
+    const prixAntivib=acces.supports_antivibratiles[chassis]?acces.supports_antivibratiles[chassis].prix_ht*sol.nombre:0;
+    const totalHT=prixPAC+prixRegul+prixMES+prixAntivib;
+
+    d+=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Estimation tarifaire HT (catalogue 02/2025)</div>
+      <div class="res-card-body"><table class="table table-striped mb-0"><tbody>
+        <tr><td>${sol.pac.nom} &times; ${sol.nombre} (ref. ${sol.pac.ref})</td><td class="hl">${fmtPrice(prixPAC)}</td></tr>
+        ${sol.pac.prix_ht_ac?`<tr class="text-muted"><td>&nbsp;&nbsp;&nbsp;Option anticorrosion (ref. ${sol.pac.ref_ac})</td><td>${fmtPrice(sol.pac.prix_ht_ac*sol.nombre)}</td></tr>`:''}
+        <tr><td>Regulation Navistem T3100 (ref. ${regul.navistem_t3100.ref})</td><td>${fmtPrice(prixRegul)}</td></tr>
+        <tr><td>Mise en service (${sol.nombre>1?'1 + '+(sol.nombre-1)+' suppl.':'1 PAC'})</td><td>${fmtPrice(prixMES)}</td></tr>
+        <tr><td>Supports antivibratiles ${chassis} &times; ${sol.nombre}</td><td>${fmtPrice(prixAntivib)}</td></tr>
+        <tr style="border-top:2px solid var(--atlantic)"><td><strong>TOTAL HT (hors options)</strong></td><td class="hl" style="font-size:1.1rem"><strong>${fmtPrice(totalHT)}</strong></td></tr>
+      </tbody></table>
+      <div class="p-3" style="font-size:.75rem;color:#9ca3af">Tarifs catalogue Atlantic Systemes au 1er fevrier 2025. Hors eco-participation, hors pose. Options: anticorrosion, supports toiture, collecteurs, vannes.</div>
+      </div></div>`;
+  }
 
   d+=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#0891b2"></span>Hydraulique</div>
     <div class="res-card-body"><table class="table table-striped mb-0"><tbody>
@@ -1098,7 +1133,7 @@ function renderComp(sol){
   const cs=SizingEngine.compareWithCompetitors(sol,S.deperditionsKW,S.tbase,S.tWater);
   let h=`<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#16a34a"></span>Comparaison concurrents</div>
     <div class="res-card-body"><div class="table-responsive"><table class="table table-striped table-hover mb-0" style="font-size:.82rem">
-      <thead><tr><th>Marque</th><th>Modele</th><th class="text-center">Qty</th><th class="text-end">P.nom</th><th>Refrig.</th><th class="text-end">COP</th><th class="text-end">Part PAC</th><th class="text-end">Couv.</th></tr></thead><tbody>`;
+      <thead><tr><th>Marque</th><th>Modele</th><th class="text-center">Qty</th><th class="text-end">P.nom</th><th>Refrig.</th><th class="text-end">COP</th><th class="text-end">Part PAC</th><th class="text-end">Prix HT</th></tr></thead><tbody>`;
   cs.forEach(c=>{
     h+=`<tr${c.isAtlantic?' class="atlantic-row"':''}>
       <td><strong>${c.brand}</strong></td><td style="font-family:var(--mono)">${c.model}</td>
@@ -1107,7 +1142,7 @@ function renderComp(sol){
       <td>${c.refrigerant}</td>
       <td class="text-end" style="font-family:var(--mono)">${c.cop_a7?c.cop_a7.toFixed(2):'\u2014'}</td>
       <td class="text-end" style="font-family:var(--mono)">${c.part_pac.toFixed(1)}%</td>
-      <td class="text-end" style="font-family:var(--mono)">${c.taux_couverture.toFixed(1)}%</td></tr>`;
+      <td class="text-end" style="font-family:var(--mono)">${c.prix_ht?fmtPrice(c.prix_ht):'\u2014'}</td></tr>`;
   });
   h+='</tbody></table></div></div></div>';
   document.getElementById('compArea').innerHTML=h;

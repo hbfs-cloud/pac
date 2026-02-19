@@ -76,9 +76,12 @@ const PERFORMANCE_DATA = {
   // ============================================================
 
   // EFFIPAC (R32) - Atlantic - up to 60°C
+  // Tarifs catalogue Atlantic Systemes 2025 en euros HT (au 1er fevrier 2025)
   effipac: {
     models: [
       {code:"AHP60_14",nom:"Effipac 14",puissance_nom:14.10,refrigerant:"R32",t_max:60,chassis:"S",
+       ref:"090 860",ref_ac:"090 861",ref_hybride:"092 308",ref_ecs:"091 967",
+       prix_ht:10403,prix_ht_ac:12412,
        performance:{
          "A7/W35":{pcalo:14.10,pabs:2.91,cop:4.85},
          "A7/W45":{pcalo:14.41,pabs:3.63,cop:3.97},
@@ -86,6 +89,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:10.60,pabs:5.07,cop:2.09}
        }},
       {code:"AHP60_18",nom:"Effipac 18",puissance_nom:17.90,refrigerant:"R32",t_max:60,chassis:"S",
+       ref:"090 862",ref_ac:"090 863",ref_hybride:"092 309",ref_ecs:"091 969",
+       prix_ht:12632,prix_ht_ac:14905,
        performance:{
          "A7/W35":{pcalo:17.90,pabs:4.07,cop:4.40},
          "A7/W45":{pcalo:18.31,pabs:5.03,cop:3.64},
@@ -93,6 +98,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:12.30,pabs:6.03,cop:2.04}
        }},
       {code:"AHP60_26",nom:"Effipac 26",puissance_nom:26.00,refrigerant:"R32",t_max:60,chassis:"M",
+       ref:"090 864",ref_ac:"090 865",ref_hybride:"092 310",ref_ecs:"091 971",
+       prix_ht:16637,prix_ht_ac:19828,
        performance:{
          "A7/W35":{pcalo:26.00,pabs:6.44,cop:4.04},
          "A7/W45":{pcalo:26.65,pabs:7.98,cop:3.34},
@@ -100,6 +107,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:17.00,pabs:9.44,cop:1.80}
        }},
       {code:"AHP60_32",nom:"Effipac 32",puissance_nom:32.10,refrigerant:"R32",t_max:60,chassis:"M",
+       ref:"090 867",ref_ac:"090 868",ref_hybride:"092 311",ref_ecs:"091 973",
+       prix_ht:19155,prix_ht_ac:22572,
        performance:{
          "A7/W35":{pcalo:32.10,pabs:7.85,cop:4.09},
          "A7/W45":{pcalo:33.60,pabs:9.97,cop:3.37},
@@ -107,6 +116,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:21.70,pabs:11.92,cop:1.82}
        }},
       {code:"AHP60_50",nom:"Effipac 50",puissance_nom:50.20,refrigerant:"R32",t_max:60,chassis:"L",
+       ref:"090 870",ref_ac:"090 871",ref_hybride:"092 312",ref_ecs:"091 975",
+       prix_ht:25800,prix_ht_ac:32113,
        performance:{
          "A7/W35":{pcalo:50.20,pabs:12.21,cop:4.11},
          "A7/W45":{pcalo:51.34,pabs:15.10,cop:3.40},
@@ -114,6 +125,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:32.90,pabs:21.79,cop:1.51}
        }},
       {code:"AHP60_70",nom:"Effipac 70",puissance_nom:66.80,refrigerant:"R32",t_max:60,chassis:"XL",
+       ref:"090 873",ref_ac:"090 874",ref_hybride:"092 313",ref_ecs:"091 978",
+       prix_ht:31786,prix_ht_ac:38945,
        performance:{
          "A7/W35":{pcalo:66.80,pabs:16.29,cop:4.10},
          "A7/W45":{pcalo:67.37,pabs:20.05,cop:3.36},
@@ -122,13 +135,18 @@ const PERFORMANCE_DATA = {
        }}
     ],
     maxCascade: 420, // kW max (6 units)
-    maxUnits: 6
+    maxUnits: 6,
+    regulation: {navistem_t3100:{ref:"091 474",prix_ht:1071}},
+    mise_en_service: {premiere:{ref:"880 320",prix_ht:700},supplementaire:{ref:"880 321",prix_ht:275},previsite:{ref:"880 322",prix_ht:330}}
   },
 
   // APTAE (R290) - Atlantic/ACV Izea - up to 75°C
+  // Tarifs catalogue Atlantic Systemes 2025 en euros HT (au 1er fevrier 2025)
   aptae: {
     models: [
       {code:"AHP70_15",nom:"Aptae 15",puissance_nom:16.33,refrigerant:"R290",t_max:75,chassis:"S",
+       ref:"090 839",ref_ac:"090 840",
+       prix_ht:11628,prix_ht_ac:13874,
        poids:174, dimensions:{h:1380,l:1180,p:460},
        performance:{
          "A7/W35":{pcalo:16.33,pabs:3.31,cop:4.94},
@@ -138,6 +156,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:10.50,pabs:4.90,cop:2.14}
        }},
       {code:"AHP70_18",nom:"Aptae 18",puissance_nom:18.72,refrigerant:"R290",t_max:75,chassis:"S",
+       ref:"090 841",ref_ac:"090 842",
+       prix_ht:13431,prix_ht_ac:15847,
        poids:174, dimensions:{h:1380,l:1180,p:460},
        performance:{
          "A7/W35":{pcalo:18.72,pabs:4.05,cop:4.62},
@@ -147,6 +167,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:12.10,pabs:5.95,cop:2.03}
        }},
       {code:"AHP70_23",nom:"Aptae 23",puissance_nom:22.80,refrigerant:"R290",t_max:75,chassis:"M",
+       ref:"090 843",ref_ac:"090 844",
+       prix_ht:16047,prix_ht_ac:19125,
        poids:254, dimensions:{h:1380,l:1570,p:460},
        performance:{
          "A7/W35":{pcalo:22.80,pabs:4.78,cop:4.77},
@@ -156,6 +178,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:14.70,pabs:7.00,cop:2.10}
        }},
       {code:"AHP70_27",nom:"Aptae 27",puissance_nom:27.00,refrigerant:"R290",t_max:75,chassis:"M",
+       ref:"090 845",ref_ac:"090 846",
+       prix_ht:17791,prix_ht_ac:20965,
        poids:264, dimensions:{h:1380,l:1570,p:460},
        performance:{
          "A7/W35":{pcalo:27.00,pabs:6.21,cop:4.35},
@@ -165,6 +189,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:17.40,pabs:9.10,cop:1.91}
        }},
       {code:"AHP70_40",nom:"Aptae 40",puissance_nom:40.00,refrigerant:"R290",t_max:75,chassis:"L",
+       ref:"090 847",ref_ac:"090 848",
+       prix_ht:27930,prix_ht_ac:34765,
        poids:542, dimensions:{h:1680,l:2340,p:780},
        performance:{
          "A7/W35":{pcalo:40.00,pabs:9.76,cop:4.10},
@@ -174,6 +200,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:25.80,pabs:14.30,cop:1.80}
        }},
       {code:"AHP70_50",nom:"Aptae 50",puissance_nom:50.00,refrigerant:"R290",t_max:75,chassis:"L",
+       ref:"090 849",ref_ac:"090 850",
+       prix_ht:34414,prix_ht_ac:42165,
        poids:560, dimensions:{h:1680,l:2340,p:780},
        performance:{
          "A7/W35":{pcalo:50.10,pabs:11.90,cop:4.21},
@@ -183,6 +211,8 @@ const PERFORMANCE_DATA = {
          "A-7/W55":{pcalo:32.20,pabs:17.90,cop:1.80}
        }},
       {code:"AHP70_65",nom:"Aptae 65",puissance_nom:62.00,refrigerant:"R290",t_max:75,chassis:"XL",
+       ref:"090 988",
+       prix_ht:39245,
        poids:650, dimensions:{h:1800,l:2500,p:850},
        performance:{
          "A7/W35":{pcalo:62.00,pabs:15.12,cop:4.10},
@@ -193,7 +223,30 @@ const PERFORMANCE_DATA = {
        }}
     ],
     maxCascade: 450, // kW max
-    maxUnits: 6
+    maxUnits: 6,
+    regulation: {navistem_t3100:{ref:"091 474",prix_ht:1071},navistem_t4100:{ref:"090 964",prix_ht:3428}},
+    mise_en_service: {premiere:{ref:"880 620",prix_ht:755},supplementaire:{ref:"880 621",prix_ht:275},previsite:{ref:"880 622",prix_ht:330}}
+  },
+
+  // ============================================================
+  // ACCESSORIES PRICING (catalogue Atlantic Systemes 2025 HT)
+  // ============================================================
+  accessoires: {
+    supports_antivibratiles: {
+      S:{ref:"092 038",prix_ht:180},M:{ref:"092 039",prix_ht:229},L:{ref:"092 040",prix_ht:316},XL:{ref:"091 661",prix_ht:204}
+    },
+    grilles_esthetiques_XL: {ref:"091 659",prix_ht:1632},
+    support_toiture_sur: {S:{ref:"030 527",prix_ht:1160},M:{ref:"030 528",prix_ht:1316},L:{ref:"030 529",prix_ht:1707},XL:{ref:"030 803",prix_ht:3180}},
+    support_toiture_sous: {S:{ref:"030 530",prix_ht:2278},M:{ref:"030 531",prix_ht:2435},L:{ref:"030 532",prix_ht:3349},XL:{ref:"030 804",prix_ht:5600}},
+    collecteur_duo_dn65: {ref:"030 795",prix_ht:2932},
+    collecteur_trio_dn65: {ref:"030 796",prix_ht:3568},
+    collecteur_duo_dn100: {ref:"030 797",prix_ht:3608},
+    collecteur_trio_dn100: {ref:"030 798",prix_ht:4464},
+    vanne_reglage: {S:{ref:"074 977",prix_ht:375},M:{ref:"074 978",prix_ht:493},L:{ref:"074 979",prix_ht:585}},
+    kit_raccord_hydraulique_L: {ref:"092 000",prix_ht:184},
+    kit_recalibrage_r290_L: {ref:"092 041",prix_ht:4169},
+    eco_participation_pac: 10, // euros HT
+    eco_participation_regulation: 0.50
   },
 
   // ============================================================

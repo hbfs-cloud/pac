@@ -464,6 +464,7 @@ const SizingEngine = {
       cop_a7: atlanticSolution.cop_a7,
       refrigerant: atlanticSolution.pac.refrigerant,
       t_max: atlanticSolution.pac.t_max,
+      prix_ht: atlanticSolution.pac.prix_ht ? atlanticSolution.pac.prix_ht * atlanticSolution.nombre : null,
       isAtlantic: true
     });
 
