@@ -183,7 +183,7 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .anim:nth-child(4){animation-delay:.12s}
 
 /* ===== PDF ACTION BAR ===== */
-.pdf-actions{display:inline-flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.pdf-actions{display:inline-flex;gap:4px;flex-wrap:wrap;align-items:center}
 .btn-pdf{background:var(--atlantic);color:#fff;font-weight:600;font-size:.72rem;
   border-radius:6px;padding:5px 10px;display:inline-flex;align-items:center;gap:4px;transition:all .15s;cursor:pointer;border:none}
 .btn-pdf:hover{background:var(--atlantic-light);color:#fff;box-shadow:0 2px 8px rgba(0,51,102,.15)}
@@ -192,6 +192,16 @@ input[type="number"]:hover::-webkit-inner-spin-button,input[type="number"]:focus
 .btn-pdf.teal{background:#0891b2}
 .btn-pdf.teal:hover{background:#0e7490}
 .btn-pdf i{font-size:.9rem}
+/* Desktop: show top actions, hide bottom */
+.actions-desktop{display:block}
+.actions-mobile{display:none}
+@media(max-width:991px){
+  .actions-desktop{display:none}
+  .actions-mobile{display:flex;justify-content:center;padding:16px 0 24px;margin-top:12px;
+    border-top:1px solid #e5e7eb}
+  .actions-mobile .pdf-actions{gap:8px}
+  .actions-mobile .btn-pdf{padding:10px 18px;font-size:.82rem;border-radius:8px}
+}
 
 /* ===== DEVIS MODAL ===== */
 .devis-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.5);
@@ -1135,14 +1145,17 @@ function doCalc(){
 function renderSolutions(sols){
   let h='<button class="btn-back-mobile" onclick="backToInputs()"><i class="ti ti-arrow-left"></i>Modifier les parametres</button>';
 
-  // Solution selector + inline actions
+  // Solution count header (actions moved to bottom on mobile)
+  const actionsHtml='<div class="pdf-actions">'
+    +'<button class="btn-pdf" onclick="generateQuickPDF()"><i class="ti ti-file-type-pdf"></i>PDF</button>'
+    +'<button class="btn-pdf orange" onclick="openDevis()"><i class="ti ti-file-invoice"></i>Devis</button>'
+    +'<button class="btn-pdf teal" onclick="window.print()"><i class="ti ti-printer"></i>Imprimer</button>'
+    +'</div>';
+
   h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px">';
   h+='<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--atlantic)">'+sols.length+' solution'+(sols.length>1?'s':'')+' trouvee'+(sols.length>1?'s':'')+'</div>';
-  h+='<div class="pdf-actions">';
-  h+='<button class="btn-pdf" onclick="generateQuickPDF()"><i class="ti ti-file-type-pdf"></i>PDF</button>';
-  h+='<button class="btn-pdf orange" onclick="openDevis()"><i class="ti ti-file-invoice"></i>Devis</button>';
-  h+='<button class="btn-pdf teal" onclick="window.print()"><i class="ti ti-printer"></i>Imprimer</button>';
-  h+='</div></div>';
+  h+='<div class="actions-desktop">'+actionsHtml+'</div>';
+  h+='</div>';
 
   h+='<div class="sol-grid">';
   sols.forEach((s,i)=>{
@@ -1170,6 +1183,10 @@ function renderSolutions(sols){
   h+='<div id="schemaArea"></div>';
   h+='<div class="res-card anim"><div class="res-card-head"><span class="bar" style="background:#3b82f6"></span>Courbe monotone de chauffage<i class="ti ti-chevron-down chevron"></i></div><div class="res-card-body padded"><div id="monotoneChart" class="chart-box"></div></div></div>';
   h+='<div id="compArea"></div>';
+
+  // Actions at the bottom for mobile
+  h+='<div class="actions-mobile">'+actionsHtml+'</div>';
+
   return h;
 }
 
