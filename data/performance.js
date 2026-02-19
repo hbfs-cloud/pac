@@ -133,7 +133,7 @@ const PERFORMANCE_DATA = {
        performance:{
          "A7/W35":{pcalo:16.33,pabs:3.31,cop:4.94},
          "A7/W45":{pcalo:15.50,pabs:3.88,cop:4.00},
-         "A7/W55":{pcalo:14.80,pabs:4.65,cop:3.18},
+         "A7/W55":{pcalo:15.23,pabs:4.52,cop:3.37},
          "A-7/W35":{pcalo:12.00,pabs:3.50,cop:3.43},
          "A-7/W55":{pcalo:10.50,pabs:4.90,cop:2.14}
        }},
@@ -141,8 +141,8 @@ const PERFORMANCE_DATA = {
        poids:174, dimensions:{h:1380,l:1180,p:460},
        performance:{
          "A7/W35":{pcalo:18.72,pabs:4.05,cop:4.62},
-         "A7/W45":{pcalo:17.80,pabs:4.74,cop:3.76},
-         "A7/W55":{pcalo:17.00,pabs:5.67,cop:3.00},
+         "A7/W45":{pcalo:18.48,pabs:4.91,cop:3.76},
+         "A7/W55":{pcalo:17.38,pabs:5.32,cop:3.27},
          "A-7/W35":{pcalo:13.80,pabs:4.25,cop:3.25},
          "A-7/W55":{pcalo:12.10,pabs:5.95,cop:2.03}
        }},
@@ -150,8 +150,8 @@ const PERFORMANCE_DATA = {
        poids:254, dimensions:{h:1380,l:1570,p:460},
        performance:{
          "A7/W35":{pcalo:22.80,pabs:4.78,cop:4.77},
-         "A7/W45":{pcalo:21.70,pabs:5.58,cop:3.89},
-         "A7/W55":{pcalo:20.70,pabs:6.68,cop:3.10},
+         "A7/W45":{pcalo:23.00,pabs:5.92,cop:3.89},
+         "A7/W55":{pcalo:21.60,pabs:6.79,cop:3.18},
          "A-7/W35":{pcalo:16.80,pabs:5.00,cop:3.36},
          "A-7/W55":{pcalo:14.70,pabs:7.00,cop:2.10}
        }},
@@ -159,8 +159,8 @@ const PERFORMANCE_DATA = {
        poids:264, dimensions:{h:1380,l:1570,p:460},
        performance:{
          "A7/W35":{pcalo:27.00,pabs:6.21,cop:4.35},
-         "A7/W45":{pcalo:25.70,pabs:7.24,cop:3.55},
-         "A7/W55":{pcalo:24.50,pabs:8.68,cop:2.82},
+         "A7/W45":{pcalo:27.51,pabs:7.75,cop:3.55},
+         "A7/W55":{pcalo:26.30,pabs:8.74,cop:3.01},
          "A-7/W35":{pcalo:19.90,pabs:6.50,cop:3.06},
          "A-7/W55":{pcalo:17.40,pabs:9.10,cop:1.91}
        }},
@@ -168,17 +168,17 @@ const PERFORMANCE_DATA = {
        poids:542, dimensions:{h:1680,l:2340,p:780},
        performance:{
          "A7/W35":{pcalo:40.00,pabs:9.76,cop:4.10},
-         "A7/W45":{pcalo:38.00,pabs:11.40,cop:3.33},
-         "A7/W55":{pcalo:36.20,pabs:13.66,cop:2.65},
+         "A7/W45":{pcalo:40.22,pabs:12.07,cop:3.33},
+         "A7/W55":{pcalo:38.10,pabs:14.38,cop:2.65},
          "A-7/W35":{pcalo:29.50,pabs:10.20,cop:2.89},
          "A-7/W55":{pcalo:25.80,pabs:14.30,cop:1.80}
        }},
       {code:"AHP70_50",nom:"Aptae 50",puissance_nom:50.00,refrigerant:"R290",t_max:75,chassis:"L",
        poids:560, dimensions:{h:1680,l:2340,p:780},
        performance:{
-         "A7/W35":{pcalo:50.00,pabs:12.20,cop:4.10},
-         "A7/W45":{pcalo:47.50,pabs:14.25,cop:3.33},
-         "A7/W55":{pcalo:45.30,pabs:17.08,cop:2.65},
+         "A7/W35":{pcalo:50.10,pabs:11.90,cop:4.21},
+         "A7/W45":{pcalo:50.52,pabs:15.16,cop:3.33},
+         "A7/W55":{pcalo:47.90,pabs:16.50,cop:2.90},
          "A-7/W35":{pcalo:36.80,pabs:12.75,cop:2.89},
          "A-7/W55":{pcalo:32.20,pabs:17.90,cop:1.80}
        }},
